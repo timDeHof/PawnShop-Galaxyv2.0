@@ -1,21 +1,22 @@
-const {
-  client,
-  // declare your model imports here
-  // for example, User
-} = require('./');
+const prisma = require("./prisma")
 
 async function dropTables() {
   console.log('Dropping All Tables...');
   // drop all tables, in the correct order
   try {
-    await client.query(`
-    DROP TABLE IF EXISTS product_categories;
-    DROP TABLE IF EXISTS product_orders;
-    DROP TABLE IF EXISTS orders;
-    DROP TABLE IF EXISTS categories;
-    DROP TABLE IF EXISTS products;
-    DROP TABLE IF EXISTS users;
-  `);
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS product_categories;`
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS product_orders;`
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS orders;`
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS categories;`
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS products;`
+    await prisma.$executeRaw`
+    DROP TABLE IF EXISTS users;`
+    ;
   } catch (error) {
     console.error('Error dropping tables!');
     throw error;
@@ -25,7 +26,7 @@ async function dropTables() {
 async function createTables() {
   console.log("Starting to build tables...")
   try {
-    await client.query(`
+    await prisma.$executeRaw`
     CREATE TABLE users (
       id SERIAL PRIMARY KEY,
       username VARCHAR(255) UNIQUE NOT NULL,
@@ -33,7 +34,8 @@ async function createTables() {
       name VARCHAR(255) NOT NULL,
       "shippingAddress" TEXT NOT NULL,
       "billingAddress" TEXT
-    );
+    );`
+    await prisma.$executeRaw`
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
@@ -42,29 +44,32 @@ async function createTables() {
       condition BOOLEAN NOT NULL,
       "inStock" BOOLEAN NOT NULL,
       "imageURL" VARCHAR(2048)
-    );
+    );`
+    await prisma.$executeRaw`
     CREATE TABLE categories (
       id SERIAL PRIMARY KEY,
       "categoryName" VARCHAR(255)
-    );
+    );`
+    await prisma.$executeRaw`
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
       "totalAmount" DECIMAL(10,2) NOT NULL,
       "isActive" BOOLEAN NOT NULL
-    );
+    );`
+    await prisma.$executeRaw`
     CREATE TABLE product_orders (
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
       quantity INTEGER NOT NULL
-    );
+    );`
+    await prisma.$executeRaw`
     CREATE TABLE product_categories (
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id),
       "categoryId" INTEGER REFERENCES categories(id)
-    );
-    `)
+    );`
   } catch (error) {
     console.error("Error creating tables!")
   }
@@ -109,7 +114,6 @@ async function createInitialProducts() {
 
 async function rebuildDB() {
   try {
-    client.connect();
     await dropTables()
     await createTables()
     await createInitialUsers()
@@ -124,7 +128,7 @@ async function rebuildDB() {
 rebuildDB()
   // .then(populateInitialData)
   .catch(console.error)
-  .finally(() => client.end());
+  .finally(() => prisma.$disconnect());
 
 
 

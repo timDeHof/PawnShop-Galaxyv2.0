@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id                 Int                  @id @default(autoincrement())
+  categoryName       String?              @db.VarChar(255)
+  product_categories product_categories[]
+}
+
+model orders {
+  id             Int              @id @default(autoincrement())
+  userId         Int?
+  totalAmount    Decimal          @db.Decimal(10, 2)
+  isActive       Boolean
+  users          users?           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product_orders product_orders[]
+}
+
+model product_categories {
+  id         Int         @id @default(autoincrement())
+  productId  Int?
+  categoryId Int?
+  categories categories? @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products   products?   @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model product_orders {
+  id        Int       @id @default(autoincrement())
+  orderId   Int?
+  productId Int?
+  quantity  Int
+  orders    orders?   @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products  products? @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model products {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(255)
+  price              Decimal              @db.Decimal(10, 2)
+  description        String?
+  condition          Boolean
+  inStock            Boolean
+  imageURL           String?              @db.VarChar(2048)
+  product_categories product_categories[]
+  product_orders     product_orders[]
+}
+
+model users {
+  id              Int      @id @default(autoincrement())
+  username        String   @unique @db.VarChar(255)
+  password        String   @db.VarChar(255)
+  name            String   @db.VarChar(255)
+  shippingAddress String
+  billingAddress  String?
+  orders          orders[]
+}
