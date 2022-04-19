@@ -4,7 +4,21 @@ const {
   // for example, User
 } = require('./');
 
-async function buildTables() {
+async function createTables () {
+  try {
+    await client.query(`
+    CREATE TABLE user (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL
+    );
+    `)
+  } catch (error) {
+    console.error("Error creating tables!")
+  }
+}
+
+async function rebuildDB() {
   try {
     client.connect();
 
@@ -26,7 +40,7 @@ async function populateInitialData() {
   }
 }
 
-buildTables()
+rebuildDB()
   .then(populateInitialData)
   .catch(console.error)
   .finally(() => client.end());
