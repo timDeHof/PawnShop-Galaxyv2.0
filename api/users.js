@@ -4,6 +4,14 @@ const prisma = require("../db/prisma");
 const jwt = require("jsonwebtoken");
 const requireUser = require("./utils");
 
+usersRouter.get("/me", requireUser, async (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
 usersRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password, name, shippingAddress, billingAddress } =
@@ -103,15 +111,6 @@ usersRouter.get("/:username", async (req, res, next) => {
     res.send(getUsername);
   } catch (error) {
     next(error);
-  }
-});
-
-usersRouter.get("/me", requireUser, async (req, res, next) => {
-  console.log("******req:", req);
-  try {
-    res.send(req.user);
-  } catch ({ name, message }) {
-    next({ name, message });
   }
 });
 
