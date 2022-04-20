@@ -16,7 +16,7 @@ const users = [
   ]
 
 const categories = [{
-    categoryName: "Music Equipment"
+    categoryName: "musicEquipment"
 }]
 
 const product_orders = [
