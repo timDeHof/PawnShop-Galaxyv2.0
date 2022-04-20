@@ -1,5 +1,5 @@
 const prisma = require("./prisma")
-
+const {users, products, orders, categories, product_orders, productCategories} = require('./seedData')
 async function dropTables() {
   console.log('Dropping All Tables...');
   // drop all tables, in the correct order
@@ -41,8 +41,8 @@ async function createTables() {
       name VARCHAR(255) NOT NULL,
       price DECIMAL(10,2) NOT NULL, 
       description TEXT,
-      condition BOOLEAN NOT NULL,
-      "inStock" BOOLEAN NOT NULL,
+      condition BOOLEAN DEFAULT true,
+      "inStock" BOOLEAN DEFAULT true,
       "imageURL" VARCHAR(2048)
     );`
     await prisma.$executeRaw`
@@ -55,7 +55,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
       "totalAmount" DECIMAL(10,2) NOT NULL,
-      "isActive" BOOLEAN NOT NULL
+      "isActive" BOOLEAN DEFAULT true
     );`
     await prisma.$executeRaw`
     CREATE TABLE product_orders (
@@ -75,49 +75,50 @@ async function createTables() {
   }
 }
 
-async function createInitialUsers() {
-  console.log('Starting to create users...');
-  try {
-    const usersToCreate = [
-      { username: 'albert', password: 'bertie99', name: "albert", shippingAddress: "somewhere" },
-      { username: 'sandra', password: 'sandra123', name: "sandra", shippingAddress: "nowhere", billingAddress: "also nowhere" },
-      { username: 'glamgal', password: 'glamgal123', name: "gg", shippingAddress: "anywhere" },
-    ];
-    // const users = await Promise.all(usersToCreate.map(createUser));
+const seedDb = async () => {
+  console.log('creating users...')
+  for (const user of users) {
+    const createdUser = await prisma.users.create({ data: user })
+    console.log(createdUser)
+  }
 
-    console.log('Users created:');
-    // console.log(users);
-  } catch (error) {
-    console.error('Error creating users!');
-    throw error;
+  console.log('creating products...')
+  for (const product of products) {
+    const prod = await prisma.products.create({ data: product })
+    console.log(prod)
+  }
+  console.log('creating orders...')
+  for (const order of orders) {
+    const createdOrder = await prisma.orders.create({ data: order })
+    console.log(createdOrder)
+  }
+  console.log('creating categories...')
+  for (const category of categories) {
+    const createdCategory= await prisma.categories.create({ data: category })
+    console.log(createdCategory)
+  }
+  console.log('creating productOrders...')
+  for (const product of product_orders) {
+    const createdProduct= await prisma.product_orders.create({ data: product })
+    console.log(createdProduct)
+  }
+  console.log('creating productCategories..')
+  for (const category of productCategories) {
+    const productCat = await prisma.product_categories.create({ data: category})
+    console.log(productCat)
   }
 }
 
-async function createInitialProducts() {
-  console.log('Starting to create products...');
-  try {
-    const productsToCreate = [
-      { name: "Robot", price: 99999.99, description: "It punches stuff", condition: "true", inStock: "true", image: "https://res.cloudinary.com/fullstack-academy-student/image/upload/v1650389197/81rG1kRmBLL._AC_SL1500__dn6mts.jpg" },
-      { name: "PRS Guitar", price: 1600.00, description: "Used paul reed smith", condition: "false", inStock: "true", image: "https://res.cloudinary.com/fullstack-academy-student/image/upload/v1650389255/PRSRedFlame3_k23zac.jpg" },
-      { name: "Free Planet", price: 0.00, description: "Getting rid of my old planet", condition: "false", inStock: "true", image: "https://res.cloudinary.com/fullstack-academy-student/image/upload/v1650389363/RS39420302815_Winner_Infrared_20Saturn_20_C2_A9_20La_CC_81szlo_CC_81_20Francsics_rgrjqd.jpg" },
-    ];
-    // const products = await Promise.all(productsToCreate.map(createUser));
 
-    console.log('products created:');
-    // console.log(products);
-  } catch (error) {
-    console.error('Error creating products!');
-    throw error;
-  }
-}
+
 
 
 async function rebuildDB() {
   try {
     await dropTables()
     await createTables()
-    await createInitialUsers()
-    await createInitialProducts()
+    await seedDb()
+    
   } catch (error) {
     throw error;
   }
