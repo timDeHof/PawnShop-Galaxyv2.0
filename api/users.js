@@ -2,8 +2,15 @@ const express = require("express");
 const usersRouter = express.Router();
 const prisma = require("../db/prisma");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
-const { requireUser } = require("./utils");
+const requireUser = require("./utils");
+
+usersRouter.get("/me", requireUser, async (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
@@ -76,7 +83,8 @@ usersRouter.post("/login", async (req, res, next) => {
       // create token & return to user
       const token = jwt.sign(
         { id: user.id, username: username },
-        process.env.JWT_SECRET,  { expiresIn: "1w" }
+        process.env.JWT_SECRET,
+        { expiresIn: "1w" }
       );
       res.send({ token, message: "you're logged in!" });
     } else {
@@ -87,15 +95,6 @@ usersRouter.post("/login", async (req, res, next) => {
     }
   } catch (error) {
     // console.log(error);
-    next(error);
-  }
-});
-
-usersRouter.get("/", async (req, res, next) => {
-  try {
-    const users = await prisma.users.findMany();
-    res.send(users);
-  } catch (error) {
     next(error);
   }
 });
@@ -115,4 +114,12 @@ usersRouter.get("/:username", async (req, res, next) => {
   }
 });
 
+usersRouter.get("/", async (req, res, next) => {
+  try {
+    const users = await prisma.users.findMany();
+    res.send(users);
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = usersRouter;
