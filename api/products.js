@@ -19,11 +19,24 @@ productsRouter.get("/", async (req, res, next) => {
     }
 })
 
-productsRouter.get("/:category", async (req, res, next) => {
+productsRouter.get("/:id", async (req, res, next) => {
     try {
-        const getProductsByCat = await prisma.products.findUnique({
+        const getProductsById = await prisma.products.findMany({
             where: {
-                category: req.params.category,
+                id: +req.params.id,
+            },
+        });
+        res.send(getProductsById);
+    } catch (error) {
+        next(error);
+    }
+});
+
+productsRouter.get("/category/:categoryId", async (req, res, next) => {
+    try {
+        const getProductsByCat = await prisma.product_categories.findMany({
+            where: {
+                categoryId: +req.params.categoryId,
             },
         });
         res.send(getProductsByCat);
@@ -31,5 +44,7 @@ productsRouter.get("/:category", async (req, res, next) => {
         next(error);
     }
 });
+
+
 
 module.exports = productsRouter

@@ -33,7 +33,8 @@ async function createTables() {
       password VARCHAR(255) NOT NULL,
       name VARCHAR(255) NOT NULL,
       "shippingAddress" TEXT NOT NULL,
-      "billingAddress" TEXT
+      "billingAddress" TEXT,
+      "isAdmin" BOOLEAN DEFAULT false
     );`
     await prisma.$executeRaw`
     CREATE TABLE products (
