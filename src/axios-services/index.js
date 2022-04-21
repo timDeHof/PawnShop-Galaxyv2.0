@@ -31,6 +31,10 @@ export async function fetchUser(token) {
   }
 }
 
+export async function loginUser(username, password) {
+
+}
+
 export async function getAPIHealth() {
   try {
     const { data } = await axios.get("/api/health");
