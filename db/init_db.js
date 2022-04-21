@@ -1,5 +1,5 @@
 const prisma = require("./prisma")
-const {users, products, orders, categories, product_orders, productCategories} = require('./seedData')
+const { users, products, orders, categories, product_orders, productCategories } = require('./seedData')
 async function dropTables() {
   console.log('Dropping All Tables...');
   // drop all tables, in the correct order
@@ -16,7 +16,7 @@ async function dropTables() {
     DROP TABLE IF EXISTS products;`
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS users;`
-    ;
+      ;
   } catch (error) {
     console.error('Error dropping tables!');
     throw error;
@@ -62,13 +62,13 @@ async function createTables() {
     CREATE TABLE product_orders (
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
-      "productId" INTEGER REFERENCES products(id),
+      "productId" INTEGER REFERENCES products(id) ON DELETE CASCADE,
       quantity INTEGER NOT NULL
     );`
     await prisma.$executeRaw`
     CREATE TABLE product_categories (
       id SERIAL PRIMARY KEY,
-      "productId" INTEGER REFERENCES products(id),
+      "productId" INTEGER REFERENCES products(id) ON DELETE CASCADE,
       "categoryId" INTEGER REFERENCES categories(id)
     );`
   } catch (error) {
@@ -95,17 +95,17 @@ const seedDb = async () => {
   }
   console.log('creating categories...')
   for (const category of categories) {
-    const createdCategory= await prisma.categories.create({ data: category })
+    const createdCategory = await prisma.categories.create({ data: category })
     console.log(createdCategory)
   }
   console.log('creating productOrders...')
   for (const product of product_orders) {
-    const createdProduct= await prisma.product_orders.create({ data: product })
+    const createdProduct = await prisma.product_orders.create({ data: product })
     console.log(createdProduct)
   }
   console.log('creating productCategories..')
   for (const category of productCategories) {
-    const productCat = await prisma.product_categories.create({ data: category})
+    const productCat = await prisma.product_categories.create({ data: category })
     console.log(productCat)
   }
 }
@@ -119,7 +119,7 @@ async function rebuildDB() {
     await dropTables()
     await createTables()
     await seedDb()
-    
+
   } catch (error) {
     throw error;
   }
