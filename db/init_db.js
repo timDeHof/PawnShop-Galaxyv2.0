@@ -110,10 +110,6 @@ const seedDb = async () => {
   }
 }
 
-
-
-
-
 async function rebuildDB() {
   try {
     await dropTables()
@@ -128,18 +124,6 @@ async function rebuildDB() {
 
 
 rebuildDB()
-  // .then(populateInitialData)
   .catch(console.error)
   .finally(() => prisma.$disconnect());
 
-
-
-// async function populateInitialData() {
-//   try {
-//     // create useful starting data by leveraging your
-//     // Model.method() adapters to seed your db, for example:
-//     // const user1 = await User.createUser({ ...user info goes here... })
-//   } catch (error) {
-//     throw error;
-//   }
-// }

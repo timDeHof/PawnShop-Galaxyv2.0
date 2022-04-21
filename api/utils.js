@@ -1,5 +1,5 @@
 function requireUser(req, res, next) {
-  console.log("********req:", req);
+
   if (!req.user) {
     res.status(401);
     next({
