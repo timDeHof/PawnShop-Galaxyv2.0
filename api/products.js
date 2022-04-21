@@ -70,7 +70,7 @@ productsRouter.patch(
   async (req, res, next) => {
     const { name, price, description, condition, inStock, imageURL } = req.body;
     try {
-      const updateProduct = await prisma.products.updateMany({
+      const updateProduct = await prisma.products.update({
         where: {
           id: +req.params.productsid,
         },
@@ -99,12 +99,6 @@ productsRouter.delete(
       const deleteProduct = await prisma.products.delete({
         where: {
           id: +req.params.productsid,
-        },
-
-        include: {
-          product_orders: {
-          productsid: product_orders.productid
-          },
         },
       });
       res.send(deleteProduct);
