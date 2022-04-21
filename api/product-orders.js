@@ -1,9 +1,7 @@
 const express = require("express");
 const productOrdersRouter = express.Router();
 const prisma = require("../db/prisma");
-const jwt = require("jsonwebtoken");
 const requireUser = require("./utils");
-const { product_orders } = require("../db/prisma");
 
 productOrdersRouter.use((req, res, next) => {
     console.log("Request made to /product-orders");
@@ -19,7 +17,7 @@ productOrdersRouter.get("/", async (req, res, next) => {
     }
 });
 
-productOrdersRouter.post("/createProductOrder", requireUser, async (req, res, next) => {
+productOrdersRouter.post("/", requireUser, async (req, res, next) => {
     const { orderId, productId, quantity } = req.body;
     try {
         const createProductOrder = await prisma.product_orders.create({
@@ -36,7 +34,7 @@ productOrdersRouter.post("/createProductOrder", requireUser, async (req, res, ne
 });
 
 productOrdersRouter.delete(
-    "/deleteProductOrder/:productOrderId",
+    "/:productOrderId",
     requireUser,
     async (req, res, next) => {
         try {
@@ -53,7 +51,7 @@ productOrdersRouter.delete(
 );
 
 productOrdersRouter.patch(
-    "/updateProductOrder/:productOrderId",
+    "/:productOrderId",
     requireUser,
     async (req, res, next) => {
         const { quantity } = req.body;
