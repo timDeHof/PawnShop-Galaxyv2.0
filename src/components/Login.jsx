@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { loginUser } from "../axios-services";
+import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
-  const { setToken, setUser } = useAuth();
+  const { setToken, setUser, token } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,21 +13,21 @@ function Login() {
 
   return (
     <div className="login">
-      <h1>This is the login page</h1>
       <form
         className="form"
         onSubmit={async (ev) => {
           ev.preventDefault();
-
+          console.log("username password:", username, password);
           const result = await loginUser(username, password);
 
           localStorage.setItem("token", result.token);
           setToken(result.token);
+          console.log("token:", token);
 
           setUsername("");
           setPassword("");
 
-          navigate("/Home", { replace: true });
+          // navigate("/", { replace: true });
         }}
       >
         <input
@@ -54,7 +55,7 @@ function Login() {
       <button
         onClick={() => {
           localStorage.removeItem("token");
-          setToken(null);
+          setToken("");
           setUser({});
         }}
       >
