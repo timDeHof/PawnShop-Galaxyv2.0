@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from "../axios-services";
+import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 

@@ -27,7 +27,7 @@ const product_orders = [
 ]
 
 const productCategories = [
-  { productId: 2, categoryId: 1 },
+  { productId: 2, categoryId: 2 },
   { productId: 1, categoryId: 1 },
   { productId: 3, categoryId: 2 }
 ]

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthContext from "../AuthContext";
-import { fetchUser } from "../axios-services";
+import { fetchUser } from "../axios-services/users";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(null);
