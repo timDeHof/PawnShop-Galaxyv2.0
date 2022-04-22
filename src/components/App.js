@@ -11,7 +11,7 @@ import Login from "./Login";
 import Navbar from "./Navbar";
 import Signin from "./Signin";
 import Products from "./Products";
-
+import SingleProduct from "./SingleProduct";
 import useAuth from "../hooks/useAuth";
 
 
@@ -52,6 +52,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:singleproductid" element={<SingleProduct />} />
+
         <Route path="/" element={<Products />} />
       </Routes>
 

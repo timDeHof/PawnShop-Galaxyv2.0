@@ -17,7 +17,7 @@ const Products = () => {
     <div className="postcard">
       <h1 className="title"> Products</h1>
       {products.map((product, i) => {
-        return <SingleProduct product={product} i={i} />;
+        return <SingleProduct product={product} i={i} products={products} />;
       })}
     </div>
   );
