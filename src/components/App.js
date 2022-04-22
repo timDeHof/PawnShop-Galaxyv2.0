@@ -8,6 +8,7 @@ import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
 import Navbar from "./Navbar";
+import Signin from "./Signin";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -35,6 +36,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
     </div>
   );
