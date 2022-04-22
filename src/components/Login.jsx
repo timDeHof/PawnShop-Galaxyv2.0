@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { loginUser } from "../axios-services";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { setToken, setUser, setIsLoggedIn } = useAuth();
-  const [username, setUserName] = useState("");
+  const { setToken, setUser } = useAuth();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   return (
     <div className="login">
@@ -19,13 +22,11 @@ function Login() {
 
           localStorage.setItem("token", result.token);
           setToken(result.token);
-          // {
-          //   result.success ? setIsLoggedIn(true) : setIsLoggedIn(false);
-          // }
 
-          setUserName("");
+          setUsername("");
           setPassword("");
-          setIsLoggedIn(true);
+
+          navigate("/Home", { replace: true });
         }}
       >
         <input
@@ -33,7 +34,7 @@ function Login() {
           type="text"
           placeholder="username"
           onChange={(ev) => {
-            setUserName(ev.target.value);
+            setUsername(ev.target.value);
           }}
           min="10"
           required
@@ -55,7 +56,6 @@ function Login() {
           localStorage.removeItem("token");
           setToken(null);
           setUser({});
-          setIsLoggedIn(false);
         }}
       >
         Logout
