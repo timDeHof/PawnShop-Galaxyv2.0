@@ -19,7 +19,7 @@ const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
   const { user, token } = useAuth();
 
-  
+
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -42,17 +42,17 @@ const App = () => {
       {!token ? (
         <h1>Please log in or register</h1>
       ) : (
-        <h1>Hello, {user.username}</h1>
+        <h1>Hello, {user ? user.username : null}</h1>
       )}
 
       <p>API Status: {APIHealth}</p>
       <Navbar />
-        
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/products" element={<Products/>} />
-        <Route path="/" element={<Products/>} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/" element={<Products />} />
       </Routes>
 
     </div>
