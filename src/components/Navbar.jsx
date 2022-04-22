@@ -13,8 +13,8 @@ function Navbar() {
       <nav>
         {/* <h1>Welcome, {user.username} !</h1> */}
         <Link to="/">Home </Link>
-        <Link to="/Login">Log In </Link>
-        <Link to="/Signin">Sign In</Link>
+        <Link to="/Login">Log In</Link>
+        <Link to="/Register">Register</Link>
         <Link to="/Products">Products</Link>
       </nav>
     </div>

@@ -9,7 +9,7 @@ import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
 import Navbar from "./Navbar";
-import Signin from "./Signin";
+import Register from "./Register";
 import Products from "./Products";
 
 import useAuth from "../hooks/useAuth";
@@ -42,7 +42,7 @@ const App = () => {
       {!token ? (
         <h1>Please log in or register</h1>
       ) : (
-        <h1>Hello, {user ? user.username : null}</h1>
+        <h1>Hello, {user ? user.username : 'Guest!'}</h1>
       )}
 
       <p>API Status: {APIHealth}</p>
@@ -50,7 +50,7 @@ const App = () => {
 
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/" element={<Products />} />
       </Routes>

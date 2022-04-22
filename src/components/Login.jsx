@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 function Login() {
   const { setToken, setUser, token } = useAuth();

@@ -32,3 +32,14 @@ export async function loginUser(username, password) {
   });
   return data;
 }
+
+export async function registerUser(username, password, name, shippingAddress, billingAddress) {
+  const { data } = await axios.post("/api/users/register", {
+    username,
+    password,
+    name,
+    shippingAddress,
+    billingAddress
+  })
+  return data
+}
