@@ -55,7 +55,7 @@ function Login() {
       <button
         onClick={() => {
           localStorage.removeItem("token");
-          setToken("");
+          setToken(localStorage.getItem("token"));
           setUser({});
         }}
       >
