@@ -42,7 +42,7 @@ const App = () => {
       {!token ? (
         <h1>Please log in or register</h1>
       ) : (
-        <h1>Hello, {user ? user.username : null}</h1>
+        <h1>Hello, {user ? user.username : 'Guest!'}</h1>
       )}
 
       <p>API Status: {APIHealth}</p>
