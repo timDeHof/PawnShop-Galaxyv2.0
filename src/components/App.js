@@ -10,8 +10,11 @@ import Login from "./Login";
 import Navbar from "./Navbar";
 import Signin from "./Signin";
 
+import useAuth from "../hooks/useAuth";
+
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
+  const { user, token } = useAuth();
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -31,7 +34,12 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
+      {!token ? (
+        <h1>Please log in or register</h1>
+      ) : (
+        <h1>Hello, {user.username}</h1>
+      )}
+
       <p>API Status: {APIHealth}</p>
       <Navbar />
       <Routes>

@@ -3,23 +3,16 @@ import AuthContext from "../AuthContext";
 import { fetchUser } from "../axios-services/users";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    const localStorageToken = localStorage.getItem("token");
-    if (localStorageToken) {
-      setToken(localStorageToken);
-      console.log("currentToken from localStorage", token);
-    }
-  }, [token]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  console.log("user:", user);
 
   useEffect(() => {
     async function getUser() {
       if (localStorage.getItem("token")) {
         // Pretend this from a fetchUser()
-        console.log("token:", token);
+
         const newUser = await fetchUser(token);
-        console.log("newUser:", newUser);
+        //console.log("newUser:", newUser);
         setUser(newUser);
       } else {
         setUser({});

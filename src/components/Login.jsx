@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-  const { setToken, setUser } = useAuth();
+  const { setToken, setUser, token } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +13,6 @@ function Login() {
 
   return (
     <div className="login">
-      <h1>This is the login page</h1>
       <form
         className="form"
         onSubmit={async (ev) => {
@@ -23,6 +22,7 @@ function Login() {
 
           localStorage.setItem("token", result.token);
           setToken(result.token);
+          console.log("token:", token);
 
           setUsername("");
           setPassword("");
@@ -55,7 +55,7 @@ function Login() {
       <button
         onClick={() => {
           localStorage.removeItem("token");
-          setToken(null);
+          setToken("");
           setUser({});
         }}
       >
