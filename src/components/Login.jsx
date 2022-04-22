@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { loginUser } from "../axios-services";
+import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const { setToken, setUser } = useAuth();
@@ -26,7 +27,7 @@ function Login() {
           setUsername("");
           setPassword("");
 
-          navigate("/Home", { replace: true });
+          // navigate("/", { replace: true });
         }}
       >
         <input
