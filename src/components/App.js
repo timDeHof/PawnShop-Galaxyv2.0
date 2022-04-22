@@ -4,17 +4,22 @@ import { Routes, Route } from "react-router-dom";
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
 import { fetchUser, getUsers } from "../axios-services/users";
+
 import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
 import Navbar from "./Navbar";
 import Signin from "./Signin";
+import Products from "./Products";
 
 import useAuth from "../hooks/useAuth";
+
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
   const { user, token } = useAuth();
+
+  
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -42,10 +47,13 @@ const App = () => {
 
       <p>API Status: {APIHealth}</p>
       <Navbar />
+        
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/products" element={<Products/>} />
       </Routes>
+
     </div>
   );
 };
