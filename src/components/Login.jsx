@@ -18,7 +18,7 @@ function Login() {
         className="form"
         onSubmit={async (ev) => {
           ev.preventDefault();
-
+          console.log("username password:", username, password);
           const result = await loginUser(username, password);
 
           localStorage.setItem("token", result.token);
