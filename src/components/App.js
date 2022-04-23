@@ -8,18 +8,15 @@ import { fetchUser, getUsers } from "../axios-services/users";
 import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
-import Navbar from "./Navbar";
+import Header from "./Header";
 import Register from "./Register";
 import Products from "./Products";
 
 import useAuth from "../hooks/useAuth";
 
-
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
   const { user, token } = useAuth();
-
-
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -39,14 +36,15 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <Header />
+
       {!token ? (
         <h1>Please log in or register</h1>
       ) : (
-        <h1>Hello, {user ? user.username : 'Guest!'}</h1>
+        <h1>Hello, {user ? user.username : "Guest!"}</h1>
       )}
 
       <p>API Status: {APIHealth}</p>
-      <Navbar />
 
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -54,7 +52,6 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/" element={<Products />} />
       </Routes>
-
     </div>
   );
 };
