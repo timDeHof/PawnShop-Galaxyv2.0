@@ -9,7 +9,7 @@ function Navbar() {
   //console.log("USER FROM APP.JS", user);
 
   return (
-    <div className="navbar">
+    <div>
       <nav>
         {/* <h1>Welcome, {user.username} !</h1> */}
         <Link to="/">Home </Link>

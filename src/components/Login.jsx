@@ -12,6 +12,12 @@ function Login() {
 
   return (
     <div className={styles.login_box}>
+      {!token ? (
+        <h2>Please log in or register</h2>
+      ) : (
+        <h2>Hello, {user ? user.username : "Guest!"}</h2>
+      )}
+
       <h2>Log in</h2>
       <form
         onSubmit={async (ev) => {

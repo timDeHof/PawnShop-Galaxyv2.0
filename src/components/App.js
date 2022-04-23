@@ -38,12 +38,6 @@ const App = () => {
     <div className="app-container">
       <Header />
 
-      {!token ? (
-        <h1>Please log in or register</h1>
-      ) : (
-        <h1>Hello, {user ? user.username : "Guest!"}</h1>
-      )}
-
       <p>API Status: {APIHealth}</p>
 
       <Routes>
