@@ -3,7 +3,8 @@ ul {
   display: flex;
   justify-content: space-evenly;
   position: inherit;
-  align-items: flex-end;
+  flex-direction: row;
+  margin-left: 200px;
 }
 ul li a {
   text-decoration: none;
