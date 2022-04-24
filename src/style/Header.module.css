@@ -1,31 +1,19 @@
 .header_box {
+  display: flex;
   width: 100%;
   padding: 1em;
   font-size: 140%;
-  position: absolute;
+  position: sticky;
   left: 0;
   transition: opacity 0.2s ease-in-out;
   text-align: center;
+  background: var(--primary);
 }
 
-.header_box h1 {
+.header_box .header_title {
   font-weight: 600;
-  display: inline;
   margin: 0;
   padding: 0;
   font-size: inherit;
-}
-
-.navbar nav {
-  display: inline-block;
-  outline: none;
-  text-decoration: none;
-  opacity: 0.7;
-  padding: 0 0.5em;
-  color: var(--primary);
-  transition: opacity 0.2s ease-in-out;
-}
-.navbar nav:hover,
-.navbar nav:focus {
-  opacity: 1;
+  color: var(--secondary_alt);
 }

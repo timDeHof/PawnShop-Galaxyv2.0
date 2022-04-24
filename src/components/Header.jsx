@@ -5,10 +5,8 @@ import styles from "../style/Header.module.css";
 function Header() {
   return (
     <div className={styles.header_box}>
-      <header>
-        <h1>galactic pawn</h1>
-        <nav className={styles.navbar}>{<Navbar />}</nav>
-      </header>
+      <h1 className={styles.header_title}>galactic pawn</h1>
+      <Navbar />
     </div>
   );
 }

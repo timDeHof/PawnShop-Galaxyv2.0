@@ -13,6 +13,7 @@ import Register from "./Register";
 import Products from "./Products";
 
 import useAuth from "../hooks/useAuth";
+import Footer from "./Footer";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -38,14 +39,13 @@ const App = () => {
     <div className="app-container">
       <Header />
 
-      <p>API Status: {APIHealth}</p>
-
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/" element={<Products />} />
       </Routes>
+      <Footer APIHealth={APIHealth} />
     </div>
   );
 };
