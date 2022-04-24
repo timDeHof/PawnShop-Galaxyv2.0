@@ -75,9 +75,9 @@ body {
   overflow: hidden;
   transition: 0.5s;
   margin: 40px 15px 0px 15px;
-
   letter-spacing: 4px;
-  background: transparent;
+  background: var(--primary);
+  border: none;
 }
 
 .register_box .buttonContainer .submit:hover {

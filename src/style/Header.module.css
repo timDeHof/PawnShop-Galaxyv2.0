@@ -10,6 +10,7 @@
   background: var(--primary);
   align-items: baseline;
   justify-content: space-between;
+  border-bottom: 1px solid var(--secondary_alt);
 }
 
 .header_box .header_title {

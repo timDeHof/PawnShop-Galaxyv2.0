@@ -6,6 +6,7 @@ import styles from "../style/Login.module.css";
 import "../style/App.css";
 function Login() {
   const { setToken, setUser, token } = useAuth();
+  // States for login
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
