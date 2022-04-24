@@ -5,6 +5,7 @@ import styles from "../style/Register.module.css";
 
 function Register() {
   const { setToken } = useAuth();
+  // States for registration
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
