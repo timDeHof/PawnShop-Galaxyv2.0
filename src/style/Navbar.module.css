@@ -2,9 +2,11 @@ ul {
   list-style: none;
   display: flex;
   justify-content: space-evenly;
-  position: inherit;
+  position: absolute;
+  top: 1vh;
+  right: 1vw;
   flex-direction: row;
-  margin-left: 200px;
+  /* margin-left: 200px; */
 }
 ul li a {
   text-decoration: none;
