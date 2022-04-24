@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import "../style/Navbar.module.css";
 import useAuth from "../hooks/useAuth";
 
 function Navbar() {
@@ -9,15 +9,31 @@ function Navbar() {
   //console.log("USER FROM APP.JS", user);
 
   return (
-    <div>
-      <nav>
-        {/* <h1>Welcome, {user.username} !</h1> */}
-        <Link to="/">Home </Link>
-        <Link to="/Login">Log In</Link>
-        <Link to="/Register">Register</Link>
-        <Link to="/Products">Products</Link>
-      </nav>
-    </div>
+    <>
+      <ul>
+        <li>
+          <NavLink exact activeClassName="active" to="/">
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="active" to="/Products">
+            Products
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="active" to="/Login">
+            Log In
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="active" to="/Register">
+            Register
+          </NavLink>
+        </li>
+      </ul>
+      {/* <h1>Welcome, {user.username} !</h1> */}
+    </>
   );
 }
 
