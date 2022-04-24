@@ -3,6 +3,7 @@ import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import styles from "../style/Login.module.css";
+import "../style/App.css";
 function Login() {
   const { setToken, setUser, token } = useAuth();
   const [username, setUsername] = useState("");
@@ -12,13 +13,13 @@ function Login() {
 
   return (
     <div className={styles.login_box}>
+      <h2>Log in</h2>
       {!token ? (
         <h2>Please log in or register</h2>
       ) : (
         <h2>Hello, {user ? user.username : "Guest!"}</h2>
       )}
 
-      <h2>Log in</h2>
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();

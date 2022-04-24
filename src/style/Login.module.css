@@ -1,5 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(var(--primary), var(--primary_alt));
+}
+
 .login_box {
-  display: absolute;
   position: absolute;
   top: 50%;
   left: 50%;
