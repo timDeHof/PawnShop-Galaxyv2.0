@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
 import { fetchUser, getUsers } from "../axios-services/users";
-
+import { getProducts } from "../axios-services/products";
 import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
@@ -18,9 +18,16 @@ import useAuth from "../hooks/useAuth";
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
   const { user, token } = useAuth();
+  const [products, setProducts] = useState([]);
 
 
-
+  useEffect(() => {
+    const getAllProducts = async () => {
+      const allProducts = await getProducts();
+      setProducts(allProducts);
+    };
+    getAllProducts();
+  }, []);
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
     // first, create an async function that will wrap your axios service adapter
@@ -51,10 +58,8 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:singleproductid" element={<SingleProduct />} />
-
-        <Route path="/" element={<Products />} />
+        <Route path="/products/:singleProductId" element={<SingleProduct products ={products} setproducts={setProducts}/>} />
+        <Route path="/products" element={<Products products={products} setProducts={setProducts} />} />
       </Routes>
 
     </div>
