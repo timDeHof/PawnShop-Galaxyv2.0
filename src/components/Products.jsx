@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getProducts } from "../axios-services/products";
 import SingleProduct from "./SingleProduct";
 
@@ -12,13 +13,22 @@ const Products = () => {
     };
     getAllProducts();
   }, []);
-  console.log(products, "after use effect");
+
   return (
     <div className="postcard">
       <h1 className="title"> Products</h1>
-      {products.map((product, i) => {
-        return <SingleProduct product={product} i={i} />;
-      })}
+      {products
+        ? products.map((product, i) => {
+            return (
+              <SingleProduct
+                product={product}
+                i={i}
+                products={products}
+                productId={products.id}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };

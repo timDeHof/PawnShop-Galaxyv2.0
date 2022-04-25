@@ -19,7 +19,7 @@ productsRouter.get("/", async (req, res, next) => {
 
 productsRouter.get("/:id", async (req, res, next) => {
   try {
-    const getProductsById = await prisma.products.findMany({
+    const getProductsById = await prisma.products.findUnique({
       where: {
         id: +req.params.id,
       },
