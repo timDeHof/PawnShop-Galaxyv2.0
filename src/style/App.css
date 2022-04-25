@@ -5,9 +5,10 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+  background-color: var(--primary_alt);
 }
 
 .app-container h1 {
-  color: var(--green);
+  color: var(--secondary_alt);
   padding: 1rem;
 }
