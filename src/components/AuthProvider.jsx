@@ -4,7 +4,8 @@ import { fetchUser } from "../axios-services/users";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token"));
-  console.log("user:", user);
+  const [cart, setCart] = useState([]);
+  // console.log("user:", user);
 
   useEffect(() => {
     async function getUser() {
@@ -22,7 +23,7 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
+    <AuthContext.Provider value={{ user, setUser, token, setToken, cart, setCart }}>
       {children}
     </AuthContext.Provider>
   );

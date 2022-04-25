@@ -31,6 +31,11 @@ function Navbar() {
             Register
           </NavLink>
         </li>
+        <li>
+          <NavLink activeClassName="active" to="/Cart">
+           Cart
+          </NavLink>
+        </li>
       </ul>
       {/* <h1>Welcome, {user.username} !</h1> */}
     </>
