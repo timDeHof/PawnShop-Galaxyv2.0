@@ -24,6 +24,7 @@ const SingleProduct = ({ product, products }) => {
         <div>{productToRender.price} ₡</div>
         <div>{productToRender.condition ? "New" : "Used"}</div>
         <div>{productToRender.description}</div>
+        
       </div>
     );
   }

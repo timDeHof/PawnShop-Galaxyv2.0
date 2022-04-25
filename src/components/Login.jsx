@@ -29,7 +29,7 @@ function Login() {
 
           localStorage.setItem("token", result.token);
           setToken(result.token);
-          console.log("token:", token);
+          // console.log("token:", token);
 
           setUsername("");
           setPassword("");
