@@ -8,12 +8,12 @@ import { getProducts } from "../axios-services/products";
 import { getAPIHealth } from "../axios-services";
 import "../style/App.css";
 import Login from "./Login";
-import Navbar from "./Navbar";
-import Signin from "./Signin";
+import Header from "./Header";
+import Register from "./Register";
 import Products from "./Products";
 import SingleProduct from "./SingleProduct";
 import useAuth from "../hooks/useAuth";
-
+import Footer from "./Footer";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -46,22 +46,16 @@ const App = () => {
 
   return (
     <div className="app-container">
-      {!token ? (
-        <h1>Please log in or register</h1>
-      ) : (
-        <h1>Hello, {user ? user.username : null}</h1>
-      )}
-
-      <p>API Status: {APIHealth}</p>
-      <Navbar />
+      <Header />
 
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/signin" element={<Signin />} />
         <Route path="/products/:singleProductId" element={<SingleProduct products ={products} setproducts={setProducts}/>} />
         <Route path="/products" element={<Products products={products} setProducts={setProducts} />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Products />} />
       </Routes>
-
+      <Footer APIHealth={APIHealth} />
     </div>
   );
 };
