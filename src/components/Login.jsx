@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../style/Login.module.css";
 import "../style/App.css";
 function Login() {
-  const { setToken, setUser, token } = useAuth();
+  const { setToken, setUser, token, user } = useAuth();
   // States for login
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
