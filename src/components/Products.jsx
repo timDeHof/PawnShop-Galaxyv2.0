@@ -21,8 +21,8 @@ const Products = () => {
         ? products.map((product, i) => {
             return (
               <SingleProduct
+                key={`product${i}`}
                 product={product}
-                i={i}
                 products={products}
                 productId={products.id}
               />

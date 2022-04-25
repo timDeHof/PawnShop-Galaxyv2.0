@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 
-const SingleProduct = ({ product, i, products }) => {
+const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
   let productToRender;
 
@@ -16,7 +16,7 @@ const SingleProduct = ({ product, i, products }) => {
 
   if (productToRender) {
     return (
-      <div key={i}>
+      <div>
         <Link to={`/products/${productToRender.id}`}>
           <h2>{productToRender.name}</h2>
         </Link>

@@ -12,27 +12,27 @@ function Navbar() {
     <>
       <ul>
         <li>
-          <NavLink exact activeClassName="active" to="/">
+          <NavLink activeclassname="active" to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/Products">
+          <NavLink activeclassname="active" to="/Products">
             Products
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/Login">
+          <NavLink activeclassname="active" to="/Login">
             Log In
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/Register">
+          <NavLink activeclassname="active" to="/Register">
             Register
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/Cart">
+          <NavLink activeclassname="active" to="/Cart">
            Cart
           </NavLink>
         </li>
