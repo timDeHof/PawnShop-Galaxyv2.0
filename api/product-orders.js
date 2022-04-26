@@ -17,17 +17,29 @@ productOrdersRouter.get("/", async (req, res, next) => {
     }
 });
 
-productOrdersRouter.post("/", requireUser, async (req, res, next) => {
+productOrdersRouter.post("/", async (req, res, next) => {
     const { orderId, productId, quantity } = req.body;
     try {
-        const createProductOrder = await prisma.product_orders.create({
+        const createdProductOrder = await prisma.product_orders.create({
             data: {
                 orderId,
                 productId,
                 quantity
             },
+            include: {
+                products: true
+            }
         });
-        res.send(createProductOrder);
+
+        // console.log("Through Table", createProductOrder)
+
+        // const product = await prisma.products.findUnique({
+        //     where: {
+        //         id: createProductOrder.productId
+        //     }
+        // })
+        console.log("Return from prisma", createdProductOrder)
+        res.send(createdProductOrder);
     } catch (error) {
         next(error);
     }

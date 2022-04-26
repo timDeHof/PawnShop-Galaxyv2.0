@@ -14,6 +14,8 @@ import Products from "./Products";
 import SingleProduct from "./SingleProduct";
 import useAuth from "../hooks/useAuth";
 import Footer from "./Footer";
+import Cart from "./Cart";
+
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -53,6 +55,7 @@ const App = () => {
         <Route path="/products/:singleProductId" element={<SingleProduct products ={products} setproducts={setProducts}/>} />
         <Route path="/products" element={<Products products={products} setProducts={setProducts} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/" element={<Products />} />
       </Routes>
       <Footer APIHealth={APIHealth} />

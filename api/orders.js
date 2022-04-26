@@ -17,7 +17,7 @@ ordersRouter.get("/", async (req, res, next) => {
     }
 });
 
-ordersRouter.get("/:userId", requireUser, async (req, res, next) => {
+ordersRouter.get("/:userId", async (req, res, next) => {
     try {
         const orders = await prisma.orders.findMany({
             where: {
