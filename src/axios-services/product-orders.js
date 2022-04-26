@@ -11,7 +11,7 @@ export async function getProductOrders() {
 
 export async function createProductOrder(token, orderId, productId, quantity) {
     try {
-        const { data: product } = await axios.post("/api/product-orders", {
+        const { data: productOrder } = await axios.post("/api/product-orders", {
             orderId,
             productId,
             quantity,
@@ -21,8 +21,18 @@ export async function createProductOrder(token, orderId, productId, quantity) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        console.log("This should be product from axios", product)
-        return product;
+        return productOrder;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export async function updateQuantity(productOrderId, quantity) {
+    try {
+        const { data: productOrder } = await axios.patch(`/api/product-orders/:${productOrderId}`, {
+            quantity,
+        })
+        return productOrder;
     } catch (err) {
         console.error(err);
     }

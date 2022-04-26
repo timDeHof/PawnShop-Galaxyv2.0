@@ -64,7 +64,6 @@ productOrdersRouter.delete(
 
 productOrdersRouter.patch(
     "/:productOrderId",
-    requireUser,
     async (req, res, next) => {
         const { quantity } = req.body;
         try {
