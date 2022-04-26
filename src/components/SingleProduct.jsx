@@ -1,8 +1,10 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
+  const { addToCart } = useCart();
   let productToRender;
 
   if (singleProductId) {
@@ -24,7 +26,10 @@ const SingleProduct = ({ product, products }) => {
         <div>{productToRender.price} ₡</div>
         <div>{productToRender.condition ? "New" : "Used"}</div>
         <div>{productToRender.description}</div>
-        
+        <button onClick={() => {
+          console.log("inside on click", productToRender.id);
+          addToCart(1, productToRender.id, 1)
+        }}>Add to Cart</button>
       </div>
     );
   }

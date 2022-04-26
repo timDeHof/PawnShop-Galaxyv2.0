@@ -9,6 +9,8 @@ const Cart = () => {
   const { token, user } = useAuth();
   const { cart, setCart } = useCart();
 
+console.log("The Cart:", cart)
+
   // useEffect(() => {
   //   if (user) {
   //     async function getCart() {
