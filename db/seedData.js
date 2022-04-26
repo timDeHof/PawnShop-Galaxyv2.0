@@ -12,9 +12,9 @@ const products = [
 ];
 
 const orders = [
-  { userId: 1, totalAmount: 99.99, isActive: true },
-  { userId: 2, totalAmount: 545.99, isActive: true },
-  { userId: 1, totalAmount: 101.99, isActive: false }
+  { userId: 1, isActive: true },
+  { userId: 2, isActive: true },
+  { userId: 1, isActive: false }
 ]
 
 const categories = [

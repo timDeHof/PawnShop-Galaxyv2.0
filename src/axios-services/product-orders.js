@@ -29,7 +29,7 @@ export async function createProductOrder(token, orderId, productId, quantity) {
 
 export async function updateQuantity(productOrderId, quantity) {
     try {
-        const { data: productOrder } = await axios.patch(`/api/product-orders/:${productOrderId}`, {
+        const { data: productOrder } = await axios.patch(`/api/product-orders/${productOrderId}`, {
             quantity,
         })
         return productOrder;

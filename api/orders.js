@@ -31,12 +31,11 @@ ordersRouter.get("/:userId", async (req, res, next) => {
 });
 
 ordersRouter.post("/", requireUser, async (req, res, next) => {
-    const { userId, totalAmount, isActive } = req.body;
+    const { userId, isActive } = req.body;
     try {
         const createOrder = await prisma.orders.create({
             data: {
                 userId,
-                totalAmount,
                 isActive
             },
         });
@@ -47,7 +46,7 @@ ordersRouter.post("/", requireUser, async (req, res, next) => {
 });
 
 ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
-    const { userId, totalAmount, isActive } = req.body;
+    const { userId, isActive } = req.body;
     try {
         const updateOrder = await prisma.orders.update({
             where: {
@@ -56,7 +55,6 @@ ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
 
             data: {
                 userId,
-                totalAmount,
                 isActive
             },
         });

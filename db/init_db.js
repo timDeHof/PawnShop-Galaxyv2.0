@@ -55,7 +55,6 @@ async function createTables() {
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       "userId" INTEGER REFERENCES users(id),
-      "totalAmount" DECIMAL(10,2) NOT NULL,
       "isActive" BOOLEAN DEFAULT true
     );`
     await prisma.$executeRaw`

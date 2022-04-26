@@ -16,7 +16,6 @@ model categories {
 model orders {
   id             Int              @id @default(autoincrement())
   userId         Int?
-  totalAmount    Decimal          @db.Decimal(10, 2)
   isActive       Boolean
   users          users?           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   product_orders product_orders[]
