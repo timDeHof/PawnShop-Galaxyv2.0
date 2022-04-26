@@ -99,6 +99,30 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
+
+usersRouter.get("/cart/:userId", async (req, res, next) => {
+  try {
+      const cart = await prisma.orders.findMany({
+          where: {
+              userId: +req.params.userId,
+              isActive: true
+          },
+          include: {
+            product_orders:{
+              include: {
+               products: true
+              },
+            
+            }
+
+          }
+      });
+      res.send(cart);
+  } catch (error) {
+      next(error);
+  }
+});
+
 usersRouter.get("/:username", async (req, res, next) => {
   // const username = req.params
   try {

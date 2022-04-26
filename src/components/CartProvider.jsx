@@ -1,35 +1,27 @@
 import React, { useEffect, useState } from "react";
 import CartContext from "../CartContext";
 import useAuth from "../hooks/useAuth";
-import { getOrderByUser } from "../axios-services/cart";
+import { getCartByUser} from "../axios-services/cart";
 import { getProductOrders } from "../axios-services/product-orders";
 import { getProducts } from "../axios-services/products";
 
-// import { getProducts } from "../axios-services/products";
 
 const CartProvider = ({ children }) => {
   const { token, user } = useAuth();
-  const localCart = JSON.parse(localStorage.getItem("cart"));
-  const [cart, setCart] = useState(localCart);
+  const [cart, setCart] = useState([]);
+//   const localCart = JSON.parse(localStorage.getItem("cart"));
+//   console.log(localCart, "my local cart");
+//   console.log(cart, "This cart");
+//   if (localCart) {
+//     console.log("localCart exists");
+//   } else {
+//     console.log("localCart is not found");
+//   }
   useEffect(() => {
     if (user) {
       async function getCart() {
-        const userOrders = await getOrderByUser(user.id);
-        const activeOrder = userOrders.find((item) => item.isActive);
-        const productOrders = await getProductOrders();
-        const filteredOrders = productOrders.filter(
-          (productOrder) => activeOrder.id === productOrder.orderId
-        );
-        const products = await getProducts();
-        const filteredProducts = products.filter((product) => {
-          if (filteredOrders.id === product.id) {
-              console.log(filteredOrders, "filtered product");
-              return filteredOrders;
-            }
-        });
-        setCart(filteredOrders);
-        console.log(cart, "This cart");
-        console.log(filteredOrders, "alberts cart");
+      const userCart = await getCartByUser(user.id)
+       setCart(userCart)
       }
 
       getCart();

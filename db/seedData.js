@@ -13,7 +13,8 @@ const products = [
 
 const orders = [
   { userId: 1, totalAmount: 99.99, isActive: true },
-  { userId: 2, totalAmount: 545.99, isActive: true }
+  { userId: 2, totalAmount: 545.99, isActive: true },
+  {userId: 1, totalAmount: 101.99, isActive: false}
 ]
 
 const categories = [
@@ -23,7 +24,7 @@ const categories = [
 
 const product_orders = [
   { orderId: 1, productId: 2, quantity: 5 },
-  { orderId: 2, productId: 1, quantity: 5 }
+  { orderId: 1, productId: 1, quantity: 5 }
 ]
 
 const productCategories = [
