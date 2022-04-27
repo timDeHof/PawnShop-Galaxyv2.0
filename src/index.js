@@ -14,10 +14,10 @@ const root = ReactDOM.createRoot(container);
 // Initial render
 root.render(
   <Router>
-      <AuthProvider>
-    <CartProvider>
+    <AuthProvider>
+      <CartProvider>
         <App />
-    </CartProvider>
-      </AuthProvider>
+      </CartProvider>
+    </AuthProvider>
   </Router>
 );

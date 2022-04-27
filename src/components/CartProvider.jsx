@@ -8,8 +8,7 @@ import { getProducts } from "../axios-services/products";
 const CartProvider = ({ children }) => {
   const { token, user } = useAuth();
   const [cart, setCart] = useState({ product_orders: [] });
-  console.log("user", user);
-  console.log(cart, "before use effect");
+
   //   const localCart = JSON.parse(localStorage.getItem("cart"));
   //   console.log(localCart, "my local cart");
   //   console.log(cart, "This cart");
@@ -18,25 +17,15 @@ const CartProvider = ({ children }) => {
   //   } else {
   //     console.log("localCart is not found");
   //   }
-  useEffect(() => {
-    console.log(cart, "in useeffect");
-    if (user.id && !cart.id) {
-      async function newCart() {
-        const newUserCart = await createCart(user.id, true);
-        // createCart(userId, isActive)
-        console.log(newUserCart, "new user cart");
-        //setCart(newUserCart);
-      }
-      newCart();
-    } else {
-      console.log("can't create a cart for user");
-    }
 
-    async function getCart() {
-      const userCart = await getCartByUser(user.id);
-      // console.log(userCart);
-      setCart(userCart);
-    }
+  useEffect(() => {
+    const getCart = async () => {
+      if (user.username !== "guest") {
+        // get their cart from the backend
+        const backedCart = await getCartByUser(user.id);
+        setCart(backedCart);
+      }
+    };
     getCart();
   }, [user]);
 

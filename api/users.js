@@ -40,6 +40,14 @@ usersRouter.post("/register", async (req, res, next) => {
           billingAddress,
         },
       });
+
+      // create a cart
+      const cart = await prisma.orders.create({
+        data: {
+          userId: user.id
+        }
+      })
+
       if (!user) {
         next({
           name: "UserCreationError",
@@ -102,24 +110,24 @@ usersRouter.post("/login", async (req, res, next) => {
 
 usersRouter.get("/cart/:userId", async (req, res, next) => {
   try {
-      const cart = await prisma.orders.findMany({
-          where: {
-              userId: +req.params.userId,
-              isActive: true
-          },
+    const cart = await prisma.orders.findMany({
+      where: {
+        userId: +req.params.userId,
+        isActive: true
+      },
+      include: {
+        product_orders: {
           include: {
-            product_orders:{
-              include: {
-               products: true
-              },
-            
-            }
+            products: true
+          },
 
-          }
-      });
-      res.send(cart);
+        }
+
+      }
+    });
+    res.send(cart);
   } catch (error) {
-      next(error);
+    next(error);
   }
 });
 
