@@ -12,19 +12,20 @@ export async function getCartByUser(userId) {
   }
 }
 
-export async function createCart(token, userId, isActive) {
+export async function createCart(userId, isActive) {
   try {
     const {
       data: [cart],
-    } = await axios.post(`/api/users/cart/${userId}`, {
+    } = await axios.post(`/api/orders/`, {
+      // withCredentials: true,
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Authorization: `Bearer ${token}`,
+      // },
+      userId,
       isActive,
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
     });
-    console.log(cart, "from axios")
+    console.log(cart, "cart from axios");
     return cart;
   } catch (err) {
     console.error(err);

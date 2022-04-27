@@ -8,7 +8,8 @@ import { getProducts } from "../axios-services/products";
 const CartProvider = ({ children }) => {
   const { token, user } = useAuth();
   const [cart, setCart] = useState({ product_orders: [] });
-  console.log(cart, "before use effect")
+  console.log("user", user);
+  console.log(cart, "before use effect");
   //   const localCart = JSON.parse(localStorage.getItem("cart"));
   //   console.log(localCart, "my local cart");
   //   console.log(cart, "This cart");
@@ -19,7 +20,15 @@ const CartProvider = ({ children }) => {
   //   }
   useEffect(() => {
     console.log(cart, "in useeffect");
-    if (user.id && cart.id) {
+    if (user.id && !cart.id) {
+      async function newCart() {
+        const newUserCart = await createCart(user.id, true);
+        console.log(newUserCart, "new user cart");
+        // setCart(newUserCart);
+      }
+      newCart();
+    }
+    if (token && cart.id) {
       async function getCart() {
         const userCart = await getCartByUser(user.id);
         // console.log(userCart);
@@ -27,14 +36,6 @@ const CartProvider = ({ children }) => {
       }
 
       getCart();
-    }
-    if (user.id && !cart.id) {
-      async function newCart() {
-        const newUserCart = await createCart(user.id);
-        // console.log(newUserCart, "new user cart");
-        setCart(newUserCart);
-      }
-      newCart();
     }
   }, [user]);
 
