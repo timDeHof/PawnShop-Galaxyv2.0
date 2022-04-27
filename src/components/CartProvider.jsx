@@ -23,20 +23,21 @@ const CartProvider = ({ children }) => {
     if (user.id && !cart.id) {
       async function newCart() {
         const newUserCart = await createCart(user.id, true);
+        // createCart(userId, isActive)
         console.log(newUserCart, "new user cart");
-        // setCart(newUserCart);
+        //setCart(newUserCart);
       }
       newCart();
+    } else {
+      console.log("can't create a cart for user");
     }
-    if (token && cart.id) {
-      async function getCart() {
-        const userCart = await getCartByUser(user.id);
-        // console.log(userCart);
-        setCart(userCart);
-      }
 
-      getCart();
+    async function getCart() {
+      const userCart = await getCartByUser(user.id);
+      // console.log(userCart);
+      setCart(userCart);
     }
+    getCart();
   }, [user]);
 
   return (

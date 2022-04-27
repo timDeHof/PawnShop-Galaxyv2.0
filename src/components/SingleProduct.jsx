@@ -5,6 +5,7 @@ import useCart from "../hooks/useCart";
 const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
   const { addToCart, cart } = useCart();
+  console.log("cart in SingleProduct:", cart);
 
   let productToRender;
 
