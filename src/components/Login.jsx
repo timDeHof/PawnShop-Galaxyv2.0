@@ -41,11 +41,12 @@ function Login() {
           <input
             value={username}
             type="text"
+            required
+            min="6"
             onChange={(ev) => {
               setUsername(ev.target.value);
             }}
-            min="10"
-            required
+            
           />
           <label>Username</label>
         </div>
@@ -53,11 +54,11 @@ function Login() {
           <input
             value={password}
             type="password"
+            min="8"
+            required
             onChange={(ev) => {
               setPassword(ev.target.value);
             }}
-            min="10"
-            required
           />
           <label>Password</label>
         </div>

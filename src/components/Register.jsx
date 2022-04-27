@@ -43,7 +43,7 @@ function Register() {
               setUsername(e.target.value);
             }}
             required
-            minLength="10"
+            minLength="6"
           />
           <label>Username</label>
         </div>
@@ -55,7 +55,7 @@ function Register() {
               setPassword(e.target.value);
             }}
             required
-            minLength="10"
+            minLength="8"
           />
           <label>Password</label>
         </div>
