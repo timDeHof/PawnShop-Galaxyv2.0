@@ -18,7 +18,7 @@ function Login() {
       {!token ? (
         <h2>Please log in or register</h2>
       ) : (
-        <h2>Hello, {user ? user.username : "Guest!"}</h2>
+        <h2>Hello, {user ? user.name : "Guest!"}</h2>
       )}
 
       <form
