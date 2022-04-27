@@ -91,15 +91,14 @@ productsRouter.patch(
 
 productsRouter.delete(
   "/:productId",
-  requireUser,
   async (req, res, next) => {
     try {
-      const deleteProduct = await prisma.products.delete({
+      const deletedProduct = await prisma.products.delete({
         where: {
           id: +req.params.productId,
         },
       });
-      res.send(deleteProduct);
+      res.send(deletedProduct);
     } catch (error) {
       next(error);
     }

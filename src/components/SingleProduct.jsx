@@ -1,11 +1,13 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { deleteProduct } from "../axios-services/products";
+import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 
 const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
   const { addToCart, cart } = useCart();
-  console.log("cart in SingleProduct:", cart);
+  const { user } = useAuth();
 
   let productToRender;
 
@@ -23,19 +25,34 @@ const SingleProduct = ({ product, products }) => {
       <div>
         <Link to={`/products/${productToRender.id}`}>
           <h2>{productToRender.name}</h2>
+          <img src={productToRender.imageURL} width="200px" />
         </Link>
-        <img src={productToRender.imageURL} width="200px" />
         <div>{productToRender.price} ₡</div>
         <div>{productToRender.condition ? "New" : "Used"}</div>
         <div>{productToRender.description}</div>
         <button
           onClick={() => {
-            console.log("inside on click", productToRender.id);
             addToCart(cart.id, productToRender.id, 1);
           }}
         >
           Add to Cart
         </button>
+        {user.isAdmin ? (
+          <button
+            onClick={async() => {
+              console.log(
+                "%cDeleted Product",
+                `background:linear-gradient(#E66465, #9198E5);
+                padding: .3rem;
+                color: white;
+                border-radius: .5em`
+              );
+              await deleteProduct(productToRender.id)
+            }}
+          >
+            Delete
+          </button>
+        ) : null}
       </div>
     );
   }
