@@ -4,7 +4,9 @@ import useCart from "../hooks/useCart";
 
 const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
+  console.log("cart in SingleProduct:", cart);
+
   let productToRender;
 
   if (singleProductId) {
@@ -26,10 +28,14 @@ const SingleProduct = ({ product, products }) => {
         <div>{productToRender.price} ₡</div>
         <div>{productToRender.condition ? "New" : "Used"}</div>
         <div>{productToRender.description}</div>
-        <button onClick={() => {
-          console.log("inside on click", productToRender.id);
-          addToCart(1, productToRender.id, 1)
-        }}>Add to Cart</button>
+        <button
+          onClick={() => {
+            console.log("inside on click", productToRender.id);
+            addToCart(cart.id, productToRender.id, 1);
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     );
   }
