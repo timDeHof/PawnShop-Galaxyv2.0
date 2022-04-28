@@ -80,14 +80,14 @@ function AdminDashboard() {
                             const username = user.username;
                             const address = user.shippingAddress;
                             return (
-                              <>
-                                <td key={`username${i}`}>
+                              <React.Fragment key={`orderData${i}`}>
+                                <td>
                                   {id === orderUserId ? username : null}
                                 </td>
-                                <td key={`address${i}`}>
+                                <td>
                                   {id === orderUserId ? address : null}
                                 </td>
-                              </>
+                              </React.Fragment>
                             );
                           })}
                         </>
