@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../axios-services/products";
 import useAuth from "../hooks/useAuth";
 import SingleProduct from "./SingleProduct";
+import styles from "../style/Products.module.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -17,25 +18,27 @@ const Products = () => {
   }, []);
 
   return (
-    <div className="postcard">
+    <div >
       <h1 className="title"> Products</h1>
-      {user.isAdmin ? 
+      {user.isAdmin ? (
         <Link to="/admin/product-form">
-          <h3>Add a New Product</h3>
+          <h3 className="admin-product-form">Add a New Product</h3>
         </Link>
-      : null}
-      {products
-        ? products.map((product, i) => {
-            return (
-              <SingleProduct
-                key={`product${i}`}
-                product={product}
-                products={products}
-                productId={products.id}
-              />
-            );
-          })
-        : null}
+      ) : null}
+      <div className={styles.postcard}>
+        {products
+          ? products.map((product, i) => {
+              return (
+                <SingleProduct
+                  key={`product${i}`}
+                  product={product}
+                  products={products}
+                  productId={products.id}
+                />
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 };
