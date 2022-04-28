@@ -30,8 +30,8 @@ productsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-productsRouter.post("/", requireUser, async (req, res, next) => {
-  const { name, price, description, condition, inStock, imageURL } = req.body;
+productsRouter.post("/", async (req, res, next) => {
+  const { name, price, description, condition, imageURL } = req.body;
   try {
     const createProduct = await prisma.products.create({
       data: {
@@ -39,7 +39,6 @@ productsRouter.post("/", requireUser, async (req, res, next) => {
         price,
         description,
         condition,
-        inStock,
         imageURL,
       },
     });
@@ -91,15 +90,14 @@ productsRouter.patch(
 
 productsRouter.delete(
   "/:productId",
-  requireUser,
   async (req, res, next) => {
     try {
-      const deleteProduct = await prisma.products.delete({
+      const deletedProduct = await prisma.products.delete({
         where: {
           id: +req.params.productId,
         },
       });
-      res.send(deleteProduct);
+      res.send(deletedProduct);
     } catch (error) {
       next(error);
     }

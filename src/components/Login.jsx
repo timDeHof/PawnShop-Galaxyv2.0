@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "../style/Login.module.css";
 import "../style/App.css";
+
 function Login() {
   const { setToken, setUser, token, user } = useAuth();
   // States for login
@@ -18,13 +19,22 @@ function Login() {
       {!token ? (
         <h2>Please log in or register</h2>
       ) : (
-        <h2>Hello, {user ? user.username : "Guest!"}</h2>
+        <h2>Hello, {user ? user.name : "Guest!"}</h2>
       )}
 
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();
-          console.log("username password:", username, password);
+          console.log(
+            "%cusername",
+            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
+            username
+          );
+          console.log(
+            "%cpassword",
+            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
+            password
+          );
           const result = await loginUser(username, password);
 
           localStorage.setItem("token", result.token);
@@ -41,11 +51,11 @@ function Login() {
           <input
             value={username}
             type="text"
+            required
+            min="6"
             onChange={(ev) => {
               setUsername(ev.target.value);
             }}
-            min="10"
-            required
           />
           <label>Username</label>
         </div>
@@ -53,11 +63,11 @@ function Login() {
           <input
             value={password}
             type="password"
+            min="8"
+            required
             onChange={(ev) => {
               setPassword(ev.target.value);
             }}
-            min="10"
-            required
           />
           <label>Password</label>
         </div>
@@ -69,20 +79,17 @@ function Login() {
             <span></span>
             Log in
           </button>
-          <button
-            className={styles.submit}
-            onClick={() => {
-              localStorage.removeItem("token");
-              setToken(localStorage.getItem("token"));
-              setUser({});
-            }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Logout
-          </button>
+        </div>
+        <div className={styles.buttonContainer}>
+          <Link to="/register">
+            <button className={styles.submit} type="submit">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Create Account
+            </button>
+          </Link>
         </div>
       </form>
     </div>

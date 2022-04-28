@@ -2,7 +2,7 @@ const users = [
   { username: 'albert', password: 'bertie99', name: "albert", shippingAddress: "somewhere" },
   { username: 'sandra', password: 'sandra123', name: "sandra", shippingAddress: "nowhere", billingAddress: "also nowhere" },
   { username: 'glamgal', password: 'glamgal123', name: "gg", shippingAddress: "anywhere" },
-  { username: 'adminACC', password: 'badpassword', name: "Admin1", shippingAddress: "anywhere", isAdmin: true },
+  { username: 'adminACC', password: 'badpassword', name: "Admin", shippingAddress: "anywhere", isAdmin: true },
 ];
 
 const products = [
