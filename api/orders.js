@@ -35,17 +35,17 @@ ordersRouter.post("/", async (req, res, next) => {
   try {
     const createOrder = await prisma.orders.create({
       data: {
-        userId,
-        isActive,
+        userId
       },
     });
+
     res.send(createOrder);
   } catch (error) {
     next(error);
   }
 });
 
-ordersRouter.patch("/:orderId", requireUser, async (req, res, next) => {
+ordersRouter.patch("/:orderId", async (req, res, next) => {
   const { userId, isActive } = req.body;
   try {
     const updateOrder = await prisma.orders.update({

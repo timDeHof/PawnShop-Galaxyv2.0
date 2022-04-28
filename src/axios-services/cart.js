@@ -31,3 +31,21 @@ export async function createCart(userId, isActive) {
     console.error(err);
   }
 }
+
+export async function setInactiveOrder(orderId, userId, inactive) {
+  try {
+    const data = await axios.patch(`/api/orders/${orderId}`, {
+      userId,
+      isActive: inactive,
+      // withCredentials: true,
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Authorization: `Bearer ${token}`,
+      // },
+    });
+    console.log(data, "cart from axios");
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}

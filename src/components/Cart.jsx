@@ -2,16 +2,38 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 import { removeFromCart } from "../axios-services/product-orders";
+import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
   const { token, user } = useAuth();
-  const { cart, setCart, updateQty, deleteItem } = useCart();
+  const { cart, setCart, updateQty, deleteItem, checkout } = useCart();
   const [qty, setQty] = useState(1);
   const incrementQty = () => setQty(qty + 1);
   let decrementQty = () => setQty(qty - 1);
 
+  const navigate = useNavigate();
+
   console.log("The Cart:", cart);
   return (
-    <>
+    <div>
+      <br />
+      <br />
+
+      <br />
+      <br />
+      <br />
+
+      <button
+        onClick={async () => {
+          const orderId = cart.product_orders[0].orderId;
+          await checkout(orderId, user.id);
+
+          navigate("/", { replace: true });
+        }}
+      >
+        Checkout
+      </button>
+
       {cart.product_orders.map((product_order, i) => {
         return (
           <div key={`cartproduct${i}`}>
@@ -36,7 +58,7 @@ const Cart = () => {
             <div>
               <button
                 onClick={async () => {
-               deleteItem(token, product_order.id)
+                  deleteItem(token, product_order.id);
                 }}
               >
                 Remove Item
@@ -45,7 +67,7 @@ const Cart = () => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
