@@ -24,7 +24,16 @@ function Login() {
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();
-          console.log("username password:", username, password);
+          console.log(
+            "%cusername",
+            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
+            username,
+          );
+          console.log(
+            "%cpassword",
+            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
+            password,
+          )
           const result = await loginUser(username, password);
 
           localStorage.setItem("token", result.token);
@@ -46,7 +55,6 @@ function Login() {
             onChange={(ev) => {
               setUsername(ev.target.value);
             }}
-            
           />
           <label>Username</label>
         </div>

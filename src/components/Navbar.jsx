@@ -17,22 +17,22 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink activeclassname="active" to="/Products">
+          <NavLink activeclassname="active" to="/products">
             Products
           </NavLink>
         </li>
         <li>
-          <NavLink activeclassname="active" to="/Login">
+          <NavLink activeclassname="active" to="/login">
             Log In
           </NavLink>
         </li>
         <li>
-          <NavLink activeclassname="active" to="/Register">
+          <NavLink activeclassname="active" to="/register">
             Register
           </NavLink>
         </li>
         <li>
-          <NavLink activeclassname="active" to="/Cart">
+          <NavLink activeclassname="active" to="/cart">
            Cart
           </NavLink>
         </li>

@@ -17,3 +17,24 @@ export async function deleteProduct(productId) {
         console.error(err);
     }
 }
+
+export async function createProduct(
+    name,
+    price,
+    description,
+    condition,
+    imageURL,
+) {
+    try {
+        const { data: product } = await axios.post(`/api/products`, {
+            name,
+            price,
+            description,
+            condition,
+            imageURL,
+        })
+        return product;
+    } catch (err) {
+        console.error(err);
+    }
+}
