@@ -23,13 +23,13 @@ const AdminProductForm = () => {
                 formState.name,
                 +formState.price,
                 formState.description,
-                !!formState.condition,
+                formState.condition,
                 formState.imageURL
               );
-              console.log("%cNew Product Created", `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`
+              console.log(
+                "%cNew Product Created",
+                `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`
               );
-              console.log("%c ", "font-size: 1px; padding: 125px 125px; background-size: 250px 250px; background: no-repeat url(https://i2.wp.com/i.giphy.com/media/12BYUePgtn7sis/giphy-downsized.gif?w=770&amp;ssl=1);"
-              ); 
             }}
           >
             <div className={styles.user_box}>
@@ -68,24 +68,24 @@ const AdminProductForm = () => {
             </div>
             <div>Condition</div>
             <input
-              value={1}
+              value={true}
               type="radio"
               id="new"
               name="condition"
-              onChange={(e) => {
-                setFormState({ ...formState, condition: e.target.value });
+              onChange={() => {
+                setFormState({ ...formState, condition: true})
               }}
               required
             />
             <label htmlFor="new">New</label>
             <br></br>
             <input
-              value={0}
+              value={false}
               type="radio"
               id="used"
               name="condition"
-              onChange={(e) => {
-                setFormState({ ...formState, condition: e.target.value });
+              onChange={() => {
+                setFormState({ ...formState, condition: false})
               }}
               required
             />
