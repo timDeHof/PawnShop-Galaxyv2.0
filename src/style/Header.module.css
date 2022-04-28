@@ -5,12 +5,14 @@
   font-size: 140%;
   position: sticky;
   left: 0;
+  top: 0;
   transition: opacity 0.2s ease-in-out;
   text-align: center;
   background: var(--primary);
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--secondary_alt);
+  height: 5rem
 }
 
 .header_box .header_title {

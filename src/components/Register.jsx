@@ -14,6 +14,7 @@ function Register() {
   const [billingAddress, setBillingAddress] = useState("");
 
   const navigate = useNavigate()
+  
   return (
     <div className={styles.register_box}>
       <form
