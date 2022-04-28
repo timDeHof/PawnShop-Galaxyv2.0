@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "../style/Login.module.css";
 import "../style/App.css";
+
 function Login() {
   const { setToken, setUser, token, user } = useAuth();
   // States for login
@@ -27,13 +28,13 @@ function Login() {
           console.log(
             "%cusername",
             `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
-            username,
+            username
           );
           console.log(
             "%cpassword",
             `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
-            password,
-          )
+            password
+          );
           const result = await loginUser(username, password);
 
           localStorage.setItem("token", result.token);
@@ -78,20 +79,17 @@ function Login() {
             <span></span>
             Log in
           </button>
-          <button
-            className={styles.submit}
-            onClick={() => {
-              localStorage.removeItem("token");
-              setToken(localStorage.getItem("token"));
-              setUser({});
-            }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Logout
-          </button>
+        </div>
+        <div className={styles.buttonContainer}>
+          <Link to="/register">
+            <button className={styles.submit} type="submit">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Create Account
+            </button>
+          </Link>
         </div>
       </form>
     </div>

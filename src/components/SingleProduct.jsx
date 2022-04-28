@@ -30,16 +30,9 @@ const SingleProduct = ({ product, products }) => {
         <div>{productToRender.price} ₡</div>
         <div>{productToRender.condition ? "New" : "Used"}</div>
         <div>{productToRender.description}</div>
-        <button
-          onClick={() => {
-            addToCart(cart.id, productToRender.id, 1);
-          }}
-        >
-          Add to Cart
-        </button>
         {user.isAdmin ? (
           <button
-            onClick={async() => {
+            onClick={async () => {
               console.log(
                 "%cDeleted Product",
                 `background:linear-gradient(#E66465, #9198E5);
@@ -47,12 +40,20 @@ const SingleProduct = ({ product, products }) => {
                 color: white;
                 border-radius: .5em`
               );
-              await deleteProduct(productToRender.id)
+              await deleteProduct(productToRender.id);
             }}
           >
             Delete
           </button>
-        ) : null}
+        ) : (
+          <button
+            onClick={() => {
+              addToCart(cart.id, productToRender.id, 1);
+            }}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     );
   }
