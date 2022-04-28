@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { registerUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import styles from "../style/Register.module.css";
+import { useNavigate } from "react-router-dom"
 
 function Register() {
   const { setToken } = useAuth();
@@ -12,6 +13,7 @@ function Register() {
   const [shippingAddress, setShippingAddress] = useState("");
   const [billingAddress, setBillingAddress] = useState("");
 
+  const navigate = useNavigate()
   return (
     <div className={styles.register_box}>
       <form
@@ -29,10 +31,11 @@ function Register() {
             localStorage.setItem("token", result.token);
             setToken(result.token);
 
-            // history.push("/");
+            navigate("/", { replace: true });
           } catch (error) {
             throw error;
           }
+
         }}
       >
         <div className={styles.user_box}>
