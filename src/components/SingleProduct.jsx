@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { deleteProduct } from "../axios-services/products";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
+import styles from "../style/Products.module.css";
 
 const SingleProduct = ({ product, products }) => {
   const { singleProductId } = useParams();
@@ -22,16 +23,21 @@ const SingleProduct = ({ product, products }) => {
 
   if (productToRender) {
     return (
-      <div>
+      <div className={styles.product}>
         <Link to={`/products/${productToRender.id}`}>
-          <h2>{productToRender.name}</h2>
-          <img src={productToRender.imageURL} width="200px" />
+          <h2 className={styles.productTitle}>{productToRender.name}</h2>
+          <img className={styles.productImg} src={productToRender.imageURL} />
         </Link>
-        <div>{productToRender.price} ₡</div>
-        <div>{productToRender.condition ? "New" : "Used"}</div>
-        <div>{productToRender.description}</div>
+        <div className={styles.productPrice}>{productToRender.price} ₡</div>
+        <div className={styles.productCondition}>
+          {productToRender.condition ? "New" : "Used"}
+        </div>
+        <div className={styles.productDescription}>
+          {productToRender.description}
+        </div>
         {user.isAdmin ? (
           <button
+            className={styles.deleteProduct}
             onClick={async () => {
               console.log(
                 "%cDeleted Product",
@@ -47,6 +53,7 @@ const SingleProduct = ({ product, products }) => {
           </button>
         ) : (
           <button
+            className={styles.addToCart}
             onClick={() => {
               addToCart(cart.id, productToRender.id, 1);
             }}

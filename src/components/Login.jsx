@@ -39,12 +39,11 @@ function Login() {
 
           localStorage.setItem("token", result.token);
           setToken(result.token);
-          // console.log("token:", token);
 
           setUsername("");
           setPassword("");
 
-          // navigate("/", { replace: true });
+          navigate("/", { replace: true });
         }}
       >
         <div className={styles.user_box}>
