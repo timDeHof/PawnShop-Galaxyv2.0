@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { createProductOrder } from "../axios-services/product-orders";
 import CartContext from "../CartContext";
 import useAuth from "./useAuth";
-import { updateQuantity } from "../axios-services/product-orders";
+import { updateQuantity, removeFromCart } from "../axios-services/product-orders";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -36,11 +36,22 @@ const useCart = () => {
     console.log(mappedItems);
     setCart({ ...cart, product_orders: mappedItems });
   };
+
+  const deleteItem = async (token, productOrderId) => {
+    await removeFromCart(token, productOrderId);
+    const filteredItems = cart.product_orders.filter((product_order)=> {
+      if(product_order.id !== productOrderId){
+        return product_order
+      }
+    })
+    setCart({...cart, product_orders: filteredItems})
+  }
   return {
     cart,
     setCart,
     addToCart,
     updateQty,
+    deleteItem
   };
 };
 
