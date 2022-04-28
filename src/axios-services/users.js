@@ -3,7 +3,6 @@ import axios from "axios";
 export async function getUsers() {
   try {
     const { data: users } = await axios.get("/api/users");
-    console.log("users:", users);
     return users;
   } catch (err) {
     console.error(err);

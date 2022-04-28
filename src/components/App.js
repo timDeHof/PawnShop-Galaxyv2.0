@@ -11,6 +11,7 @@ import SingleProduct from "./SingleProduct";
 import Footer from "./Footer";
 import Cart from "./Cart";
 import AdminProductForm from "./AdminProductForm";
+import AdminDashboard from "./AdminDashboard";
 
 
 const App = () => {
@@ -46,7 +47,8 @@ const App = () => {
         <Route path="/products" element={<Products products={products} setProducts={setProducts} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/admin/product-form" element={< AdminProductForm />} />``
+        <Route path="/admin/product-form" element={< AdminProductForm />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/" element={<Products />} />
       </Routes>
       <Footer APIHealth={APIHealth} />

@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 import styles from "../style/Login.module.css";
 
 function Navbar() {
-  const { token, setToken, setUser } = useAuth();
+  const { token, setToken, setUser, user } = useAuth();
 
   //console.log("USER FROM APP.JS", user);
 
@@ -51,13 +51,20 @@ function Navbar() {
           </>
         )}
 
-        <li>
-          <NavLink activeclassname="active" to="/cart">
-            Cart
-          </NavLink>
-        </li>
+        {!user.isAdmin ? (
+          <li>
+            <NavLink activeclassname="active" to="/cart">
+              Cart
+            </NavLink>
+          </li>
+        ) : (
+          <li>
+            <NavLink activeclassname="active" to="/admin/dashboard">
+              Dashboard
+            </NavLink>
+          </li>
+        )}
       </ul>
-      {/* <h1>Welcome, {user.username} !</h1> */}
     </>
   );
 }
