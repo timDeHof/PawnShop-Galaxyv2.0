@@ -50,7 +50,8 @@ const useCart = () => {
 
   const checkout = async (orderId, userId) => {
     await setInactiveOrder(orderId, userId, false)
-    await createCart(userId, true)
+    const newCart = await createCart(userId, true)
+    console.log('New Cart', newCart);
     setCart({ ...cart, product_orders: [] })
   }
 

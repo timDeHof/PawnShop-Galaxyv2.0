@@ -51,14 +51,6 @@ const SingleProduct = ({ product, products }) => {
           >
             Delete
           </button>
-          <button
-          className={styles.deleteProduct}
-          onClick={async () => {
-            // show edit product form
-          }}
-        >
-          Edit
-        </button>
         ) : (
           <button
             className={styles.addToCart}

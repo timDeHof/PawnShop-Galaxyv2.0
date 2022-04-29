@@ -25,8 +25,8 @@ export async function createCart(userId, isActive) {
       userId,
       isActive,
     });
-    console.log(cart, "cart from axios");
-    return cart;
+    console.log(cart.data, "cart.data from axios");
+    return cart.data;
   } catch (err) {
     console.error(err);
   }
@@ -34,7 +34,7 @@ export async function createCart(userId, isActive) {
 
 export async function setInactiveOrder(orderId, userId, inactive) {
   try {
-    const data = await axios.patch(`/api/orders/${orderId}`, {
+    const { data: [cart] } = await axios.patch(`/api/orders/${orderId}`, {
       userId,
       isActive: inactive,
       // withCredentials: true,
@@ -43,8 +43,8 @@ export async function setInactiveOrder(orderId, userId, inactive) {
       //   Authorization: `Bearer ${token}`,
       // },
     });
-    console.log(data, "cart from axios");
-    return data;
+    // console.log(data, "cart from axios");
+    return cart;
   } catch (err) {
     console.error(err);
   }
