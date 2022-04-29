@@ -1,6 +1,6 @@
 .footer_box {
   display: flex;
-  position: relative;
+  position: absolute;
   flex-direction: row;
   text-align: center;
   justify-content: center;

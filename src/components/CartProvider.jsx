@@ -22,8 +22,8 @@ const CartProvider = ({ children }) => {
     const getCart = async () => {
       if (user.username !== "guest") {
         // get their cart from the backend
-        const backedCart = await getCartByUser(user.id);
-        setCart(backedCart);
+        const backendCart = await getCartByUser(user.id);
+        setCart(backendCart);
       }
     };
     getCart();

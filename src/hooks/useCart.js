@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { createProductOrder } from "../axios-services/product-orders";
 import CartContext from "../CartContext";
 import useAuth from "./useAuth";
-import { updateQuantity } from "../axios-services/product-orders";
+import { updateQuantity, removeFromCart } from "../axios-services/product-orders";
+import { createCart, setInactiveOrder } from "../axios-services/cart";
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   const addToCart = async (orderId, productId, quantity) => {
     const productOrder = await createProductOrder(
@@ -36,11 +37,30 @@ const useCart = () => {
     console.log(mappedItems);
     setCart({ ...cart, product_orders: mappedItems });
   };
+
+  const deleteItem = async (token, productOrderId) => {
+    await removeFromCart(token, productOrderId);
+    const filteredItems = cart.product_orders.filter((product_order) => {
+      if (product_order.id !== productOrderId) {
+        return product_order
+      }
+    })
+    setCart({ ...cart, product_orders: filteredItems })
+  }
+
+  const checkout = async (orderId, userId) => {
+    await setInactiveOrder(orderId, userId, false)
+    await createCart(userId, true)
+    setCart({ ...cart, product_orders: [] })
+  }
+
   return {
     cart,
     setCart,
     addToCart,
     updateQty,
+    deleteItem,
+    checkout
   };
 };
 
