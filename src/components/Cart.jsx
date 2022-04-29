@@ -25,10 +25,11 @@ const Cart = () => {
 
       <button
         onClick={async () => {
-          const orderId = cart.product_orders[0].orderId;
+          const orderId = cart.id;
+          console.log("OrderId", orderId);
           await checkout(orderId, user.id);
 
-          navigate("/", { replace: true });
+          // navigate("/", { replace: true });
         }}
       >
         Checkout

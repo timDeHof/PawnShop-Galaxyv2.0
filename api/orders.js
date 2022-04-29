@@ -35,9 +35,18 @@ ordersRouter.post("/", async (req, res, next) => {
   try {
     const createOrder = await prisma.orders.create({
       data: {
-        userId
+        userId,
+        isActive
       },
+      include: {
+        product_orders: {
+          include: {
+            products: true
+          }
+        }
+      }
     });
+    console.log('Created order:', createOrder);
 
     res.send(createOrder);
   } catch (error) {

@@ -38,3 +38,25 @@ export async function createProduct(
         console.error(err);
     }
 }
+
+export async function updateProduct(
+    productId,
+    name,
+    price,
+    description,
+    condition,
+    imageURL,
+) {
+    try {
+        const { data: product } = await axios.patch(`/api/products/${productId}`, {
+            name,
+            price,
+            description,
+            condition,
+            imageURL,
+        })
+        return product;
+    } catch (err) {
+        console.error(err);
+    }
+}

@@ -15,7 +15,7 @@ export async function getCartByUser(userId) {
 export async function createCart(userId, isActive) {
   try {
     const {
-      data: [cart],
+      data
     } = await axios.post(`/api/orders/`, {
       // withCredentials: true,
       // headers: {
@@ -25,8 +25,8 @@ export async function createCart(userId, isActive) {
       userId,
       isActive,
     });
-    console.log(cart, "cart from axios");
-    return cart;
+    // console.log(data, "DATA from axios");
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -43,7 +43,7 @@ export async function setInactiveOrder(orderId, userId, inactive) {
       //   Authorization: `Bearer ${token}`,
       // },
     });
-    console.log(data, "cart from axios");
+    // console.log(data, "cart from axios");
     return data;
   } catch (err) {
     console.error(err);
