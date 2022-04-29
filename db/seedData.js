@@ -116,7 +116,7 @@ const products = [
   },
   {
     name: "Babel Fish",
-    Price: 56.99,
+    Price: 42.0,
     description:
       "A small, bright yellow fish, which can be placed in someone's ear in order for them to be able to hear any language translated into their first language",
     condition: false,
