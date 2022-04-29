@@ -66,7 +66,7 @@ const products = [
   },
   {
     name: "Perri-air Salt-Free Air",
-    Price: 19.99,
+    price: 19.99,
     description:
       "An original can of Perri-air Naturally Sparkling Salt-Free Air",
     condition: true,
@@ -76,7 +76,7 @@ const products = [
   },
   {
     name: "Thanos' Gauntlet",
-    Price: 59.99,
+    price: 59.99,
     description:
       "You'll be ready to rule the Galaxy with golden gauntlet with multi colored stones",
     condition: true,
@@ -86,7 +86,7 @@ const products = [
   },
   {
     name: "Moon Necklace",
-    Price: 129.99,
+    price: 129.99,
     description:
       "Moon Rock Pendant with real lunar meteorite granules with 20 sterling silver chain",
     condition: true,
@@ -96,7 +96,7 @@ const products = [
   },
   {
     name: "Sputnik 1",
-    Price: 135.98,
+    price: 135.98,
     description:
       "Own the first artificial Earth Satellite that triggered the Space Race",
     condition: false,
@@ -106,7 +106,7 @@ const products = [
   },
   {
     name: "Towel",
-    Price: 19.99,
+    price: 19.99,
     description:
       "A towel is the most massively useful thing an interstellar hitchhiker can carry",
     condition: true,
@@ -116,7 +116,7 @@ const products = [
   },
   {
     name: "Babel Fish",
-    Price: 42.0,
+    price: 42.0,
     description:
       "A small, bright yellow fish, which can be placed in someone's ear in order for them to be able to hear any language translated into their first language",
     condition: false,
@@ -150,7 +150,7 @@ const productCategories = [
   { productId: 2, categoryId: 2 },
   { productId: 1, categoryId: 1 },
   { productId: 3, categoryId: 2 },
-  { productID: 4, categoryId: 3 },
+  { productId: 4, categoryId: 3 },
   { productId: 5, categoryId: 4 },
   { productId: 6, categoryId: 5 },
   { productId: 7, categoryId: 5 },
