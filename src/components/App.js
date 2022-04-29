@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import Cart from "./Cart";
 import AdminProductForm from "./AdminProductForm";
 import AdminDashboard from "./AdminDashboard";
+import AdminEditForm from "./AdminEditForm";
 
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin/product-form" element={< AdminProductForm />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/edit-form/:productId" element={<AdminEditForm />} />
         <Route path="/" element={<Products />} />
       </Routes>
       <Footer APIHealth={APIHealth} />

@@ -63,7 +63,6 @@ productsRouter.get("/category/:categoryId", async (req, res, next) => {
 
 productsRouter.patch(
   "/:productId",
-  requireUser,
   async (req, res, next) => {
     const { name, price, description, condition, inStock, imageURL } = req.body;
     try {

@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 import styles from "../style/Products.module.css";
 
-const SingleProduct = ({ product, products }) => {
+const SingleProduct = ({ product, products, setProducts }) => {
   const { singleProductId } = useParams();
   const { addToCart, cart } = useCart();
   const { user } = useAuth();
@@ -36,21 +36,34 @@ const SingleProduct = ({ product, products }) => {
           {productToRender.description}
         </div>
         {user.isAdmin ? (
-          <button
-            className={styles.deleteProduct}
-            onClick={async () => {
-              console.log(
-                "%cDeleted Product",
-                `background:linear-gradient(#E66465, #9198E5);
+          <>
+            <Link
+              to={`/admin/edit-form/${productToRender.id}`}
+              className={styles.deleteProduct}
+            >
+              Edit
+            </Link>
+            <button
+              className={styles.deleteProduct}
+              onClick={async () => {
+                console.log(
+                  "%cDeleted Product",
+                  `background:linear-gradient(#E66465, #9198E5);
                 padding: .3rem;
                 color: white;
                 border-radius: .5em`
-              );
-              await deleteProduct(productToRender.id);
-            }}
-          >
-            Delete
-          </button>
+                );
+                await deleteProduct(productToRender.id);
+                const filteredProducts = products.filter(product => {
+                  if (product.id !== productToRender.id) return true
+                })
+                setProducts(filteredProducts)
+
+              }}
+            >
+              Delete
+            </button>
+          </>
         ) : (
           <button
             className={styles.addToCart}

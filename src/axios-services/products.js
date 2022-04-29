@@ -60,3 +60,12 @@ export async function updateProduct(
         console.error(err);
     }
 }
+
+export async function getProductById(id) {
+    try {
+        const { data: product } = await axios.get(`/api/products/${id}`);
+        return product;
+    } catch (err) {
+        console.error(err);
+    }
+}

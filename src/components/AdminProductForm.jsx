@@ -46,12 +46,11 @@ const AdminProductForm = () => {
             <div className={styles.user_box}>
               <input
                 value={formState.price}
-                type="number"
+                type="text"
                 onChange={(e) => {
                   setFormState({ ...formState, price: e.target.value });
                 }}
                 required
-                min={0}
               />
               <label>Price</label>
             </div>
@@ -73,7 +72,7 @@ const AdminProductForm = () => {
               id="new"
               name="condition"
               onChange={() => {
-                setFormState({ ...formState, condition: true})
+                setFormState({ ...formState, condition: true });
               }}
               required
             />
@@ -85,7 +84,7 @@ const AdminProductForm = () => {
               id="used"
               name="condition"
               onChange={() => {
-                setFormState({ ...formState, condition: false})
+                setFormState({ ...formState, condition: false });
               }}
               required
             />
