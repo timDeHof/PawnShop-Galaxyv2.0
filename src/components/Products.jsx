@@ -33,7 +33,7 @@ const Products = () => {
                   key={`product${i}`}
                   product={product}
                   products={products}
-                  productId={products.id}
+                  setProducts={setProducts}
                 />
               );
             })
