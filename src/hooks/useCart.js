@@ -52,7 +52,7 @@ const useCart = () => {
     await setInactiveOrder(orderId, userId, false)
     const newCart = await createCart(userId, true)
     console.log('New Cart', newCart);
-    setCart({ ...cart, product_orders: [] })
+    setCart(newCart)
   }
 
   return {

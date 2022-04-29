@@ -15,7 +15,7 @@ export async function getCartByUser(userId) {
 export async function createCart(userId, isActive) {
   try {
     const {
-      data: [cart],
+      data
     } = await axios.post(`/api/orders/`, {
       // withCredentials: true,
       // headers: {
@@ -25,8 +25,8 @@ export async function createCart(userId, isActive) {
       userId,
       isActive,
     });
-    console.log(cart.data, "cart.data from axios");
-    return cart.data;
+    // console.log(data, "DATA from axios");
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -34,7 +34,7 @@ export async function createCart(userId, isActive) {
 
 export async function setInactiveOrder(orderId, userId, inactive) {
   try {
-    const { data: [cart] } = await axios.patch(`/api/orders/${orderId}`, {
+    const data = await axios.patch(`/api/orders/${orderId}`, {
       userId,
       isActive: inactive,
       // withCredentials: true,
@@ -44,7 +44,7 @@ export async function setInactiveOrder(orderId, userId, inactive) {
       // },
     });
     // console.log(data, "cart from axios");
-    return cart;
+    return data;
   } catch (err) {
     console.error(err);
   }

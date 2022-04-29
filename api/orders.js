@@ -38,6 +38,13 @@ ordersRouter.post("/", async (req, res, next) => {
         userId,
         isActive
       },
+      include: {
+        product_orders: {
+          include: {
+            products: true
+          }
+        }
+      }
     });
     console.log('Created order:', createOrder);
 
