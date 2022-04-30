@@ -3,9 +3,51 @@ body {
   padding: 0;
   background: linear-gradient(var(--primary), var(--primary_alt));
 }
+.instructions{
+  font-size: 0.75em;
+  border-radius: 0.5em;
+  background: var(--secondary_alt);
+  color:#fff;
+  padding:0.25em;
+  position: relative;
+  bottom:-10px
+}
+.instructions > svg {
+  margin-right: 00.25em;
+}
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+.hide {
+  display: none;
+}
+
+.valid{
+  color:limegreen;
+  margin-left: 00.25em;
+}
+
+.invalid{
+  color: red;
+  margin-left: 0.25em;
+}
+
+.errmsg{
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.line{
+  display: inline-block;
+}
 
 .register_box {
   position: absolute;
+  display: inline-block;
   top: 50%;
   left: 50%;
   width: 400px;
@@ -16,15 +58,28 @@ body {
   box-shadow: 0 15px 25px var(--additional_color);
   border-radius: 10px;
 }
-
+.register_box h1 {
+  display:inline-block;
+  margin: 0.25em 1em 0.25em;
+  padding: 1em;
+  color: var(--secondary_alt);
+  text-align: center;
+}
 .register_box h2 {
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
   text-align: center;
 }
+.register_box p{
+  margin: 1em;
+  padding: .25em;
+  color: #fff;
+  text-align: left;
+}
 .register_box .user_box {
   position: relative;
+  padding: 0.25em;
 }
 
 .register_box .user_box input {
@@ -38,7 +93,6 @@ body {
   outline: none;
   background: transparent;
 }
-
 .register_box .user_box label {
   position: absolute;
   top: 0;
@@ -85,7 +139,7 @@ body {
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px var(--secondary_alt), 0 0 25px var(--secondary_alt),
-    0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
+  0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
 }
 
 .register_box .submit span {
@@ -110,7 +164,6 @@ body {
     left: 100%;
   }
 }
-
 .register_box .submit span:nth-child(2) {
   top: -100%;
   right: 0;
@@ -246,8 +299,8 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 40px 15px 0px 15px;
-
+  margin: .75em;
+  
   letter-spacing: 4px;
   background: transparent;
 }
@@ -257,7 +310,7 @@ body {
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px var(--secondary_alt), 0 0 25px var(--secondary_alt),
-    0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
+  0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
 }
 
 .register_box .submit span {
@@ -342,3 +395,40 @@ body {
     bottom: 100%;
   }
 }
+
+ .loginContainer{
+  display: flex ;
+  top: 2em;
+  margin: 3em;
+  height: 2em;
+  width: 20em;
+  text-align: left;
+  padding-top: 1em;
+  font-size:small;
+  align-items: center;
+}
+
+ .loginContainer .loginSubmit{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  padding: 1em 1em;
+  color: var(--secondary_alt);
+  font-size: 9px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin: .25em 15px 0px 15px;
+  letter-spacing: .25em;
+  background: var(--primary);
+  border: none;
+}
+ .loginContainer .loginSubmit:hover {
+  background: var(--secondary_alt);
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--secondary_alt), 0 0 10px var(--secondary_alt),
+  0 0 15px var(--secondary_alt), 0 0 20px var(--secondary_alt);
+}
+
