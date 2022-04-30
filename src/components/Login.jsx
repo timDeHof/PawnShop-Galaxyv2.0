@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  faCheck,
+  faTimes,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../style/Login.module.css";
 import "../style/App.css";
+/*  
+  validates userName and password. The username must start with a lower or uppercase letter after that it must follow by any six or 23 characters that can be lower or upper case letters, digits, hyphens or underscores.The password requires at least one lower case letter, one uppercase letter, one digit, and one special character and it can be anywhere from eight to twenty four characters.
+*/
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{6,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Login() {
   const { setToken, setUser, token, user } = useAuth();
