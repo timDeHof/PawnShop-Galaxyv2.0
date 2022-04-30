@@ -81,7 +81,7 @@ function Register() {
       >
         {errMsg}
       </p>
-      <h1>Sign Up</h1>
+      <h1>Register</h1>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -151,12 +151,17 @@ function Register() {
         <div className={styles.user_box}>
           <input
             value={password}
+            id="password"
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             required
-            minLength="8"
+            aria-invalid={validPwd ? "false" : "true"}
+            aria-describedby="pwdnote"
+            onFocus={() => setPwdFocus(true)}
+            onBlur={() => setPwdFocus(false)}
+            //minLength="8"
           />
           <label htmlFor="password">
             Password:
@@ -169,7 +174,29 @@ function Register() {
               <FontAwesomeIcon icon={faTimes} />
             </span>
           </label>
+          <p
+            id="pwdnote"
+            className={
+              pwdFocus && !validPwd ? styles.instruction : styles.offscreen
+            }
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            8 to 24 characters.
+            <br />
+            Must include uppercase and lowercase letters, a number and a special
+            character.
+            <br />
+            Letters, numbers, underscores, hyphens allowed.
+            <br />
+            Allowed special characters:{" "}
+            <span aria-label="exclamation mark">!</span>{" "}
+            <span aria-label="at symbol">@</span>{" "}
+            <span aria-label="hashtag">#</span>{" "}
+            <span aria-label="dollar sign">$</span>{" "}
+            <span aria-label="percent">%</span>
+          </p>
         </div>
+        <div className={styles.user_box}></div>
         <div className={styles.user_box}>
           <input
             value={name}
