@@ -79,7 +79,6 @@ function Register() {
         <section className={styles.register_box}>
           <h1>Success!</h1>
           <p>
-            {/* put router link here */}
             <button
               className={styles.buttonContainer}
               onClick={() => navigate("/login")}
