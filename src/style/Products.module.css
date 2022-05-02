@@ -89,7 +89,7 @@
   justify-content: baseline;
 }
  p {
-  color: var(--primary);
+ color: rgb(253, 251, 189);
   font-weight: bolder;
 display: flex;
 justify-content: center;
@@ -103,7 +103,6 @@ h1 {
   display: flex;
 justify-content: center;
 }
-
 
 .card__image {
   background-position: center center;
@@ -148,6 +147,7 @@ justify-content: center;
   
     cursor: pointer;
 }
+
 
 /* .productDescription {
   display: flex;
