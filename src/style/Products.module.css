@@ -1,8 +1,8 @@
 .productImg {
   height: 225px;
   max-width: 225px;
-  vertical-align: middle; 
-  border-radius: .5rem;
+  vertical-align: middle;
+  border-radius: 0.5rem;
   border-style: ridge;
   outline-style: none;
 }
@@ -11,36 +11,38 @@
   color: white;
 }
 
-.deleteProduct, .addToCart {
+.deleteProduct,
+.addToCart {
   text-decoration: none;
   background-color: var(--primary);
   color: var(--secondary_alt);
   padding: 1rem;
   font-weight: bold;
-  font-size: 16px; 
+  font-size: 16px;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: .25rem;
+  margin: 0.25rem;
   border: 2px outset var(--primary_alt);
   border-radius: 10px;
   text-align: center;
 }
 
-.deleteProduct:hover, .addToCart:hover {
+.deleteProduct:hover,
+.addToCart:hover {
   background-color: var(--secondary_alt);
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px var(--secondary_alt), 0 0 25px var(--secondary_alt),
     0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn--block {
   display: block;
   width: 100%;
 }
-.link{
+.link {
   text-decoration: none;
 }
 .postcard {
@@ -48,18 +50,6 @@
   flex-wrap: wrap;
   list-style: none;
   justify-content: center;
-
-}
-
-.cards__item {
-  display: flex;
-  padding: 1rem;
-  @media (min-width: 40rem) {
-    width: 50%;
-  }
-  @media (min-width: 56rem) {
-    width: 33.3333%;
-  }
 }
 
 .product {
@@ -77,62 +67,57 @@
   border-style: ridge;
 }
 
- .productPrice, .productCondition, .productDescription{
-  color:var(--primary_alt);
+.productPrice {
+  margin-top: 2rem;
+}
+
+/* .productDescription {
+  box-sizing: content-box;
+  text-overflow: ellipsis;
+} */
+
+.productPrice,
+.productCondition,
+.productDescription {
+  color: var(--primary_alt);
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
-  padding: .25rem;
+  padding: 0.25rem;
   font-weight: bold;
   box-sizing: content-box;
-  width:fit-content;
+  width: fit-content;
   justify-content: baseline;
 }
 
-
-
-.card__image {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-  filter: contrast(70%);
-  filter: saturate(180%);
-  overflow: hidden;
-  position: relative;
-  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
-}
-.contentLabel{
+.contentLabel {
   color: var(--primary);
   font-size: 1rem;
-  font-weight: normal ;
-  letter-spacing: .125em;
+  font-weight: normal;
+  letter-spacing: 0.125em;
   text-transform: uppercase;
   text-decoration: none;
-  
 }
-
 
 .productTitle {
   color: var(--secondary_alt);
   font-size: 1.25rem;
   font-weight: bold;
-  letter-spacing: .125em;
+  letter-spacing: 0.125em;
   text-transform: uppercase;
   text-decoration: none;
   font-family: "Rubik Mono One", sans-serif;
-  text-shadow: 2px 0 var(--primary_alt), 0 2px var(--primary_alt), 2px 0 var(--primary_alt), 0 2px var(--primary_alt);
+  text-shadow: 2px 0 var(--primary_alt), 0 2px var(--primary_alt),
+    2px 0 var(--primary_alt), 0 2px var(--primary_alt);
 }
 
-.productImg:hover{
+.productImg:hover {
   cursor: pointer;
 }
 .productTitle:hover {
- 
   color: #fff;
-  
-    cursor: pointer;
+
+  cursor: pointer;
 }
 
 /* .productDescription {

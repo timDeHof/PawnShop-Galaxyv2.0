@@ -18,11 +18,18 @@ const Products = () => {
   }, []);
 
   return (
-    <div >
-      <h1 className="title"> Products</h1>
+    <div>
+      <h1 style={{ textAlign: "center", marginBottom: "0" }}> Products</h1>
       {user.isAdmin ? (
         <Link to="/admin/product-form">
-          <h3 className="admin-product-form">Add a New Product</h3>
+          <div style={{ textAlign: "center" }}>
+            <button
+              className={styles.deleteProduct}
+              style={{ textAlign: "center", marginBottom: "2rem" }}
+            >
+              Add a New Product
+            </button>
+          </div>
         </Link>
       ) : null}
       <div className={styles.postcard}>

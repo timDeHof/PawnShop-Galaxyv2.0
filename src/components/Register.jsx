@@ -78,12 +78,16 @@ function Register() {
       {success ? (
         <section className={styles.register_box}>
           <h1>Success!</h1>
-          <p>
+          <p className={styles.buttonContainer}>
             <button
-              className={styles.buttonContainer}
-              onClick={() => navigate("/login")}
+              className={styles.submit}
+              onClick={() => navigate("/products")}
             >
-              Log in
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Products
             </button>
           </p>
         </section>
