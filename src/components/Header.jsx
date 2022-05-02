@@ -4,10 +4,10 @@ import styles from "../style/Header.module.css";
 
 function Header() {
   return (
-    <div className={styles.header_box}>
+    <header className={styles.header_box}>
       <h1 className={styles.header_title}>galactic pawn</h1>
       <Navbar />
-    </div>
+    </header>
   );
 }
 

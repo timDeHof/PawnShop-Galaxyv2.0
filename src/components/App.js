@@ -14,11 +14,9 @@ import AdminProductForm from "./AdminProductForm";
 import AdminDashboard from "./AdminDashboard";
 import AdminEditForm from "./AdminEditForm";
 
-
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
   const [products, setProducts] = useState([]);
-
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -34,27 +32,35 @@ const App = () => {
       setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
     };
 
-
     getAPIStatus();
   }, []);
 
   return (
-    <div className="app-container">
+    <main className="app-container">
       <Header />
 
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/products/:singleProductId" element={<SingleProduct products={products} setproducts={setProducts} />} />
-        <Route path="/products" element={<Products products={products} setProducts={setProducts} />} />
+        <Route
+          path="/products/:singleProductId"
+          element={
+            <SingleProduct products={products} setproducts={setProducts} />
+          }
+        />
+        <Route
+          path="/products"
+          element={<Products products={products} setProducts={setProducts} />}
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/admin/product-form" element={< AdminProductForm />} />
+        <Route path="/admin/product-form" element={<AdminProductForm />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/edit-form/:productId" element={<AdminEditForm />} />
         <Route path="/" element={<Products />} />
       </Routes>
+
       <Footer APIHealth={APIHealth} />
-    </div>
+    </main>
   );
 };
 

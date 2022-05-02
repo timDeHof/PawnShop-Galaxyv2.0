@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
@@ -6,92 +6,140 @@ import styles from "../style/Login.module.css";
 import "../style/App.css";
 
 function Login() {
+  // allows us to set the focus on the user input when the component loads
+  const userRef = useRef();
+
+  // allows us to set the focus on if we get an error
+  const errRef = useRef();
   const { setToken, setUser, token, user } = useAuth();
   // States for login
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
+  // hook that sets the focus on the username input when the component loads
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  // hook for displaying an error message
+  useEffect(() => {
+    setErrMsg("");
+  }, [username, password]);
+
   return (
-    <div className={styles.login_box}>
-      <h2>Log in</h2>
-      {!token ? (
-        <h2>Please log in or register</h2>
-      ) : (
-        <h2>Hello, {user ? user.name : "Guest!"}</h2>
-      )}
-
-      <form
-        onSubmit={async (ev) => {
-          ev.preventDefault();
-          console.log(
-            "%cusername",
-            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
-            username
-          );
-          console.log(
-            "%cpassword",
-            `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
-            password
-          );
-          const result = await loginUser(username, password);
-
-          localStorage.setItem("token", result.token);
-          setToken(result.token);
-
-          setUsername("");
-          setPassword("");
-
-          navigate("/", { replace: true });
-        }}
-      >
-        <div className={styles.user_box}>
-          <input
-            value={username}
-            type="text"
-            required
-            min="6"
-            onChange={(ev) => {
-              setUsername(ev.target.value);
-            }}
-          />
-          <label>Username</label>
-        </div>
-        <div className={styles.user_box}>
-          <input
-            value={password}
-            type="password"
-            min="8"
-            required
-            onChange={(ev) => {
-              setPassword(ev.target.value);
-            }}
-          />
-          <label>Password</label>
-        </div>
-        <div className={styles.buttonContainer}>
-          <button className={styles.submit} type="submit">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Log in
-          </button>
-        </div>
-        <div className={styles.buttonContainer}>
-          <Link to="/register">
-            <button className={styles.submit} type="submit">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Create Account
+    <>
+      {success ? (
+        <section className={styles.login_box}>
+          <h1>You are logged in!</h1>
+          <br />
+          <p>
+            <button
+              className={styles.buttonContainer}
+              onClick={() => navigate("/")}
+            >
+              Check out our Products!
             </button>
-          </Link>
-        </div>
-      </form>
-    </div>
+          </p>
+        </section>
+      ) : (
+        <section className={styles.login_box}>
+          <p
+            ref={errRef}
+            className={errMsg ? styles.errmsg : styles.offscreen}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+
+          <h1>Log in</h1>
+
+          <form
+            onSubmit={async (ev) => {
+              ev.preventDefault();
+              console.log(
+                "%cusername",
+                `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
+                username,
+                password
+              );
+              try {
+                const result = await loginUser(username, password);
+
+                localStorage.setItem("token", result.token);
+                setToken(result.token);
+                setSuccess(true);
+
+                setUsername("");
+                setPassword("");
+              } catch (error) {
+                if (!errMsg.response) {
+                  setErrMsg("No Server Response");
+                } else if (error.response?.status === 400) {
+                  setErrMsg("Missing Username or Password");
+                } else if (error.response?.status === 401) {
+                  setErrMsg("Unauthorized");
+                } else {
+                  setErrMsg("Login Failed");
+                }
+                errRef.current.focus();
+              }
+
+              //navigate("/", { replace: true });
+            }}
+          >
+            <div className={styles.user_box}>
+              <input
+                type="text"
+                id="username"
+                required
+                ref={userRef}
+                autoComplete="off"
+                onChange={(ev) => {
+                  setUsername(ev.target.value);
+                }}
+                value={username}
+              />
+              <label htmlFor="username">Username:</label>
+            </div>
+            <div className={styles.user_box}>
+              <input
+                type="password"
+                value={password}
+                required
+                onChange={(ev) => {
+                  setPassword(ev.target.value);
+                }}
+              />
+              <label htmlFor="password">Password:</label>
+            </div>
+            <div className={styles.buttonContainer}>
+              <button className={styles.submit}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Log in
+              </button>
+            </div>
+          </form>
+          <p className={styles.registerContainer}>
+            Need an Account?
+            <br />
+            <span className={styles.buttonContainer}>
+              <button
+                className={styles.registerSubmit}
+                onClick={() => navigate("/register")}
+              >
+                Create Account
+              </button>
+            </span>
+          </p>
+        </section>
+      )}
+    </>
   );
 }
 

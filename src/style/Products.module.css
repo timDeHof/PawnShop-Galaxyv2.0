@@ -1,21 +1,27 @@
 .productImg {
-  height: auto;
-  max-width: 30vw;
-  vertical-align: middle;
+  height: 225px;
+  max-width: 225px;
+  vertical-align: middle; 
+  border-radius: .5rem;
+  border-style: ridge;
+  outline-style: none;
+}
+
+.productImg:visited {
+  color: white;
 }
 
 .deleteProduct, .addToCart {
   text-decoration: none;
   background-color: var(--primary);
   color: var(--secondary_alt);
-  padding: 10px 20px;
+  padding: 1rem;
   font-weight: bold;
-  font-size: 16px;
-  text-decoration: none;
+  font-size: 16px; 
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 40px 15px 0px 15px;
+  margin: .25rem;
   border: 2px outset var(--primary_alt);
   border-radius: 10px;
   text-align: center;
@@ -34,13 +40,15 @@
   display: block;
   width: 100%;
 }
-
+.link{
+  text-decoration: none;
+}
 .postcard {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+
 }
 
 .cards__item {
@@ -56,26 +64,32 @@
 
 .product {
   background-color: var(--secondary);
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  box-shadow: 20px 20px 40px -14px var(--primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 2%;
-  margin: 2%;
-  &:hover {
-    .card__image {
-      filter: contrast(100%);
-    }
-  }
+  padding: 1%;
+  margin: 1%;
+  width: 450px;
+  height: 625px;
+  align-items: stretch;
+  border-style: ridge;
 }
 
-.card__content {
+ .productPrice, .productCondition, .productDescription{
+  color:var(--primary_alt);
   display: flex;
   flex: 1 1 auto;
-  flex-direction: column;
-  padding: 1rem;
+  flex-direction: row;
+  padding: .25rem;
+  font-weight: bold;
+  box-sizing: content-box;
+  width:fit-content;
+  justify-content: baseline;
 }
+
+
 
 .card__image {
   background-position: center center;
@@ -89,34 +103,45 @@
   position: relative;
   transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
 }
-
-.card__image--flowers {
-  background-image: url(https://unsplash.it/800/600?image=82);
-}
-
-.card__image--river {
-  background-image: url(https://unsplash.it/800/600?image=11);
-}
-
-.card__image--record {
-  background-image: url(https://unsplash.it/800/600?image=39);
-}
-
-.card__image--fence {
-  background-image: url(https://unsplash.it/800/600?image=59);
-}
-
-.card__title {
-  color: @gray-dark;
-  font-size: 1.25rem;
-  font-weight: 300;
-  letter-spacing: 2px;
+.contentLabel{
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: normal ;
+  letter-spacing: .125em;
   text-transform: uppercase;
+  text-decoration: none;
+  
 }
 
-.card__text {
-  flex: 1 1 auto;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
+
+.productTitle {
+  color: var(--secondary_alt);
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: .125em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: "Rubik Mono One", sans-serif;
+  text-shadow: 2px 0 var(--primary_alt), 0 2px var(--primary_alt), 2px 0 var(--primary_alt), 0 2px var(--primary_alt);
 }
+
+.productImg:hover{
+  cursor: pointer;
+}
+.productTitle:hover {
+ 
+  color: #fff;
+  
+    cursor: pointer;
+}
+
+/* .productDescription {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  flex: 1 1 auto;
+  font-size: 0.75rem;
+  line-height: 1.5;
+   margin-bottom: 1.25rem; 
+  font-weight: bold;
+} */

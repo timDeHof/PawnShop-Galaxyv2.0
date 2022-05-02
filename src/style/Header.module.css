@@ -1,5 +1,6 @@
 .header_box {
   display: flex;
+  flex-direction: row;
   width: 100%;
   padding: 1em;
   font-size: 140%;
@@ -22,4 +23,25 @@
   font-size: inherit;
   color: var(--secondary_alt);
   font-family: "Rubik Mono One", sans-serif;
+}
+@media screen and (max-width: 412px) {
+  .header_box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1em;
+    font-size: 140%;
+    position: sticky;
+    left: 0;
+    top: 0;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+    background: var(--primary);
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--secondary_alt);
+    height: 10rem
+  }
+  
 }

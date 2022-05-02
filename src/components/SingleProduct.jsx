@@ -24,15 +24,28 @@ const SingleProduct = ({ product, products, setProducts }) => {
   if (productToRender) {
     return (
       <div className={styles.product}>
-        <Link to={`/products/${productToRender.id}`}>
+        <Link
+          to={`/products/${productToRender.id}`}
+          style={{
+            textDecoration: "none",
+            textAlign: "center",
+            color: "white",
+          }}
+        >
           <h2 className={styles.productTitle}>{productToRender.name}</h2>
           <img className={styles.productImg} src={productToRender.imageURL} />
         </Link>
-        <div className={styles.productPrice}>{productToRender.price} ₡</div>
+
+        <div className={styles.productPrice}>
+          <label className={styles.contentLabel}>PRICE:</label>{" "}
+          {productToRender.price}₡
+        </div>
         <div className={styles.productCondition}>
-          {productToRender.condition ? "New" : "Used"}
+          <label className={styles.contentLabel}>Condition:</label>{" "}
+          {productToRender.condition ? " New" : " Used"}
         </div>
         <div className={styles.productDescription}>
+          <label className={styles.contentLabel}>Description:</label>{" "}
           {productToRender.description}
         </div>
         {user.isAdmin ? (
@@ -54,11 +67,10 @@ const SingleProduct = ({ product, products, setProducts }) => {
                 border-radius: .5em`
                 );
                 await deleteProduct(productToRender.id);
-                const filteredProducts = products.filter(product => {
-                  if (product.id !== productToRender.id) return true
-                })
-                setProducts(filteredProducts)
-
+                const filteredProducts = products.filter((product) => {
+                  if (product.id !== productToRender.id) return true;
+                });
+                setProducts(filteredProducts);
               }}
             >
               Delete
