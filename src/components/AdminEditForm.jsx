@@ -11,7 +11,7 @@ function AdminEditForm() {
 
   const { productId } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -82,30 +82,36 @@ function AdminEditForm() {
                 />
                 <label>Description</label>
               </div>
-              <div>Condition</div>
-              <input
-                value={true}
-                type="radio"
-                id="new"
-                name="condition"
-                checked={productToEdit.condition}
-                onChange={() => {
-                  setProductToEdit({ ...productToEdit, condition: true });
-                }}
-              />
-              <label htmlFor="new">New</label>
-              <br></br>
-              <input
-                value={false}
-                type="radio"
-                id="used"
-                name="condition"
-                checked={!productToEdit.condition}
-                onChange={() => {
-                  setProductToEdit({ ...productToEdit, condition: false });
-                }}
-              />
-              <label htmlFor="used">Used</label>
+              <div className={styles.user_box}>
+                <div className={styles.condition_box}>
+                  <p htmlFor="new">New</p>
+                  <input
+                    value={true}
+                    type="radio"
+                    id="new"
+                    name="condition"
+                    checked={productToEdit.condition}
+                    onChange={() => {
+                      setProductToEdit({ ...productToEdit, condition: true });
+                    }}
+                  />
+                </div>
+                {/* <br></br> */}
+                <div className={styles.condition_box}>
+                  <p htmlFor="used">Used</p>
+                  <input
+                    value={false}
+                    type="radio"
+                    id="used"
+                    name="condition"
+                    checked={!productToEdit.condition}
+                    onChange={() => {
+                      setProductToEdit({ ...productToEdit, condition: false });
+                    }}
+                  />
+                </div>
+                <label>Condition</label>
+              </div>
               <hr></hr>
               <div className={styles.user_box}>
                 <input

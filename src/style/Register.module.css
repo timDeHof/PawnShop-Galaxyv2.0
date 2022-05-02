@@ -82,7 +82,11 @@ body {
   position: relative;
   padding: 0.25em;
 }
-
+.register_box .user_box .condition_box {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em;
+}
 .register_box .user_box input {
   width: 100%;
   padding: 10px 0;
