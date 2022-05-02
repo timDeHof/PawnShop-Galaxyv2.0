@@ -1,6 +1,6 @@
 .footer_box {
   display: inline-block;
-  
+
   overflow: hidden;
   text-align: center;
   justify-content: center;
@@ -9,7 +9,6 @@
   padding: 1em;
   bottom: 0;
   width: 100vw;
-  
   background-color: var(--primary);
   margin-top: 1rem;
   border-top: 1px solid var(--secondary_alt);
