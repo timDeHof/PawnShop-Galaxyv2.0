@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--secondary_alt);
-  height: 5rem
+  height: 5rem;
 }
 
 .header_box .header_title {
@@ -23,6 +23,7 @@
   font-size: inherit;
   color: var(--secondary_alt);
   font-family: "Rubik Mono One", sans-serif;
+  text-decoration: none;
 }
 @media screen and (max-width: 412px) {
   .header_box {
@@ -41,7 +42,6 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--secondary_alt);
-    height: 10rem
+    height: 10rem;
   }
-  
 }

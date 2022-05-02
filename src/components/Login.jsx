@@ -35,11 +35,15 @@ function Login() {
         <section className={styles.login_box}>
           <h1>You are logged in!</h1>
           <br />
-          <p>
+          <p className={styles.buttonContainer}>
             <button
-              className={styles.buttonContainer}
-              onClick={() => navigate("/")}
+              className={styles.submit}
+              onClick={() => navigate("/products")}
             >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
               Check out our Products!
             </button>
           </p>
