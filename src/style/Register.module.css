@@ -3,14 +3,14 @@ body {
   padding: 0;
   background: linear-gradient(var(--primary), var(--primary_alt));
 }
-.instructions{
+.instructions {
   font-size: 0.75em;
   border-radius: 0.5em;
   background: var(--secondary_alt);
-  color:#fff;
-  padding:0.25em;
+  color: #fff;
+  padding: 0.25em;
   position: relative;
-  bottom:-10px
+  bottom: -10px;
 }
 .instructions > svg {
   margin-right: 00.25em;
@@ -23,17 +23,17 @@ body {
   display: none;
 }
 
-.valid{
-  color:limegreen;
+.valid {
+  color: limegreen;
   margin-left: 00.25em;
 }
 
-.invalid{
+.invalid {
   color: red;
   margin-left: 0.25em;
 }
 
-.errmsg{
+.errmsg {
   background-color: lightpink;
   color: firebrick;
   font-weight: bold;
@@ -41,40 +41,40 @@ body {
   margin-bottom: 0.5em;
 }
 
-.line{
+.line {
   display: inline-block;
 }
 
 .register_box {
-  position: absolute;
   display: inline-block;
   top: 50%;
   left: 50%;
-  height: 40rem;
+  height: fit-content;
   width: 30rem;
   padding: 1rem;
-  transform: translate(-50%, -50%);
+  margin-top: 4rem;
+  margin-bottom: 22rem;
   background: var(--primary);
   box-sizing: border-box;
   box-shadow: 0 1rem 1.25rem var(--additional_color);
   border-radius: 1em;
 }
 .register_box h1 {
-  display:inline-block;
+  display: inline-block;
   margin: 0.25rem 5rem 0.25rem 5rem;
-  padding: .25em;
+  padding: 0.25em;
   color: var(--secondary_alt);
   text-align: center;
 }
 .register_box h2 {
   margin: 0 0 30px;
-  padding: .25rem;
+  padding: 0.25rem;
   color: #fff;
   text-align: center;
 }
-.register_box p{
+.register_box p {
   margin: 1em;
-  padding: .25em;
+  padding: 0.25em;
   color: #fff;
   text-align: left;
 }
@@ -96,6 +96,7 @@ body {
 }
 .register_box .user_box label {
   position: absolute;
+  display: inline-block;
   top: 0;
   left: 0;
   padding: 10px 0;
@@ -111,6 +112,7 @@ body {
   left: 0;
   color: var(--secondary);
   font-size: 12px;
+  display: inline-block;
 }
 
 .register_box .buttonContainer {
@@ -122,14 +124,14 @@ body {
   position: relative;
   display: inline-block;
   text-align: center;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   color: var(--secondary_alt);
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: .5rem 1rem 0px 1rem;
+  margin: 0.5rem 1rem 0px 1rem;
   letter-spacing: 4px;
   background: var(--primary);
   border: none;
@@ -140,7 +142,7 @@ body {
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px var(--secondary_alt), 0 0 25px var(--secondary_alt),
-  0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
+    0 0 50px var(--secondary_alt), 0 0 100px var(--secondary_alt);
 }
 
 .register_box .submit span {
@@ -224,20 +226,20 @@ body {
     bottom: 100%;
   }
 }
- .register_box .loginContainer{
-  display: flex ;
+.register_box .loginContainer {
+  display: flex;
   top: 2em;
   margin: 1em;
   height: 2em;
   width: 20em;
   text-align: left;
   padding-top: 1em;
-  font-size:small;
+  font-size: small;
   align-items: center;
   justify-content: center;
 }
 
- .loginContainer .loginSubmit{
+.loginContainer .loginSubmit {
   position: relative;
   display: inline-block;
   text-align: center;
@@ -248,16 +250,15 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: .25em 15px 0px 15px;
-  letter-spacing: .25em;
+  margin: 0.25em 15px 0px 15px;
+  letter-spacing: 0.25em;
   background: var(--primary);
   border: none;
 }
- .loginContainer .loginSubmit:hover {
+.loginContainer .loginSubmit:hover {
   background: var(--secondary_alt);
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px var(--secondary_alt), 0 0 10px var(--secondary_alt),
-  0 0 15px var(--secondary_alt), 0 0 20px var(--secondary_alt);
+    0 0 15px var(--secondary_alt), 0 0 20px var(--secondary_alt);
 }
-

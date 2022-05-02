@@ -235,8 +235,8 @@ function Register() {
                 required
                 aria-invalid={validMatch ? "false" : "true"}
                 aria-describedby="confirmnote"
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)}
+                onFocus={() => setMatchFocus(true)}
+                onBlur={() => setMatchFocus(false)}
               />
               <p
                 id="confirmnote"

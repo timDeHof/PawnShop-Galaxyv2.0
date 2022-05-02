@@ -1,39 +1,39 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   background: linear-gradient(var(--primary), var(--primary_alt));
+} */
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
-  .errmsg{
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
-  }
-
 .login_box {
-  position: absolute;
   display: inline-block;
   top: 50%;
   left: 50%;
   width: 24rem;
   height: 22rem;
   padding: 1em;
-  transform: translate(-50%, -50%);
+  margin-top: 4rem;
+  margin-bottom: 38rem;
   background: var(--primary);
   box-sizing: border-box;
   box-shadow: 0 15px 25px var(--additional_color);
   border-radius: 1rem;
 }
 .login_box h1 {
-  position:relative;
-  display:inline-block;
+  position: relative;
+  display: inline-block;
   margin: -3rem 7rem 0.25em 5rem;
   padding: 1em;
   color: var(--secondary_alt);
   text-align: center;
-} 
+}
 
 .login_box h2 {
   margin: 0 0 30px;
@@ -92,7 +92,7 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: .75em;
+  margin: 0.75em;
 
   letter-spacing: 4px;
   background: var(--primary);
@@ -189,20 +189,20 @@ body {
     bottom: 100%;
   }
 }
-.registerContainer{
-  display: flex ;
+.registerContainer {
+  display: flex;
   top: 2em;
   margin: 1em;
   height: 2em;
   width: 20em;
   text-align: left;
   padding-top: 1em;
-  font-size:small;
+  font-size: small;
   align-items: center;
-  color: #fff
+  color: #fff;
 }
 
-.registerContainer .registerSubmit{
+.registerContainer .registerSubmit {
   position: relative;
   display: inline-block;
   text-align: center;
@@ -213,8 +213,8 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: .25em 1em 0px 1em;
-  letter-spacing: .25em;
+  margin: 0.25em 1em 0px 1em;
+  letter-spacing: 0.25em;
   background: var(--primary);
   border: none;
 }
