@@ -23,7 +23,9 @@ const SingleProduct = ({ product, products, setProducts }) => {
 
   if (productToRender) {
     return (
-      <div className={styles.product}>
+      <div className={styles.product} style= {{
+        marginBottom: '10rem'
+      }}>
         <Link
           to={`/products/${productToRender.id}`}
           style={{

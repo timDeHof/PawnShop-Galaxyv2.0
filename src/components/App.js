@@ -8,6 +8,7 @@ import Header from "./Header";
 import Register from "./Register";
 import Products from "./Products";
 import SingleProduct from "./SingleProduct";
+import Home from "./Home";
 import Footer from "./Footer";
 import Cart from "./Cart";
 import AdminProductForm from "./AdminProductForm";
@@ -56,7 +57,7 @@ const App = () => {
         <Route path="/admin/product-form" element={<AdminProductForm />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/edit-form/:productId" element={<AdminEditForm />} />
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Home products ={products} />} />
       </Routes>
 
       <Footer APIHealth={APIHealth} />
