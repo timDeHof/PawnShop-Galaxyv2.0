@@ -225,12 +225,12 @@ function Register() {
                 <br />
                 Letters, numbers, underscores, hyphens allowed.
                 <br />
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>{" "}
+                Allowed special characters: !,@,#,$,%
+                {/* <span aria-label="exclamation mark">!</span>{" "}
                 <span aria-label="at symbol">@</span>{" "}
                 <span aria-label="hashtag">#</span>{" "}
                 <span aria-label="dollar sign">$</span>{" "}
-                <span aria-label="percent">%</span>
+                <span aria-label="percent">%</span> */}
               </p>
             </div>
             <div className={styles.user_box}>
