@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { loginUser } from "../axios-services/users";
 import useAuth from "../hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../style/Login.module.css";
 import "../style/App.css";
 
@@ -11,7 +11,7 @@ function Login() {
 
   // allows us to set the focus on if we get an error
   const errRef = useRef();
-  const { setToken, setUser, token, user } = useAuth();
+  const { setToken } = useAuth();
   // States for login
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -63,12 +63,6 @@ function Login() {
           <form
             onSubmit={async (ev) => {
               ev.preventDefault();
-              console.log(
-                "%cusername",
-                `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`,
-                username,
-                password
-              );
               try {
                 const result = await loginUser(username, password);
 
@@ -90,8 +84,6 @@ function Login() {
                 }
                 errRef.current.focus();
               }
-
-              //navigate("/", { replace: true });
             }}
           >
             <div className={styles.user_box}>

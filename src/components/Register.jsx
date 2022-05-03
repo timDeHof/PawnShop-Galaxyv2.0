@@ -123,8 +123,11 @@ function Register() {
                 localStorage.setItem("token", result.token);
                 setToken(result.token);
                 // clear input fields
-
-                //navigate("/", { replace: true });
+                setUsername("");
+                setPassword("");
+                setName("");
+                setShippingAddress("");
+                setBillingAddress("");
               } catch (error) {
                 if (!error.response) {
                   setErrMsg("No server Response");
@@ -194,7 +197,6 @@ function Register() {
                 aria-describedby="pwdnote"
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
-                //minLength="8"
               />
               <label htmlFor="password">
                 Password:
