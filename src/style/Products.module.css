@@ -89,8 +89,23 @@
   width: fit-content;
   justify-content: baseline;
 }
+ p {
+ color: rgb(253, 251, 189);
+  font-weight: bolder;
+display: flex;
+justify-content: center;
+}
+h1 {
+  display: flex;
+  justify-content: center; 
+}
 
-.contentLabel {
+.homeTitle {
+  display: flex;
+justify-content: center;
+}
+
+.contentLabel{
   color: var(--primary);
   font-size: 1rem;
   font-weight: normal;
@@ -119,6 +134,7 @@
 
   cursor: pointer;
 }
+
 
 /* .productDescription {
   display: flex;
