@@ -123,8 +123,11 @@ function Register() {
                 localStorage.setItem("token", result.token);
                 setToken(result.token);
                 // clear input fields
-
-                //navigate("/", { replace: true });
+                setUsername("");
+                setPassword("");
+                setName("");
+                setShippingAddress("");
+                setBillingAddress("");
               } catch (error) {
                 if (!error.response) {
                   setErrMsg("No server Response");
@@ -194,7 +197,6 @@ function Register() {
                 aria-describedby="pwdnote"
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}
-                //minLength="8"
               />
               <label htmlFor="password">
                 Password:
@@ -223,12 +225,12 @@ function Register() {
                 <br />
                 Letters, numbers, underscores, hyphens allowed.
                 <br />
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>{" "}
+                Allowed special characters: !,@,#,$,%
+                {/* <span aria-label="exclamation mark">!</span>{" "}
                 <span aria-label="at symbol">@</span>{" "}
                 <span aria-label="hashtag">#</span>{" "}
                 <span aria-label="dollar sign">$</span>{" "}
-                <span aria-label="percent">%</span>
+                <span aria-label="percent">%</span> */}
               </p>
             </div>
             <div className={styles.user_box}>
