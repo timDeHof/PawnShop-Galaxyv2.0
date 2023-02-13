@@ -40,7 +40,7 @@ const SingleProduct = ({ product, products, setProducts }) => {
 
         <div className={styles.productPrice}>
           <label className={styles.contentLabel}>PRICE:</label>{" "}
-          {productToRender.price}₡
+          $ {productToRender.price}
         </div>
         <div className={styles.productCondition}>
           <label className={styles.contentLabel}>Condition:</label>{" "}

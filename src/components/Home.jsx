@@ -47,7 +47,7 @@ const Home = ({ products }) => {
 
                     <div className={styles.productPrice}>
                       <label className={styles.contentLabel}>PRICE:</label>{" "}
-                      {product.price}₡
+                     $ {product.price}
                     </div>
                     <div className={styles.productCondition}>
                       <label className={styles.contentLabel}>Condition:</label>{" "}
