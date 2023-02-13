@@ -45,7 +45,8 @@ const Cart = () => {
             <button
               onClick={async () => {
                 updateQty(product_order.id, --product_order.quantity)
-              }}>
+              }}
+              disabled={product_order.quantity === 1 ? true : false}>
               -
             </button>
             <div>{product_order.quantity}</div>
