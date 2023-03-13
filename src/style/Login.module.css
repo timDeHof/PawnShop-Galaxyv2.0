@@ -207,14 +207,14 @@
   position: relative;
   display: inline-block;
   text-align: center;
-  padding: 1em 1em;
+  padding: 1em;
   color: var(--secondary_alt);
   font-size: 9px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 0.25em 1em 0px 1em;
+  margin: 0.25em 1em 0px;
   letter-spacing: 0.25em;
   background: var(--primary);
   border: none;

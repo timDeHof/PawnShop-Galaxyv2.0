@@ -10,7 +10,6 @@ ul {
   /* margin-left: 200px; */
 }
 ul li a {
-  text-decoration: none;
   background-color: var(--primary);
   color: var(--secondary_alt);
   padding: 10px 20px;
@@ -20,7 +19,7 @@ ul li a {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 40px 15px 0px 15px;
+  margin: 40px 15px 0px;
   border: 2px outset var(--primary_alt);
   border-radius: 10px;
 }

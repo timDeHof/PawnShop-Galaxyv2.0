@@ -62,7 +62,7 @@ body {
 }
 .register_box h1 {
   display: inline-block;
-  margin: 0.25rem 5rem 0.25rem 5rem;
+  margin: 0.25rem 5rem;
   padding: 0.25em;
   color: var(--secondary_alt);
   text-align: center;
@@ -136,7 +136,7 @@ body {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 0.5rem 1rem 0px 1rem;
+  margin: 0.5rem 1rem 0px;
   letter-spacing: 4px;
   background: var(--primary);
   border: none;
@@ -248,14 +248,14 @@ body {
   position: relative;
   display: inline-block;
   text-align: center;
-  padding: 1em 1em;
+  padding: 1em;
   color: var(--secondary_alt);
   font-size: 9px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin: 0.25em 15px 0px 15px;
+  margin: 0.25em 15px 0px;
   letter-spacing: 0.25em;
   background: var(--primary);
   border: none;
