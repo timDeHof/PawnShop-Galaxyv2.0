@@ -1,0 +1,29 @@
+name: CI
+
+on: 
+ # run on pushes to the main branch
+ push:
+   branches: [main]
+ # also runs inside pull requests that target the main branch
+ pull_request:
+   branches: [main]
+   
+jobs:
+   build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          cache: "npm"
+      # install dependencies
+      - run: npm ci
+      # run ESLint & Prettier
+      - run: npm run lint
+      - run: npm run prettier
+      # verify that there are no type and build errors
+      - run: npm run build
+      - name: Seed Database
+        run: npm run db:build
