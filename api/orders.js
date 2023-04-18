@@ -1,14 +1,16 @@
-const express = require("express");
+const express = require('express');
+
 const ordersRouter = express.Router();
-const prisma = require("../db/prisma");
-const requireUser = require("./utils");
+const prisma = require('../db/prisma');
+const requireUser = require('./utils');
 
 ordersRouter.use((req, res, next) => {
-  console.log("Request made to /orders");
+  // eslint-disable-next-line no-console
+  console.log('Request made to /orders');
   next();
 });
 
-ordersRouter.get("/", async (req, res, next) => {
+ordersRouter.get('/', async (req, res, next) => {
   try {
     const orders = await prisma.orders.findMany();
     res.send(orders);
@@ -17,7 +19,7 @@ ordersRouter.get("/", async (req, res, next) => {
   }
 });
 
-ordersRouter.get("/:userId", async (req, res, next) => {
+ordersRouter.get('/:userId', async (req, res, next) => {
   try {
     const orders = await prisma.orders.findMany({
       where: {
@@ -30,22 +32,23 @@ ordersRouter.get("/:userId", async (req, res, next) => {
   }
 });
 
-ordersRouter.post("/", async (req, res, next) => {
+ordersRouter.post('/', async (req, res, next) => {
   const { userId, isActive } = req.body;
   try {
     const createOrder = await prisma.orders.create({
       data: {
         userId,
-        isActive
+        isActive,
       },
       include: {
         product_orders: {
           include: {
-            products: true
-          }
-        }
-      }
+            products: true,
+          },
+        },
+      },
     });
+    // eslint-disable-next-line no-console
     console.log('Created order:', createOrder);
 
     res.send(createOrder);
@@ -54,7 +57,7 @@ ordersRouter.post("/", async (req, res, next) => {
   }
 });
 
-ordersRouter.patch("/:orderId", async (req, res, next) => {
+ordersRouter.patch('/:orderId', async (req, res, next) => {
   const { userId, isActive } = req.body;
   try {
     const updateOrder = await prisma.orders.update({
@@ -73,7 +76,7 @@ ordersRouter.patch("/:orderId", async (req, res, next) => {
   }
 });
 
-ordersRouter.delete("/:orderId", requireUser, async (req, res, next) => {
+ordersRouter.delete('/:orderId', requireUser, async (req, res, next) => {
   try {
     const deleteOrder = await prisma.orders.delete({
       where: {

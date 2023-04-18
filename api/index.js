@@ -1,33 +1,35 @@
-const express = require("express");
-const apiRouter = require("express").Router();
-const { JWT_SECRET } = process.env;
-const jwt = require("jsonwebtoken");
-const prisma = require("../db/prisma");
+// eslint-disable-next-line no-unused-vars
+const express = require('express');
+const apiRouter = require('express').Router();
 
-apiRouter.get("/health", (req, res, next) => {
+const { JWT_SECRET } = process.env;
+const jwt = require('jsonwebtoken');
+const prisma = require('../db/prisma');
+
+apiRouter.get('/health', (req, res, next) => {
   res.send({
     healthy: true,
   });
+  next();
 });
 
 apiRouter.use(async (req, res, next) => {
-  const prefix = "Bearer ";
-  const auth = req.header("Authorization");
-  //console.log(" prefix auth:", prefix, auth);
+  const prefix = 'Bearer ';
+  const auth = req.header('Authorization');
 
   if (!auth) {
     // nothing to see here
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
-    //console.log("*************token:", token);
+
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
-      //console.log("response:", response);
+
       if (id) {
         req.user = await prisma.users.findUnique({
           where: {
-            id: id,
+            id,
           },
         });
         next();
@@ -37,7 +39,7 @@ apiRouter.use(async (req, res, next) => {
     }
   } else {
     next({
-      name: "AuthorizationHeaderError",
+      name: 'AuthorizationHeaderError',
       message: `Authorization token must start with ${prefix}`,
     });
   }
@@ -45,28 +47,33 @@ apiRouter.use(async (req, res, next) => {
 
 apiRouter.use((req, res, next) => {
   if (req.user) {
-    console.log("User is set:", req.user);
+    // eslint-disable-next-line no-console
+    console.log('User is set:', req.user);
   }
 
   next();
 });
 
-const usersRouter = require("./users");
-apiRouter.use("/users", usersRouter);
+const usersRouter = require('./users');
 
-const productsRouter = require("./products")
-apiRouter.use("/products", productsRouter)
+apiRouter.use('/users', usersRouter);
 
-const productOrdersRouter = require("./product-orders")
-apiRouter.use("/product-orders", productOrdersRouter)
+const productsRouter = require('./products');
 
-const ordersRouter = require("./orders")
-apiRouter.use("/orders", ordersRouter)
+apiRouter.use('/products', productsRouter);
+
+const productOrdersRouter = require('./product-orders');
+
+apiRouter.use('/product-orders', productOrdersRouter);
+
+const ordersRouter = require('./orders');
+
+apiRouter.use('/orders', ordersRouter);
 
 // place your routers here
-apiRouter.get("/", (req, res, next) => {
+apiRouter.get('/', (req, res) => {
   res.send({
-    message: "API is under construction!!!",
+    message: 'API is under construction!!!',
   });
 });
 // apiRouter.use((error, req, res, next) => {

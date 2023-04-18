@@ -1,23 +1,26 @@
-import { useContext } from "react";
-import { createProductOrder } from "../axios-services/product-orders";
-import CartContext from "../CartContext";
-import useAuth from "./useAuth";
-import { updateQuantity, removeFromCart } from "../axios-services/product-orders";
-import { createCart, setInactiveOrder } from "../axios-services/cart";
+/* eslint-disable array-callback-return */
+/* eslint-disable no-shadow */
+/* eslint-disable no-param-reassign */
+/* eslint-disable camelcase */
+/* eslint-disable no-console */
+import { useContext } from 'react';
+import {
+  createProductOrder,
+  updateQuantity,
+  removeFromCart,
+} from '../axios-services/product-orders';
+import CartContext from '../CartContext';
+import useAuth from './useAuth';
+import { createCart, setInactiveOrder } from '../axios-services/cart';
 
 const useCart = () => {
   const { cart, setCart } = useContext(CartContext);
-  const { token, user } = useAuth();
+  const { token } = useAuth();
 
   const addToCart = async (orderId, productId, quantity) => {
-    const productOrder = await createProductOrder(
-      token,
-      orderId,
-      productId,
-      quantity
-    );
+    const productOrder = await createProductOrder(token, orderId, productId, quantity);
 
-    console.log("this should be the product", productOrder);
+    console.log('this should be the product', productOrder);
     setCart({
       ...cart,
       product_orders: [...cart.product_orders, productOrder],
@@ -28,7 +31,7 @@ const useCart = () => {
     await updateQuantity(productOrderId, qty);
     console.log(cart.product_orders);
     const mappedItems = cart.product_orders.map((product_order) => {
-      console.log("productOrder in map", product_order);
+      console.log('productOrder in map', product_order);
       if (product_order.id === productOrderId) {
         product_order.quantity = +qty;
       }
@@ -40,20 +43,21 @@ const useCart = () => {
 
   const deleteItem = async (token, productOrderId) => {
     await removeFromCart(token, productOrderId);
+    // eslint-disable-next-line consistent-return
     const filteredItems = cart.product_orders.filter((product_order) => {
       if (product_order.id !== productOrderId) {
-        return product_order
+        return product_order;
       }
-    })
-    setCart({ ...cart, product_orders: filteredItems })
-  }
+    });
+    setCart({ ...cart, product_orders: filteredItems });
+  };
 
   const checkout = async (orderId, userId) => {
-    await setInactiveOrder(orderId, userId, false)
-    const newCart = await createCart(userId, true)
+    await setInactiveOrder(orderId, userId, false);
+    const newCart = await createCart(userId, true);
     console.log('New Cart', newCart);
-    setCart(newCart)
-  }
+    setCart(newCart);
+  };
 
   return {
     cart,
@@ -61,7 +65,7 @@ const useCart = () => {
     addToCart,
     updateQty,
     deleteItem,
-    checkout
+    checkout,
   };
 };
 
