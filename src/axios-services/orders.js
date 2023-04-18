@@ -1,7 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 
 // eslint-disable-next-line consistent-return
-export default async function getAllOrders() {
+export async function getAllOrders() {
   try {
     const { data: orders } = await axios.get('/api/orders');
     return orders;

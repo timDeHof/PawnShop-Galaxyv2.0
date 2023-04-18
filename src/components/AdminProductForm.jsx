@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { createProduct } from "../axios-services/products";
-import useAuth from "../hooks/useAuth";
-import styles from "../style/Register.module.css";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-console */
+/* eslint-disable react/jsx-no-useless-fragment */
+import React, { useState } from 'react';
+import { createProduct } from '../axios-services/products';
+import useAuth from '../hooks/useAuth';
+import styles from '../style/Register.module.css';
 
-const AdminProductForm = () => {
+function AdminProductForm() {
   const [formState, setFormState] = useState({
-    name: "",
-    price: "",
-    description: "",
+    name: '',
+    price: '',
+    description: '',
     condition: false,
-    imageURL: "",
+    imageURL: '',
   });
   const { user } = useAuth();
   return (
@@ -27,7 +30,7 @@ const AdminProductForm = () => {
                 formState.imageURL
               );
               console.log(
-                "%cNew Product Created",
+                '%cNew Product Created',
                 `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`
               );
             }}
@@ -67,7 +70,7 @@ const AdminProductForm = () => {
             </div>
             <div>Condition</div>
             <input
-              value={true}
+              value
               type="radio"
               id="new"
               name="condition"
@@ -77,7 +80,7 @@ const AdminProductForm = () => {
               required
             />
             <label htmlFor="new">New</label>
-            <br></br>
+            <br />
             <input
               value={false}
               type="radio"
@@ -89,7 +92,7 @@ const AdminProductForm = () => {
               required
             />
             <label htmlFor="used">Used</label>
-            <hr></hr>
+            <hr />
             <div className={styles.user_box}>
               <input
                 value={formState.imageURL}
@@ -103,20 +106,20 @@ const AdminProductForm = () => {
             </div>
             <div className={styles.buttonContainer}>
               <button className={styles.submit} type="submit">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span />
+                <span />
+                <span />
+                <span />
                 Add new product
               </button>
             </div>
           </form>
         </div>
       ) : (
-        <h2>You're not authorized to view this page :/</h2>
+        <h2>You&apos;re not authorized to view this page :/</h2>
       )}
     </>
   );
-};
+}
 
 export default AdminProductForm;

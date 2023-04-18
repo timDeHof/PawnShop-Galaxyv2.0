@@ -10,8 +10,7 @@ function Navbar() {
   const { token, setToken, setUser, user } = useAuth();
 
   return (
-    <>
-      <ul>
+    <ul>
         <li>
           <NavLink activeclassname="active" to="/">
             Home
@@ -31,7 +30,8 @@ function Navbar() {
                 localStorage.removeItem('token');
                 setToken(localStorage.getItem('token'));
                 setUser({});
-              }}>
+              }}
+            >
               Logout
             </NavLink>
           </li>
@@ -64,7 +64,6 @@ function Navbar() {
           </li>
         )}
       </ul>
-    </>
   );
 }
 
