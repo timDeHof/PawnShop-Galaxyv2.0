@@ -1,16 +1,19 @@
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import '../style/Navbar.module.css';
-import useAuth from '../hooks/useAuth';
-import '../style/Login.module.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "../style/Navbar.module.css";
+import useAuth from "../hooks/useAuth";
+import styles from "../style/Login.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const { token, setToken, setUser, user } = useAuth();
 
+  //console.log("USER FROM APP.JS", user);
+
   return (
-    <ul>
+    <>
+      <ul>
         <li>
           <NavLink activeclassname="active" to="/">
             Home
@@ -27,8 +30,8 @@ function Navbar() {
               activeclassname="active"
               to="/login"
               onClick={() => {
-                localStorage.removeItem('token');
-                setToken(localStorage.getItem('token'));
+                localStorage.removeItem("token");
+                setToken(localStorage.getItem("token"));
                 setUser({});
               }}
             >
@@ -64,6 +67,7 @@ function Navbar() {
           </li>
         )}
       </ul>
+    </>
   );
 }
 

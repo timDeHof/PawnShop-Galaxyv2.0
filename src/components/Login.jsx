@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/jsx-no-useless-fragment */
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../axios-services/users';
-import useAuth from '../hooks/useAuth';
-import styles from '../style/Login.module.css';
-import '../style/App.css';
+import React, { useState, useRef, useEffect } from "react";
+import { loginUser } from "../axios-services/users";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import styles from "../style/Login.module.css";
+import "../style/App.css";
 
 function Login() {
   // allows us to set the focus on the user input when the component loads
@@ -16,9 +13,9 @@ function Login() {
   const errRef = useRef();
   const { setToken } = useAuth();
   // States for login
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -29,7 +26,7 @@ function Login() {
 
   // hook for displaying an error message
   useEffect(() => {
-    setErrMsg('');
+    setErrMsg("");
   }, [username, password]);
 
   return (
@@ -39,11 +36,14 @@ function Login() {
           <h1>You are logged in!</h1>
           <br />
           <p className={styles.buttonContainer}>
-            <button className={styles.submit} onClick={() => navigate('/products')}>
-              <span />
-              <span />
-              <span />
-              <span />
+            <button
+              className={styles.submit}
+              onClick={() => navigate("/products")}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
               Check out our Products!
             </button>
           </p>
@@ -66,21 +66,21 @@ function Login() {
               try {
                 const result = await loginUser(username, password);
 
-                localStorage.setItem('token', result.token);
+                localStorage.setItem("token", result.token);
                 setToken(result.token);
                 setSuccess(true);
 
-                setUsername('');
-                setPassword('');
+                setUsername("");
+                setPassword("");
               } catch (error) {
                 if (!errMsg.response) {
-                  setErrMsg('No Server Response');
+                  setErrMsg("No Server Response");
                 } else if (error.response?.status === 400) {
-                  setErrMsg('Missing Username or Password');
+                  setErrMsg("Missing Username or Password");
                 } else if (error.response?.status === 401) {
-                  setErrMsg('Unauthorized');
+                  setErrMsg("Unauthorized");
                 } else {
-                  setErrMsg('Login Failed');
+                  setErrMsg("Login Failed");
                 }
                 errRef.current.focus();
               }
@@ -113,10 +113,10 @@ function Login() {
             </div>
             <div className={styles.buttonContainer}>
               <button className={styles.submit}>
-                <span />
-                <span />
-                <span />
-                <span />
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
                 Log in
               </button>
             </div>
@@ -125,7 +125,10 @@ function Login() {
             Need an Account?
             <br />
             <span className={styles.buttonContainer}>
-              <button className={styles.registerSubmit} onClick={() => navigate('/register')}>
+              <button
+                className={styles.registerSubmit}
+                onClick={() => navigate("/register")}
+              >
                 Create Account
               </button>
             </span>
