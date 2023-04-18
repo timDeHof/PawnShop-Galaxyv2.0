@@ -1,4 +1,6 @@
-import axios from "axios";
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
+import axios from 'axios';
 
 export async function getCartByUser(userId) {
   try {
@@ -14,9 +16,7 @@ export async function getCartByUser(userId) {
 
 export async function createCart(userId, isActive) {
   try {
-    const {
-      data
-    } = await axios.post(`/api/orders/`, {
+    const { data } = await axios.post(`/api/orders/`, {
       // withCredentials: true,
       // headers: {
       //   "Content-Type": "application/json",

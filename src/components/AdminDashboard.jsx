@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { getAllOrders } from "../axios-services/orders";
-import { getUsers } from "../axios-services/users";
-import useAuth from "../hooks/useAuth";
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-shadow */
+import React, { useEffect, useState } from 'react';
+import { getAllOrders } from '../axios-services/orders';
+import { getUsers } from '../axios-services/users';
+import useAuth from '../hooks/useAuth';
 
 function AdminDashboard() {
   const { user } = useAuth();
@@ -15,11 +17,6 @@ function AdminDashboard() {
     }
     async function fetchOrders() {
       const orders = await getAllOrders();
-      console.log(
-        "%cAdminDashboard.jsx line:17 orders",
-        "color: white; background-color: #007acc;",
-        orders
-      );
       setAllOrders(orders);
     }
     fetchUsers();
@@ -41,20 +38,14 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {allUsers.map((user, i) => {
-                return (
-                  <tr key={`alluser${i}`}>
-                    <td>{user.username}</td>
-                    <td>{user.name}</td>
-                    <td>{user.shippingAddress}</td>
-                    {user.billingAddress ? (
-                      <td>{user.billingAddress}</td>
-                    ) : (
-                      <td>N/A</td>
-                    )}
-                  </tr>
-                );
-              })}
+              {allUsers.map((user, i) => (
+                <tr key={`user${i}`}>
+                  <td>{user.username}</td>
+                  <td>{user.name}</td>
+                  <td>{user.shippingAddress}</td>
+                  {user.billingAddress ? <td>{user.billingAddress}</td> : <td>N/A</td>}
+                </tr>
+              ))}
             </tbody>
           </table>
           <h2>Pending Orders</h2>
@@ -67,31 +58,29 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {allOrders.map((order, i) => {
-                return (
-                  <tr key={`order${i}`}>
-                    {!order.isActive ? (
+              {allOrders.map((order, i) => (
+                <tr key={`order${i}`}>
+                  {!order.isActive ? (
+                    <>
+                      <td>{order.id}</td>
                       <>
-                        <td>{order.id}</td>
-                        <>
-                          {allUsers.map((user, i) => {
-                            const id = user.id;
-                            const orderUserId = order.userId;
-                            const username = user.username;
-                            const address = user.shippingAddress;
-                            return (
-                              <React.Fragment key={`orderData${i}`}>
-                                <td>{id === orderUserId ? username : null}</td>
-                                <td>{id === orderUserId ? address : null}</td>
-                              </React.Fragment>
-                            );
-                          })}
-                        </>
+                        {allUsers.map((user, i) => {
+                          const { id } = user;
+                          const orderUserId = order.userId;
+                          const { username } = user;
+                          const address = user.shippingAddress;
+                          return (
+                            <React.Fragment key={`orderData${i}`}>
+                              <td>{id === orderUserId ? username : null}</td>
+                              <td>{id === orderUserId ? address : null}</td>
+                            </React.Fragment>
+                          );
+                        })}
                       </>
-                    ) : null}
-                  </tr>
-                );
-              })}
+                    </>
+                  ) : null}
+                </tr>
+              ))}
             </tbody>
           </table>
         </>

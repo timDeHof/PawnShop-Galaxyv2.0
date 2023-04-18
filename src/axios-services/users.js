@@ -1,31 +1,34 @@
-import axios from "axios";
+/* eslint-disable consistent-return */
+import axios from 'axios';
 
 export async function getUsers() {
   try {
-    const { data: users } = await axios.get("/api/users");
+    const { data: users } = await axios.get('/api/users');
     return users;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 }
 
 export async function fetchUser(token) {
   try {
-    const { data } = await axios.get("/api/users/me", {
+    const { data } = await axios.get('/api/users/me', {
       withCredentials: true,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
     return data;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 }
 
 export async function loginUser(username, password) {
-  const { data } = await axios.post("/api/users/login", {
+  const { data } = await axios.post('/api/users/login', {
     username,
     password,
   });
@@ -33,12 +36,12 @@ export async function loginUser(username, password) {
 }
 
 export async function registerUser(username, password, name, shippingAddress, billingAddress) {
-  const { data } = await axios.post("/api/users/register", {
+  const { data } = await axios.post('/api/users/register', {
     username,
     password,
     name,
     shippingAddress,
-    billingAddress
-  })
-  return data
+    billingAddress,
+  });
+  return data;
 }

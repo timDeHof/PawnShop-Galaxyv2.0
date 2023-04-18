@@ -1,7 +1,7 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import styles from "../style/Header.module.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from "./Navbar";
+import styles from '../style/Header.module.css';
 
 function Header() {
   return (

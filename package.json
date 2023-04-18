@@ -1,9 +1,10 @@
 {
-  "name": "starting_code",
+  "name": "galaxies-pawn",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "husy install",
     "postinstall": "npm run client:build",
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",
@@ -11,6 +12,10 @@
     "db:build": "node ./db/init_db",
     "start:dev": "concurrently \"npm run client:build\" \"npm run client:dev\" \"npm run server:dev\"",
     "start": "node index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "prettier": "prettier --check .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "test": "jest --runInBand"
   },
   "prisma": {
@@ -19,6 +24,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{ts,tsx}": "bash -c 'tsc --noEmit'",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
@@ -42,7 +52,19 @@
     "react-scripts": "^5.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.4",
+    "prettier": "2.8.7",
     "supertest": "^6.2.1"
   },
   "proxy": "http://localhost:4000",

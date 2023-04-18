@@ -1,14 +1,19 @@
-const prisma = require("./prisma");
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
+const prisma = require('./prisma');
 const {
   users,
   products,
   orders,
   categories,
+  // eslint-disable-next-line camelcase
   product_orders,
   productCategories,
-} = require("./seedData");
+} = require('./seedData');
+
 async function dropTables() {
-  console.log("Dropping All Tables...");
+  console.log('Dropping All Tables...');
   // drop all tables, in the correct order
   try {
     await prisma.$executeRaw`
@@ -24,13 +29,13 @@ async function dropTables() {
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS users;`;
   } catch (error) {
-    console.error("Error dropping tables!");
+    console.error('Error dropping tables!');
     throw error;
   }
 }
 
 async function createTables() {
-  console.log("Starting to build tables...");
+  console.log('Starting to build tables...');
   try {
     await prisma.$executeRaw`
     CREATE TABLE users (
@@ -46,7 +51,7 @@ async function createTables() {
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      price DECIMAL(10,2) NOT NULL, 
+      price DECIMAL(10,2) NOT NULL,
       description TEXT,
       condition BOOLEAN DEFAULT true,
       "inStock" BOOLEAN DEFAULT true,
@@ -79,40 +84,42 @@ async function createTables() {
       "categoryId" INTEGER REFERENCES categories(id)
     );`;
   } catch (error) {
-    console.error("Error creating tables!");
+    console.error('Error creating tables!');
   }
 }
 
 const seedDb = async () => {
-  console.log("creating users...");
+  console.log('creating users...');
   for (const user of users) {
     const createdUser = await prisma.users.create({ data: user });
     console.log(createdUser);
   }
 
-  console.log("creating products...");
+  console.log('creating products...');
+  // eslint-disable-next-line no-restricted-syntax
   for (const product of products) {
     const prod = await prisma.products.create({ data: product });
     console.log(prod);
   }
-  console.log("creating orders...");
+  console.log('creating orders...');
   for (const order of orders) {
     const createdOrder = await prisma.orders.create({ data: order });
     console.log(createdOrder);
   }
-  console.log("creating categories...");
+  console.log('creating categories...');
   for (const category of categories) {
     const createdCategory = await prisma.categories.create({ data: category });
     console.log(createdCategory);
   }
-  console.log("creating productOrders...");
+  console.log('creating productOrders...');
+  // eslint-disable-next-line camelcase
   for (const product of product_orders) {
     const createdProduct = await prisma.product_orders.create({
       data: product,
     });
     console.log(createdProduct);
   }
-  console.log("creating productCategories..");
+  console.log('creating productCategories..');
   for (const category of productCategories) {
     const productCat = await prisma.product_categories.create({
       data: category,
@@ -122,6 +129,7 @@ const seedDb = async () => {
 };
 
 async function rebuildDB() {
+  // eslint-disable-next-line no-useless-catch
   try {
     await dropTables();
     await createTables();

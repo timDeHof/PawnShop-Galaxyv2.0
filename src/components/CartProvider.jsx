@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
-import CartContext from "../CartContext";
-import useAuth from "../hooks/useAuth";
-import { getCartByUser, createCart } from "../axios-services/cart";
-import { getProductOrders } from "../axios-services/product-orders";
-import { getProducts } from "../axios-services/products";
+/* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
+import CartContext from '../CartContext';
+import useAuth from '../hooks/useAuth';
+import { getCartByUser, createCart } from '../axios-services/cart';
+import { getProductOrders } from '../axios-services/product-orders';
+import { getProducts } from '../axios-services/products';
 
-const CartProvider = ({ children }) => {
+function CartProvider({ children }) {
   const { token, user } = useAuth();
   const [cart, setCart] = useState({ product_orders: [] });
 
@@ -20,7 +23,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const getCart = async () => {
-      if (user.username !== "guest") {
+      if (user.username !== 'guest') {
         // get their cart from the backend
         const backendCart = await getCartByUser(user.id);
         setCart(backendCart);
@@ -29,11 +32,7 @@ const CartProvider = ({ children }) => {
     getCart();
   }, [user]);
 
-  return (
-    <CartContext.Provider value={{ cart, setCart }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
+  return <CartContext.Provider value={{ cart, setCart }}>{children}</CartContext.Provider>;
+}
 
 export default CartProvider;

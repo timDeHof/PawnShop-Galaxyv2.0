@@ -27,11 +27,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
         with:
           # fetch complete commit history on all branches
           fetch-depth: 0
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
+      - name: run ESLint
+        run: npm run lint
+      - name: run Prettier
+        run: npm run prettier
       - name: Seed Database
         run: npm run db:build
       - name: Test Suite
