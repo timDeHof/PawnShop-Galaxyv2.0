@@ -2,11 +2,10 @@ const express = require('express');
 
 const productsRouter = express.Router();
 const prisma = require('../db/prisma');
-// eslint-disable-next-line no-unused-vars
-const requireUser = require('./utils');
+
+// const requireUser = require('./utils');
 
 productsRouter.use((req, res, next) => {
-  // eslint-disable-next-line no-console
   console.log('Request made to /products');
   next();
 });

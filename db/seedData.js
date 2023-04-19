@@ -135,8 +135,7 @@ const categories = [
   { categoryName: 'personalCare' },
 ];
 
-// eslint-disable-next-line camelcase
-const product_orders = [
+const productOrders = [
   { orderId: 1, productId: 2, quantity: 5 },
   { orderId: 1, productId: 1, quantity: 5 },
 ];
@@ -158,7 +157,6 @@ module.exports = {
   products,
   orders,
   categories,
-  // eslint-disable-next-line camelcase
-  product_orders,
+  productOrders,
   productCategories,
 };
