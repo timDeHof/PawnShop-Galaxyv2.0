@@ -16,13 +16,13 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
 usersRouter.post('/register', async (req, res, next) => {
   try {
     const { username, password, name, shippingAddress, billingAddress } = req.body;
-    // eslint-disable-next-line no-underscore-dangle
-    const _user = await prisma.users.findUnique({
+
+    const registerUser = await prisma.users.findUnique({
       where: {
         username,
       },
     });
-    if (_user) {
+    if (registerUser) {
       res.status(401);
       next({
         name: 'UserExistsError',
@@ -43,8 +43,8 @@ usersRouter.post('/register', async (req, res, next) => {
       });
 
       // create a cart
-      // eslint-disable-next-line no-unused-vars
-      const cart = await prisma.orders.create({
+
+      await prisma.orders.create({
         data: {
           userId: user.id,
         },
@@ -100,7 +100,6 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     }
   } catch (error) {
-    // console.log(error);
     next(error);
   }
 });

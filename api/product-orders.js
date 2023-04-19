@@ -5,7 +5,6 @@ const prisma = require('../db/prisma');
 const requireUser = require('./utils');
 
 productOrdersRouter.use((req, res, next) => {
-  // eslint-disable-next-line no-console
   console.log('Request made to /product-orders');
   next();
 });
@@ -40,7 +39,7 @@ productOrdersRouter.post('/', async (req, res, next) => {
     //         id: createProductOrder.productId
     //     }
     // })
-    // eslint-disable-next-line no-console
+
     console.log('Return from prisma', createdProductOrder);
     res.send(createdProductOrder);
   } catch (error) {

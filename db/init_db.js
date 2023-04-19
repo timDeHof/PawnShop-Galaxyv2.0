@@ -1,14 +1,10 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-console */
 const prisma = require('./prisma');
 const {
   users,
   products,
   orders,
   categories,
-  // eslint-disable-next-line camelcase
-  product_orders,
+  productOrders,
   productCategories,
 } = require('./seedData');
 
@@ -88,7 +84,7 @@ async function createTables() {
   }
 }
 
-const seedDb = async () => {
+/* const seedDb = async () => {
   console.log('creating users...');
   for (const user of users) {
     const createdUser = await prisma.users.create({ data: user });
@@ -112,8 +108,8 @@ const seedDb = async () => {
     console.log(createdCategory);
   }
   console.log('creating productOrders...');
-  // eslint-disable-next-line camelcase
-  for (const product of product_orders) {
+
+  for (const product of productOrders) {
     const createdProduct = await prisma.product_orders.create({
       data: product,
     });
@@ -126,17 +122,52 @@ const seedDb = async () => {
     });
     console.log(productCat);
   }
-};
-
-async function rebuildDB() {
-  // eslint-disable-next-line no-useless-catch
+}; */
+const seedDb = async () => {
   try {
-    await dropTables();
-    await createTables();
-    await seedDb();
+    console.log('creating users...');
+    const userPromises = users.map((user) => prisma.users.create({ data: user }));
+    const createdUsers = await Promise.all(userPromises);
+    console.log(createdUsers);
+
+    console.log('creating products...');
+    const productPromises = products.map((product) => prisma.products.create({ data: product }));
+    const createdProducts = await Promise.all(productPromises);
+    console.log(createdProducts);
+
+    console.log('creating orders...');
+    const orderPromises = orders.map((order) => prisma.orders.create({ data: order }));
+    const createdOrders = await Promise.all(orderPromises);
+    console.log(createdOrders);
+
+    console.log('creating categories...');
+    const categoryPromises = categories.map((category) =>
+      prisma.categories.create({ data: category })
+    );
+    const createdCategories = await Promise.all(categoryPromises);
+    console.log(createdCategories);
+
+    console.log('creating productOrders...');
+    const productOrderPromises = productOrders.map((productOrder) =>
+      prisma.productOrders.create({ data: productOrder })
+    );
+    const createdProductOrders = await Promise.all(productOrderPromises);
+    console.log(createdProductOrders);
+
+    console.log('creating productCategories..');
+    const productCategoriesPromises = productCategories.map((productCategory) =>
+      prisma.productCategories.create({ data: productCategory })
+    );
+    const createdProductCategories = await Promise.all(productCategoriesPromises);
+    console.log(createdProductCategories);
   } catch (error) {
-    throw error;
+    console.error(error);
   }
+};
+async function rebuildDB() {
+  await dropTables();
+  await createTables();
+  await seedDb();
 }
 
 rebuildDB()

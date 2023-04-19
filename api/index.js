@@ -1,6 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 const express = require('express');
-const apiRouter = require('express').Router();
+
+const apiRouter = express.Router();
 
 const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
@@ -47,7 +47,6 @@ apiRouter.use(async (req, res, next) => {
 
 apiRouter.use((req, res, next) => {
   if (req.user) {
-    // eslint-disable-next-line no-console
     console.log('User is set:', req.user);
   }
 

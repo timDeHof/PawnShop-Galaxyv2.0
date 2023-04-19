@@ -5,7 +5,6 @@ const prisma = require('../db/prisma');
 const requireUser = require('./utils');
 
 ordersRouter.use((req, res, next) => {
-  // eslint-disable-next-line no-console
   console.log('Request made to /orders');
   next();
 });
@@ -48,7 +47,7 @@ ordersRouter.post('/', async (req, res, next) => {
         },
       },
     });
-    // eslint-disable-next-line no-console
+
     console.log('Created order:', createOrder);
 
     res.send(createOrder);
