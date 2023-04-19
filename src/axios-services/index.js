@@ -11,9 +11,8 @@ export default async function getAPIHealth() {
   try {
     const { data } = await axios.get('/api/health');
     return data;
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return { healthy: false };
   }
 }

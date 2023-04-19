@@ -1,27 +1,32 @@
-/* eslint-disable no-console */
-/* eslint-disable consistent-return */
 import axios from 'axios';
 
-// eslint-disable-next-line consistent-return
 export async function getProducts() {
   try {
     const { data: products } = await axios.get('/api/products');
     return products;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
 export async function deleteProduct(productId) {
+  if (!productId) {
+    throw new Error('ProductId is required');
+  }
   try {
     const { data: product } = await axios.delete(`/api/products/${productId}`);
     return product;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
 export async function createProduct(name, price, description, condition, imageURL) {
+  if (!name || !price || !description || !condition || !imageURL) {
+    throw new Error('name, price, description, condition, imageURL must be provided');
+  }
   try {
     const { data: product } = await axios.post(`/api/products`, {
       name,
@@ -31,8 +36,9 @@ export async function createProduct(name, price, description, condition, imageUR
       imageURL,
     });
     return product;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
@@ -46,16 +52,21 @@ export async function updateProduct(productId, name, price, description, conditi
       imageURL,
     });
     return product;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
 export async function getProductById(id) {
+  if (!id) {
+    throw new Error('Product ID required');
+  }
   try {
     const { data: product } = await axios.get(`/api/products/${id}`);
     return product;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }

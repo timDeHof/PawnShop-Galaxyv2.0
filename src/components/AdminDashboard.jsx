@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
-import { getAllOrders } from '../axios-services/orders';
+import getAllOrders from '../axios-services/orders';
 import { getUsers } from '../axios-services/users';
 import useAuth from '../hooks/useAuth';
 
