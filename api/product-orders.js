@@ -1,15 +1,15 @@
-const express = require('express');
+const express = require("express");
 
 const productOrdersRouter = express.Router();
-const prisma = require('../db/prisma');
-const requireUser = require('./utils');
+const prisma = require("../db/prisma");
+const requireUser = require("./utils");
 
 productOrdersRouter.use((req, res, next) => {
-  console.log('Request made to /product-orders');
+  console.log("Request made to /product-orders");
   next();
 });
 
-productOrdersRouter.get('/', async (req, res, next) => {
+productOrdersRouter.get("/", async (req, res, next) => {
   try {
     const productOrders = await prisma.product_orders.findMany();
     res.send(productOrders);
@@ -18,7 +18,7 @@ productOrdersRouter.get('/', async (req, res, next) => {
   }
 });
 
-productOrdersRouter.post('/', async (req, res, next) => {
+productOrdersRouter.post("/", async (req, res, next) => {
   const { orderId, productId, quantity } = req.body;
   try {
     const createdProductOrder = await prisma.product_orders.create({
@@ -40,27 +40,31 @@ productOrdersRouter.post('/', async (req, res, next) => {
     //     }
     // })
 
-    console.log('Return from prisma', createdProductOrder);
+    console.log("Return from prisma", createdProductOrder);
     res.send(createdProductOrder);
   } catch (error) {
     next(error);
   }
 });
 
-productOrdersRouter.delete('/:productOrderId', requireUser, async (req, res, next) => {
-  try {
-    const deleteProductOrder = await prisma.product_orders.delete({
-      where: {
-        id: +req.params.productOrderId,
-      },
-    });
-    res.send(deleteProductOrder);
-  } catch (error) {
-    next(error);
+productOrdersRouter.delete(
+  "/:productOrderId",
+  requireUser,
+  async (req, res, next) => {
+    try {
+      const deleteProductOrder = await prisma.product_orders.delete({
+        where: {
+          id: +req.params.productOrderId,
+        },
+      });
+      res.send(deleteProductOrder);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-productOrdersRouter.patch('/:productOrderId', async (req, res, next) => {
+productOrdersRouter.patch("/:productOrderId", async (req, res, next) => {
   const { quantity } = req.body;
   try {
     const updateProductOrder = await prisma.product_orders.update({

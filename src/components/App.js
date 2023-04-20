@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { getProducts } from '../axios-services/products';
-import '../style/App.css';
-import Login from './Login';
-import Header from './Header';
-import Register from './Register';
-import Products from './Products';
-import SingleProduct from './SingleProduct';
-import Home from './Home';
-import Footer from './Footer';
-import Cart from './Cart';
-import AdminProductForm from './AdminProductForm';
-import AdminDashboard from './AdminDashboard';
-import AdminEditForm from './AdminEditForm';
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { getProducts } from "../axios-services/products";
+import "../style/App.css";
+import Login from "./Login";
+import Header from "./Header";
+import Register from "./Register";
+import Products from "./Products";
+import SingleProduct from "./SingleProduct";
+import Home from "./Home";
+import Footer from "./Footer";
+import Cart from "./Cart";
+import AdminProductForm from "./AdminProductForm";
+import AdminDashboard from "./AdminDashboard";
+import AdminEditForm from "./AdminEditForm";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -33,7 +33,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route
           path="/products/:singleProductId"
-          element={<SingleProduct products={products} setproducts={setProducts} />}
+          element={
+            <SingleProduct products={products} setproducts={setProducts} />
+          }
         />
         <Route
           path="/products"

@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function getUsers() {
   try {
-    const { data: users } = await axios.get('/api/users');
+    const { data: users } = await axios.get("/api/users");
     return users;
   } catch ({ message }) {
     console.error(message);
@@ -12,13 +12,13 @@ export async function getUsers() {
 
 export async function fetchUser(token) {
   if (!token) {
-    throw new Error('Token is required');
+    throw new Error("Token is required");
   }
   try {
-    const { data } = await axios.get('/api/users/me', {
+    const { data } = await axios.get("/api/users/me", {
       withCredentials: true,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -30,10 +30,10 @@ export async function fetchUser(token) {
 }
 export async function loginUser(username, password) {
   if (!username || !password) {
-    throw new Error('Username and password are required');
+    throw new Error("Username and password are required");
   }
   try {
-    const { data } = await axios.post('/api/users/login', {
+    const { data } = await axios.post("/api/users/login", {
       username,
       password,
     });
@@ -44,12 +44,18 @@ export async function loginUser(username, password) {
   }
 }
 
-export async function registerUser(username, password, name, shippingAddress, billingAddress) {
+export async function registerUser(
+  username,
+  password,
+  name,
+  shippingAddress,
+  billingAddress
+) {
   if (!username || !password || !name || !shippingAddress || !billingAddress) {
-    throw new Error('All fields are required');
+    throw new Error("All fields are required");
   }
   try {
-    const { data } = await axios.post('/api/users/register', {
+    const { data } = await axios.post("/api/users/register", {
       username,
       password,
       name,

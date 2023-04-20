@@ -8,11 +8,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../style/Products.module.css';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "../style/Products.module.css";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
 
 function Home({ products }) {
   const { user } = useAuth();
@@ -22,9 +22,9 @@ function Home({ products }) {
       <div
         style={{
           backgroundImage: `url("https://res.cloudinary.com/fullstack-academy-student/image/upload/v1651532410/0x0_gcyvwp.jpg")`,
-          width: '100vw',
-          height: '100%',
-          paddingBottom: '10rem',
+          width: "100vw",
+          height: "100%",
+          paddingBottom: "10rem",
         }}
       >
         <div className="home">
@@ -42,45 +42,55 @@ function Home({ products }) {
                   <Link
                     to={`/products/${product.id}`}
                     style={{
-                      textDecoration: 'none',
-                      textAlign: 'center',
-                      color: 'white',
+                      textDecoration: "none",
+                      textAlign: "center",
+                      color: "white",
                     }}
                   >
                     <h2 className={styles.productTitle}>{product.name}</h2>
-                    <img className={styles.productImg} src={product.imageURL} alt={product.name} />
+                    <img
+                      className={styles.productImg}
+                      src={product.imageURL}
+                      alt={product.name}
+                    />
                   </Link>
 
                   <div className={styles.productPrice}>
-                    <label className={styles.contentLabel}>PRICE:</label> $ {product.price}
+                    <label className={styles.contentLabel}>PRICE:</label> ${" "}
+                    {product.price}
                   </div>
                   <div className={styles.productCondition}>
-                    <label className={styles.contentLabel}>Condition:</label>{' '}
-                    {product.condition ? ' New' : ' Used'}
+                    <label className={styles.contentLabel}>Condition:</label>{" "}
+                    {product.condition ? " New" : " Used"}
                   </div>
                   <div className={styles.productDescription}>
-                    <label className={styles.contentLabel}>Description:</label>{' '}
+                    <label className={styles.contentLabel}>Description:</label>{" "}
                     {product.description}
                   </div>
                   {user.isAdmin ? (
                     <>
-                      <Link to={`/admin/edit-form/${product.id}`} className={styles.deleteProduct}>
+                      <Link
+                        to={`/admin/edit-form/${product.id}`}
+                        className={styles.deleteProduct}
+                      >
                         Edit
                       </Link>
                       <button
                         className={styles.deleteProduct}
                         onClick={async () => {
                           console.log(
-                            '%cDeleted Product',
+                            "%cDeleted Product",
                             `background:linear-gradient(#E66465, #9198E5);
                                   padding: .3rem;
                                   color: white;
                                   border-radius: .5em`
                           );
                           await deleteProduct(product.id);
-                          const filteredProducts = products.filter((product) => {
-                            if (product.id !== product.id) return true;
-                          });
+                          const filteredProducts = products.filter(
+                            (product) => {
+                              if (product.id !== product.id) return true;
+                            }
+                          );
                           setProducts(filteredProducts);
                         }}
                       >

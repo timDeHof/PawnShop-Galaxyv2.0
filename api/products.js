@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require("express");
 
 const productsRouter = express.Router();
-const prisma = require('../db/prisma');
+const prisma = require("../db/prisma");
 
 // const requireUser = require('./utils');
 
 productsRouter.use((req, res, next) => {
-  console.log('Request made to /products');
+  console.log("Request made to /products");
   next();
 });
 
-productsRouter.get('/', async (req, res, next) => {
+productsRouter.get("/", async (req, res, next) => {
   try {
     const products = await prisma.products.findMany();
     res.send(products);
@@ -19,7 +19,7 @@ productsRouter.get('/', async (req, res, next) => {
   }
 });
 
-productsRouter.get('/:id', async (req, res, next) => {
+productsRouter.get("/:id", async (req, res, next) => {
   try {
     const getProductsById = await prisma.products.findUnique({
       where: {
@@ -32,7 +32,7 @@ productsRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-productsRouter.post('/', async (req, res, next) => {
+productsRouter.post("/", async (req, res, next) => {
   const { name, price, description, condition, imageURL } = req.body;
   try {
     const createProduct = await prisma.products.create({
@@ -50,7 +50,7 @@ productsRouter.post('/', async (req, res, next) => {
   }
 });
 
-productsRouter.get('/category/:categoryId', async (req, res, next) => {
+productsRouter.get("/category/:categoryId", async (req, res, next) => {
   try {
     const getProductsByCat = await prisma.product_categories.findMany({
       where: {
@@ -63,7 +63,7 @@ productsRouter.get('/category/:categoryId', async (req, res, next) => {
   }
 });
 
-productsRouter.patch('/:productId', async (req, res, next) => {
+productsRouter.patch("/:productId", async (req, res, next) => {
   const { name, price, description, condition, inStock, imageURL } = req.body;
   try {
     const updateProduct = await prisma.products.update({
@@ -86,7 +86,7 @@ productsRouter.patch('/:productId', async (req, res, next) => {
   }
 });
 
-productsRouter.delete('/:productId', async (req, res, next) => {
+productsRouter.delete("/:productId", async (req, res, next) => {
   try {
     const deletedProduct = await prisma.products.delete({
       where: {
