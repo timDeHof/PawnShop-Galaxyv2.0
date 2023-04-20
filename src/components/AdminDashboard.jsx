@@ -60,14 +60,12 @@ function AdminDashboard() {
               {allOrders
                 .filter((order) => !order.isActive)
                 .map((order) => (
-                    <tr key={`order${order.id}`}>
-                      <td>{order.id}</td>
-                      <td>{usersById[order.userId]?.username || null}</td>
-                      <td>
-                        {usersById[order.userId]?.shippingAddress || null}
-                      </td>
-                    </tr>
-                  ))}
+                  <tr key={`order${order.id}`}>
+                    <td>{order.id}</td>
+                    <td>{usersById[order.userId]?.username || null}</td>
+                    <td>{usersById[order.userId]?.shippingAddress || null}</td>
+                  </tr>
+                ))}
               ;
             </tbody>
           </table>
