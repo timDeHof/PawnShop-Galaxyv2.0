@@ -1,33 +1,32 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getProductById, updateProduct } from "../axios-services/products";
-import useAuth from "../hooks/useAuth";
-import styles from "../style/Register.module.css";
+import React, { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { getProductById, updateProduct } from "../axios-services/products"
+import useAuth from "../hooks/useAuth"
+import styles from "../style/Register.module.css"
 
 function AdminEditForm() {
-  const [productToEdit, setProductToEdit] = useState({});
+  const [productToEdit, setProductToEdit] = useState({})
 
-  const { user } = useAuth();
+  const { user } = useAuth()
 
-  const { productId } = useParams();
+  const { productId } = useParams()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const product = await getProductById(productId);
-      setProductToEdit(product);
-    };
-    fetchProduct();
-  }, []);
+      const product = await getProductById(productId)
+      setProductToEdit(product)
+    }
+    fetchProduct()
+  }, [])
   return (
     <div>
       {user.isAdmin ? (
         <div className={styles.register_box}>
           <form
             onSubmit={async (e) => {
-              e.preventDefault();
+              e.preventDefault()
               await updateProduct(
                 productId,
                 productToEdit.name,
@@ -35,9 +34,9 @@ function AdminEditForm() {
                 productToEdit.description,
                 productToEdit.condition,
                 productToEdit.imageURL
-              );
+              )
 
-              navigate("/products", { replace: true });
+              navigate("/products", { replace: true })
             }}
           >
             <div className={styles.user_box}>
@@ -49,7 +48,7 @@ function AdminEditForm() {
                   setProductToEdit({
                     ...productToEdit,
                     name: e.target.value,
-                  });
+                  })
                 }}
               />
               <label htmlFor="name">Name</label>
@@ -57,32 +56,35 @@ function AdminEditForm() {
             <div className={styles.user_box}>
               <input
                 value={productToEdit.price}
+                id="price"
                 type="text"
                 onChange={(e) => {
                   setProductToEdit({
                     ...productToEdit,
                     price: e.target.value,
-                  });
+                  })
                 }}
               />
-              <label>Price</label>
+              <label htmlFor="price">Price</label>
             </div>
             <div className={styles.user_box}>
               <input
+                id="description"
                 value={productToEdit.description}
                 type="text"
                 onChange={(e) => {
                   setProductToEdit({
                     ...productToEdit,
                     description: e.target.value,
-                  });
+                  })
                 }}
               />
-              <label>Description</label>
+              <label htmlFor="description">Description</label>
             </div>
             <div className={styles.user_box}>
+              <p>Condition</p>
               <div className={styles.condition_box}>
-                <p htmlFor="new">New</p>
+                <label htmlFor="new">New</label>
                 <input
                   value
                   type="radio"
@@ -90,13 +92,13 @@ function AdminEditForm() {
                   name="condition"
                   checked={productToEdit.condition}
                   onChange={() => {
-                    setProductToEdit({ ...productToEdit, condition: true });
+                    setProductToEdit({ ...productToEdit, condition: true })
                   }}
                 />
               </div>
               {/* <br></br> */}
               <div className={styles.condition_box}>
-                <p htmlFor="used">Used</p>
+                <label htmlFor="used">Used</label>
                 <input
                   value={false}
                   type="radio"
@@ -104,25 +106,25 @@ function AdminEditForm() {
                   name="condition"
                   checked={!productToEdit.condition}
                   onChange={() => {
-                    setProductToEdit({ ...productToEdit, condition: false });
+                    setProductToEdit({ ...productToEdit, condition: false })
                   }}
                 />
               </div>
-              <label>Condition</label>
             </div>
             <hr />
             <div className={styles.user_box}>
               <input
+                id="imageURL"
                 value={productToEdit.imageURL}
                 type="url"
                 onChange={(e) => {
                   setProductToEdit({
                     ...productToEdit,
                     imageURL: e.target.value,
-                  });
+                  })
                 }}
               />
-              <label>Image URL</label>
+              <label htmlFor="imageURL">Image URL</label>
             </div>
             <div className={styles.buttonContainer}>
               <button className={styles.submit} type="submit">
@@ -139,7 +141,7 @@ function AdminEditForm() {
         <h2>You&apos;re not authorized to view this page :/</h2>
       )}
     </div>
-  );
+  )
 }
 
-export default AdminEditForm;
+export default AdminEditForm

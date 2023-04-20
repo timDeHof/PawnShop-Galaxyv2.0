@@ -17,12 +17,21 @@
   },
   "plugins": ["react"],
   "rules": {
-    "semi": ["error", "always"],
+    "semi": ["error", "never"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-console": "off",
     "no-unused-vars": [
       "error",
       { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["Label"],
+        "labelAttributes": ["label"],
+        "controlComponents": ["Input"],
+        "depth": 3
+      }
     ]
   }
 }
