@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { getProductById, updateProduct } from "../axios-services/products"
-import useAuth from "../hooks/useAuth"
-import styles from "../style/Register.module.css"
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProductById, updateProduct } from "../axios-services/products";
+import useAuth from "../hooks/useAuth";
+import styles from "../style/Register.module.css";
 
 function AdminEditForm() {
-  const [productToEdit, setProductToEdit] = useState({})
+  const [productToEdit, setProductToEdit] = useState({});
 
-  const { user } = useAuth()
+  const { user } = useAuth();
 
-  const { productId } = useParams()
+  const { productId } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const product = await getProductById(productId)
-      setProductToEdit(product)
-    }
-    fetchProduct()
-  }, [])
+      const product = await getProductById(productId);
+      setProductToEdit(product);
+    };
+    fetchProduct();
+  }, []);
   return (
     <div>
       {user.isAdmin ? (
         <div className={styles.register_box}>
           <form
             onSubmit={async (e) => {
-              e.preventDefault()
+              e.preventDefault();
               await updateProduct(
                 productId,
                 productToEdit.name,
@@ -34,9 +34,9 @@ function AdminEditForm() {
                 productToEdit.description,
                 productToEdit.condition,
                 productToEdit.imageURL
-              )
+              );
 
-              navigate("/products", { replace: true })
+              navigate("/products", { replace: true });
             }}
           >
             <div className={styles.user_box}>
@@ -48,7 +48,7 @@ function AdminEditForm() {
                   setProductToEdit({
                     ...productToEdit,
                     name: e.target.value,
-                  })
+                  });
                 }}
               />
               <label htmlFor="name">Name</label>
@@ -62,7 +62,7 @@ function AdminEditForm() {
                   setProductToEdit({
                     ...productToEdit,
                     price: e.target.value,
-                  })
+                  });
                 }}
               />
               <label htmlFor="price">Price</label>
@@ -76,7 +76,7 @@ function AdminEditForm() {
                   setProductToEdit({
                     ...productToEdit,
                     description: e.target.value,
-                  })
+                  });
                 }}
               />
               <label htmlFor="description">Description</label>
@@ -92,7 +92,7 @@ function AdminEditForm() {
                   name="condition"
                   checked={productToEdit.condition}
                   onChange={() => {
-                    setProductToEdit({ ...productToEdit, condition: true })
+                    setProductToEdit({ ...productToEdit, condition: true });
                   }}
                 />
               </div>
@@ -106,7 +106,7 @@ function AdminEditForm() {
                   name="condition"
                   checked={!productToEdit.condition}
                   onChange={() => {
-                    setProductToEdit({ ...productToEdit, condition: false })
+                    setProductToEdit({ ...productToEdit, condition: false });
                   }}
                 />
               </div>
@@ -121,7 +121,7 @@ function AdminEditForm() {
                   setProductToEdit({
                     ...productToEdit,
                     imageURL: e.target.value,
-                  })
+                  });
                 }}
               />
               <label htmlFor="imageURL">Image URL</label>
@@ -141,7 +141,7 @@ function AdminEditForm() {
         <h2>You&apos;re not authorized to view this page :/</h2>
       )}
     </div>
-  )
+  );
 }
 
-export default AdminEditForm
+export default AdminEditForm;

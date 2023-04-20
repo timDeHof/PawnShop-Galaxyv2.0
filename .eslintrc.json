@@ -17,7 +17,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "semi": ["error", "never"],
+    "semi": ["error", "always"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-console": "off",
     "no-unused-vars": [
