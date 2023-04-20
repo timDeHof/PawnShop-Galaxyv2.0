@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductById, updateProduct } from "../axios-services/products";
@@ -57,6 +56,7 @@ function AdminEditForm() {
             <div className={styles.user_box}>
               <input
                 value={productToEdit.price}
+                id="price"
                 type="text"
                 onChange={(e) => {
                   setProductToEdit({
@@ -65,10 +65,11 @@ function AdminEditForm() {
                   });
                 }}
               />
-              <label>Price</label>
+              <label htmlFor="price">Price</label>
             </div>
             <div className={styles.user_box}>
               <input
+                id="description"
                 value={productToEdit.description}
                 type="text"
                 onChange={(e) => {
@@ -78,11 +79,12 @@ function AdminEditForm() {
                   });
                 }}
               />
-              <label>Description</label>
+              <label htmlFor="description">Description</label>
             </div>
             <div className={styles.user_box}>
+              <p>Condition</p>
               <div className={styles.condition_box}>
-                <p htmlFor="new">New</p>
+                <label htmlFor="new">New</label>
                 <input
                   value
                   type="radio"
@@ -96,7 +98,7 @@ function AdminEditForm() {
               </div>
               {/* <br></br> */}
               <div className={styles.condition_box}>
-                <p htmlFor="used">Used</p>
+                <label htmlFor="used">Used</label>
                 <input
                   value={false}
                   type="radio"
@@ -108,11 +110,11 @@ function AdminEditForm() {
                   }}
                 />
               </div>
-              <label>Condition</label>
             </div>
             <hr />
             <div className={styles.user_box}>
               <input
+                id="imageURL"
                 value={productToEdit.imageURL}
                 type="url"
                 onChange={(e) => {
@@ -122,7 +124,7 @@ function AdminEditForm() {
                   });
                 }}
               />
-              <label>Image URL</label>
+              <label htmlFor="imageURL">Image URL</label>
             </div>
             <div className={styles.buttonContainer}>
               <button className={styles.submit} type="submit">
