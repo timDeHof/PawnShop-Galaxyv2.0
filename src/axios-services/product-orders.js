@@ -1,13 +1,12 @@
-/* eslint-disable no-console */
-/* eslint-disable consistent-return */
 import axios from 'axios';
 
 export async function getProductOrders() {
   try {
     const { data: products } = await axios.get('/api/product-orders');
     return products;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
@@ -24,11 +23,15 @@ export async function createProductOrder(token, orderId, productId, quantity) {
       },
     });
     return productOrder;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 export async function removeFromCart(token, productOrderId) {
+  if (!token || !productOrderId) {
+    throw new Error('Token and productOrderId are required');
+  }
   try {
     const { data: productOrder } = await axios.delete(`/api/product-orders/${productOrderId}`, {
       withCredentials: true,
@@ -38,18 +41,23 @@ export async function removeFromCart(token, productOrderId) {
       },
     });
     return productOrder;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
 export async function updateQuantity(productOrderId, quantity) {
+  if (!productOrderId || !quantity) {
+    throw new Error('productOrderId and quantity is required');
+  }
   try {
     const { data: productOrder } = await axios.patch(`/api/product-orders/${productOrderId}`, {
       quantity,
     });
     return productOrder;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }

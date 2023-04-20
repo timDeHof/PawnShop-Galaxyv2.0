@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import AuthContext from '../AuthContext';
 import { fetchUser } from '../axios-services/users';
 // import useCart from '../hooks/useCart';
-// import { getCartByUser } from '../axios-services/cart';
+// import { getCartByUserId } from '../axios-services/cart';
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState({ username: 'guest' });

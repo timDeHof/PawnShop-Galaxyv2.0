@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import CartContext from '../CartContext';
 import useAuth from '../hooks/useAuth';
-import { getCartByUser, createCart } from '../axios-services/cart';
+import { getCartByUserId, createCart } from '../axios-services/cart';
 import { getProductOrders } from '../axios-services/product-orders';
 import { getProducts } from '../axios-services/products';
 
@@ -25,7 +25,7 @@ function CartProvider({ children }) {
     const getCart = async () => {
       if (user.username !== 'guest') {
         // get their cart from the backend
-        const backendCart = await getCartByUser(user.id);
+        const backendCart = await getCartByUserId(user.id);
         setCart(backendCart);
       }
     };

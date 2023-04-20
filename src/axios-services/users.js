@@ -1,17 +1,19 @@
-/* eslint-disable consistent-return */
 import axios from 'axios';
 
 export async function getUsers() {
   try {
     const { data: users } = await axios.get('/api/users');
     return users;
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
 export async function fetchUser(token) {
+  if (!token) {
+    throw new Error('Token is required');
+  }
   try {
     const { data } = await axios.get('/api/users/me', {
       withCredentials: true,
@@ -21,27 +23,42 @@ export async function fetchUser(token) {
       },
     });
     return data;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
+  }
+}
+export async function loginUser(username, password) {
+  if (!username || !password) {
+    throw new Error('Username and password are required');
+  }
+  try {
+    const { data } = await axios.post('/api/users/login', {
+      username,
+      password,
+    });
+    return data;
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
-export async function loginUser(username, password) {
-  const { data } = await axios.post('/api/users/login', {
-    username,
-    password,
-  });
-  return data;
-}
-
 export async function registerUser(username, password, name, shippingAddress, billingAddress) {
-  const { data } = await axios.post('/api/users/register', {
-    username,
-    password,
-    name,
-    shippingAddress,
-    billingAddress,
-  });
-  return data;
+  if (!username || !password || !name || !shippingAddress || !billingAddress) {
+    throw new Error('All fields are required');
+  }
+  try {
+    const { data } = await axios.post('/api/users/register', {
+      username,
+      password,
+      name,
+      shippingAddress,
+      billingAddress,
+    });
+    return data;
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
+  }
 }

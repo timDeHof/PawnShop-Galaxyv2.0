@@ -1,51 +1,49 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-console */
 import axios from 'axios';
 
-export async function getCartByUser(userId) {
+export async function getCartByUserId(userId) {
+  if (!userId) {
+    throw new Error('UserId is required');
+  }
   try {
     const {
       data: [cart],
     } = await axios.get(`/api/users/cart/${userId}`);
 
     return cart;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
 export async function createCart(userId, isActive) {
+  if (!userId || !isActive) {
+    throw new Error('UserId and isActive is required');
+  }
   try {
     const { data } = await axios.post(`/api/orders/`, {
-      // withCredentials: true,
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${token}`,
-      // },
       userId,
       isActive,
     });
-    // console.log(data, "DATA from axios");
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }
 
-export async function setInactiveOrder(orderId, userId, inactive) {
+export async function setInactiveOrder(orderId, userId, isActive) {
+  if (!orderId || !userId || !isActive) {
+    throw new Error('UserId, orderId, and isActive is required');
+  }
   try {
     const data = await axios.patch(`/api/orders/${orderId}`, {
       userId,
-      isActive: inactive,
-      // withCredentials: true,
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${token}`,
-      // },
+      isActive,
     });
-    // console.log(data, "cart from axios");
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch ({ message }) {
+    console.error(message);
+    throw new Error(message);
   }
 }

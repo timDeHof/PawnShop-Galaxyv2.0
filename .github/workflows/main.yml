@@ -1,16 +1,17 @@
 name: CI
 
-on: 
- # run on pushes to the main branch
- push:
-   branches: [main]
- # also runs inside pull requests that target the main branch
- pull_request:
-   branches: [main]
-   
+on:
+  # run on pushes to the main branch
+  push:
+    branches: [main]
+  # also runs inside pull requests that target the main branch
+  pull_request:
+    branches: [main]
+
 jobs:
-   build:
-    runs-on: ubuntu-latest
+  build:
+    runs-on:
+      ubuntu-latest
       # postgres image for API tests via supertest
     services:
       postgres:
@@ -28,8 +29,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: '18'
+          cache: 'npm'
       # install dependencies
       - run: npm ci
       # run ESLint & Prettier
