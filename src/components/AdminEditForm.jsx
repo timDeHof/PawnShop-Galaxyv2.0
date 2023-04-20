@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getProductById, updateProduct } from '../axios-services/products';
-import useAuth from '../hooks/useAuth';
-import styles from '../style/Register.module.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProductById, updateProduct } from "../axios-services/products";
+import useAuth from "../hooks/useAuth";
+import styles from "../style/Register.module.css";
 
 function AdminEditForm() {
   const [productToEdit, setProductToEdit] = useState({});
@@ -37,7 +37,7 @@ function AdminEditForm() {
                 productToEdit.imageURL
               );
 
-              navigate('/products', { replace: true });
+              navigate("/products", { replace: true });
             }}
           >
             <div className={styles.user_box}>

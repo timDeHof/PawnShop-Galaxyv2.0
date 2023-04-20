@@ -2,12 +2,12 @@ name: Validate Pull Request
 on:
   pull_request:
     branches:
-      - 'main'
+      - "main"
     types:
-      - 'opened'
-      - 'edited'
+      - "opened"
+      - "edited"
       # triggered by new commits to an existing PR
-      - 'synchronize'
+      - "synchronize"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,9 +20,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
           --health-retries 5
     steps:
       - name: Checkout

@@ -121,9 +121,9 @@ h1 {
   letter-spacing: 0.125em;
   text-transform: uppercase;
   text-decoration: none;
-  font-family: 'Rubik Mono One', sans-serif;
-  text-shadow: 2px 0 var(--primary_alt), 0 2px var(--primary_alt), 2px 0 var(--primary_alt),
-    0 2px var(--primary_alt);
+  font-family: "Rubik Mono One", sans-serif;
+  text-shadow: 2px 0 var(--primary_alt), 0 2px var(--primary_alt),
+    2px 0 var(--primary_alt), 0 2px var(--primary_alt);
 }
 
 .productImg:hover {

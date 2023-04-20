@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getProducts } from '../axios-services/products';
-import useAuth from '../hooks/useAuth';
-import SingleProduct from './SingleProduct';
-import styles from '../style/Products.module.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getProducts } from "../axios-services/products";
+import useAuth from "../hooks/useAuth";
+import SingleProduct from "./SingleProduct";
+import styles from "../style/Products.module.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -21,13 +21,13 @@ function Products() {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', marginBottom: '0' }}> Products</h1>
+      <h1 style={{ textAlign: "center", marginBottom: "0" }}> Products</h1>
       {user.isAdmin ? (
         <Link to="/admin/product-form">
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: "center" }}>
             <button
               className={styles.deleteProduct}
-              style={{ textAlign: 'center', marginBottom: '2rem' }}
+              style={{ textAlign: "center", marginBottom: "2rem" }}
             >
               Add a New Product
             </button>

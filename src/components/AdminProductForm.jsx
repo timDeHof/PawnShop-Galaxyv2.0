@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useState } from 'react';
-import { createProduct } from '../axios-services/products';
-import useAuth from '../hooks/useAuth';
-import styles from '../style/Register.module.css';
+import React, { useState } from "react";
+import { createProduct } from "../axios-services/products";
+import useAuth from "../hooks/useAuth";
+import styles from "../style/Register.module.css";
 
 function AdminProductForm() {
   const [formState, setFormState] = useState({
-    name: '',
-    price: '',
-    description: '',
+    name: "",
+    price: "",
+    description: "",
     condition: false,
-    imageURL: '',
+    imageURL: "",
   });
   const { user } = useAuth();
   return (
@@ -30,7 +30,7 @@ function AdminProductForm() {
                 formState.imageURL
               );
               console.log(
-                '%cNew Product Created',
+                "%cNew Product Created",
                 `background:linear-gradient(#E66465, #9198E5);padding: .3rem;color: white;border-radius: .5em`
               );
             }}

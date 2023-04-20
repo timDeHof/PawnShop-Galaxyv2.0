@@ -1,4 +1,4 @@
-const prisma = require('./prisma');
+const prisma = require("./prisma");
 const {
   users,
   products,
@@ -6,10 +6,10 @@ const {
   categories,
   productOrders,
   productCategories,
-} = require('./seedData');
+} = require("./seedData");
 
 async function dropTables() {
-  console.log('Dropping All Tables...');
+  console.log("Dropping All Tables...");
   // drop all tables, in the correct order
   try {
     await prisma.$executeRaw`
@@ -25,13 +25,13 @@ async function dropTables() {
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS users;`;
   } catch (error) {
-    console.error('Error dropping tables!');
+    console.error("Error dropping tables!");
     throw error;
   }
 }
 
 async function createTables() {
-  console.log('Starting to build tables...');
+  console.log("Starting to build tables...");
   try {
     await prisma.$executeRaw`
     CREATE TABLE users (
@@ -80,7 +80,7 @@ async function createTables() {
       "categoryId" INTEGER REFERENCES categories(id)
     );`;
   } catch (error) {
-    console.error('Error creating tables!');
+    console.error("Error creating tables!");
   }
 }
 
@@ -125,40 +125,48 @@ async function createTables() {
 }; */
 const seedDb = async () => {
   try {
-    console.log('creating users...');
-    const userPromises = users.map((user) => prisma.users.create({ data: user }));
+    console.log("creating users...");
+    const userPromises = users.map((user) =>
+      prisma.users.create({ data: user })
+    );
     const createdUsers = await Promise.all(userPromises);
     console.log(createdUsers);
 
-    console.log('creating products...');
-    const productPromises = products.map((product) => prisma.products.create({ data: product }));
+    console.log("creating products...");
+    const productPromises = products.map((product) =>
+      prisma.products.create({ data: product })
+    );
     const createdProducts = await Promise.all(productPromises);
     console.log(createdProducts);
 
-    console.log('creating orders...');
-    const orderPromises = orders.map((order) => prisma.orders.create({ data: order }));
+    console.log("creating orders...");
+    const orderPromises = orders.map((order) =>
+      prisma.orders.create({ data: order })
+    );
     const createdOrders = await Promise.all(orderPromises);
     console.log(createdOrders);
 
-    console.log('creating categories...');
+    console.log("creating categories...");
     const categoryPromises = categories.map((category) =>
       prisma.categories.create({ data: category })
     );
     const createdCategories = await Promise.all(categoryPromises);
     console.log(createdCategories);
 
-    console.log('creating productOrders...');
+    console.log("creating productOrders...");
     const productOrderPromises = productOrders.map((productOrder) =>
       prisma.productOrders.create({ data: productOrder })
     );
     const createdProductOrders = await Promise.all(productOrderPromises);
     console.log(createdProductOrders);
 
-    console.log('creating productCategories..');
+    console.log("creating productCategories..");
     const productCategoriesPromises = productCategories.map((productCategory) =>
       prisma.productCategories.create({ data: productCategory })
     );
-    const createdProductCategories = await Promise.all(productCategoriesPromises);
+    const createdProductCategories = await Promise.all(
+      productCategoriesPromises
+    );
     console.log(createdProductCategories);
   } catch (error) {
     console.error(error);

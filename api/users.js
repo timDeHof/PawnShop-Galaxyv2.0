@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
 
 const usersRouter = express.Router();
-const jwt = require('jsonwebtoken');
-const prisma = require('../db/prisma');
-const requireUser = require('./utils');
+const jwt = require("jsonwebtoken");
+const prisma = require("../db/prisma");
+const requireUser = require("./utils");
 
-usersRouter.get('/me', requireUser, async (req, res, next) => {
+usersRouter.get("/me", requireUser, async (req, res, next) => {
   try {
     res.send(req.user);
   } catch ({ name, message }) {
@@ -13,9 +13,10 @@ usersRouter.get('/me', requireUser, async (req, res, next) => {
   }
 });
 
-usersRouter.post('/register', async (req, res, next) => {
+usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password, name, shippingAddress, billingAddress } = req.body;
+    const { username, password, name, shippingAddress, billingAddress } =
+      req.body;
 
     const registerUser = await prisma.users.findUnique({
       where: {
@@ -25,12 +26,12 @@ usersRouter.post('/register', async (req, res, next) => {
     if (registerUser) {
       res.status(401);
       next({
-        name: 'UserExistsError',
-        message: 'A user by that username already exists',
+        name: "UserExistsError",
+        message: "A user by that username already exists",
       });
     } else if (password.length < 8) {
       res.status(401);
-      next({ name: 'PasswordLengthError', message: 'Password Too Short!' });
+      next({ name: "PasswordLengthError", message: "Password Too Short!" });
     } else {
       const user = await prisma.users.create({
         data: {
@@ -52,14 +53,18 @@ usersRouter.post('/register', async (req, res, next) => {
 
       if (!user) {
         next({
-          name: 'UserCreationError',
-          message: 'There was a problem registering you. Please try again.',
+          name: "UserCreationError",
+          message: "There was a problem registering you. Please try again.",
         });
       } else {
         // json token
-        const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {
-          expiresIn: '1w',
-        });
+        const token = jwt.sign(
+          { id: user.id, username },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "1w",
+          }
+        );
         res.send({ user, token, message: "you're logged in!" });
       }
     }
@@ -68,15 +73,15 @@ usersRouter.post('/register', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/login', async (req, res, next) => {
+usersRouter.post("/login", async (req, res, next) => {
   // console.log(req, "request");
   const { username, password } = req.body;
 
   // request must have both
   if (!username || !password) {
     next({
-      name: 'MissingCredentialsError',
-      message: 'Please supply both a username and password',
+      name: "MissingCredentialsError",
+      message: "Please supply both a username and password",
     });
   }
 
@@ -89,14 +94,18 @@ usersRouter.post('/login', async (req, res, next) => {
 
     if (user && user.password === password) {
       // create token & return to user
-      const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {
-        expiresIn: '1w',
-      });
+      const token = jwt.sign(
+        { id: user.id, username },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1w",
+        }
+      );
       res.send({ token, message: "you're logged in!" });
     } else {
       next({
-        name: 'IncorrectCredentialsError',
-        message: 'Username or password is incorrect',
+        name: "IncorrectCredentialsError",
+        message: "Username or password is incorrect",
       });
     }
   } catch (error) {
@@ -104,7 +113,7 @@ usersRouter.post('/login', async (req, res, next) => {
   }
 });
 
-usersRouter.get('/cart/:userId', async (req, res, next) => {
+usersRouter.get("/cart/:userId", async (req, res, next) => {
   try {
     const cart = await prisma.orders.findMany({
       where: {
@@ -125,7 +134,7 @@ usersRouter.get('/cart/:userId', async (req, res, next) => {
   }
 });
 
-usersRouter.get('/:username', async (req, res, next) => {
+usersRouter.get("/:username", async (req, res, next) => {
   // const username = req.params
   try {
     const getUsername = await prisma.users.findUnique({
@@ -139,7 +148,7 @@ usersRouter.get('/:username', async (req, res, next) => {
   }
 });
 
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await prisma.users.findMany();
     res.send(users);

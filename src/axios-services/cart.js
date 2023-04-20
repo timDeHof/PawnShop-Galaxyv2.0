@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function getCartByUserId(userId) {
   if (!userId) {
-    throw new Error('UserId is required');
+    throw new Error("UserId is required");
   }
   try {
     const {
@@ -18,7 +18,7 @@ export async function getCartByUserId(userId) {
 
 export async function createCart(userId, isActive) {
   if (!userId || !isActive) {
-    throw new Error('UserId and isActive is required');
+    throw new Error("UserId and isActive is required");
   }
   try {
     const { data } = await axios.post(`/api/orders/`, {
@@ -34,7 +34,7 @@ export async function createCart(userId, isActive) {
 
 export async function setInactiveOrder(orderId, userId, isActive) {
   if (!orderId || !userId || !isActive) {
-    throw new Error('UserId, orderId, and isActive is required');
+    throw new Error("UserId, orderId, and isActive is required");
   }
   try {
     const data = await axios.patch(`/api/orders/${orderId}`, {

@@ -1,9 +1,7 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-shadow */
-import React, { useEffect, useState } from 'react';
-import getAllOrders from '../axios-services/orders';
-import { getUsers } from '../axios-services/users';
-import useAuth from '../hooks/useAuth';
+import React, { useEffect, useState } from "react";
+import getAllOrders from "../axios-services/orders";
+import { getUsers } from "../axios-services/users";
+import useAuth from "../hooks/useAuth";
 
 function AdminDashboard() {
   const { user } = useAuth();
@@ -11,18 +9,17 @@ function AdminDashboard() {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    async function fetchUsers() {
-      const users = await getUsers();
+    async function fetchData() {
+      const [users, orders] = await Promise.all([getUsers(), getAllOrders()]);
       setAllUsers(users);
-    }
-    async function fetchOrders() {
-      const orders = await getAllOrders();
       setAllOrders(orders);
     }
-    fetchUsers();
-    fetchOrders();
+    fetchData();
   }, []);
-
+  const usersById = allUsers.reduce(
+    (acc, selectUser) => ({ ...acc, [user.id]: selectUser }),
+    {}
+  );
   return (
     <div>
       {user.isAdmin ? (
@@ -38,14 +35,16 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {allUsers.map((user, i) => (
-                <tr key={`user${i}`}>
-                  <td>{user.username}</td>
-                  <td>{user.name}</td>
-                  <td>{user.shippingAddress}</td>
-                  {user.billingAddress ? <td>{user.billingAddress}</td> : <td>N/A</td>}
-                </tr>
-              ))}
+              {allUsers.map(
+                ({ id, username, name, shippingAddress, billingAddress }) => (
+                  <tr key={`user${id}`}>
+                    <td>{username}</td>
+                    <td>{name}</td>
+                    <td>{shippingAddress}</td>
+                    <td>{billingAddress || "N/A"}</td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
           <h2>Pending Orders</h2>
@@ -58,35 +57,25 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {allOrders.map((order, i) => (
-                <tr key={`order${i}`}>
-                  {!order.isActive ? (
-                    <>
+              {allOrders
+                .filter((order) => !order.isActive)
+                .map((order) => (
+                    <tr key={`order${order.id}`}>
                       <td>{order.id}</td>
-                      <>
-                        {allUsers.map((user, i) => {
-                          const { id } = user;
-                          const orderUserId = order.userId;
-                          const { username } = user;
-                          const address = user.shippingAddress;
-                          return (
-                            <React.Fragment key={`orderData${i}`}>
-                              <td>{id === orderUserId ? username : null}</td>
-                              <td>{id === orderUserId ? address : null}</td>
-                            </React.Fragment>
-                          );
-                        })}
-                      </>
-                    </>
-                  ) : null}
-                </tr>
-              ))}
+                      <td>{usersById[order.userId]?.username || null}</td>
+                      <td>
+                        {usersById[order.userId]?.shippingAddress || null}
+                      </td>
+                    </tr>
+                  ))}
+              ;
             </tbody>
           </table>
         </>
       ) : (
         <h2>You are not authorized to view this page :/</h2>
       )}
+      ;
     </div>
   );
 }
