@@ -37,60 +37,62 @@ function Home({ products }) {
   }
 
   function renderProduct(product) {
-    <div key={`p${product.id}`} className={styles.product}>
-      <Link
-        to={`/products/${product.id}`}
-        style={{
-          textDecoration: "none",
-          textAlign: "center",
-          color: "white",
-        }}
-      >
-        <h2 className={styles.productTitle}>{product.name}</h2>
-        <img
-          className={styles.productImg}
-          src={product.imageURL}
-          alt={product.name}
-        />
-      </Link>
+    return (
+      <div key={`p${product.id}`} className={styles.product}>
+        <Link
+          to={`/products/${product.id}`}
+          style={{
+            textDecoration: "none",
+            textAlign: "center",
+            color: "white",
+          }}
+        >
+          <h2 className={styles.productTitle}>{product.name}</h2>
+          <img
+            className={styles.productImg}
+            src={product.imageURL}
+            alt={product.name}
+          />
+        </Link>
 
-      <div className={styles.productPrice}>
-        <span className={styles.contentLabel}>PRICE:</span> $ {product.price}
-      </div>
-      <div className={styles.productCondition}>
-        <span className={styles.contentLabel}>Condition:</span>{" "}
-        {product.condition ? " New" : " Used"}
-      </div>
-      <div className={styles.productDescription}>
-        <span className={styles.contentLabel}>Description:</span>{" "}
-        {product.description}
-      </div>
-      {user.isAdmin ? (
-        <>
-          <Link
-            to={`/admin/edit-form/${product.id}`}
-            className={styles.deleteProduct}
-          >
-            Edit
-          </Link>
+        <div className={styles.productPrice}>
+          <span className={styles.contentLabel}>PRICE:</span> $ {product.price}
+        </div>
+        <div className={styles.productCondition}>
+          <span className={styles.contentLabel}>Condition:</span>{" "}
+          {product.condition ? " New" : " Used"}
+        </div>
+        <div className={styles.productDescription}>
+          <span className={styles.contentLabel}>Description:</span>{" "}
+          {product.description}
+        </div>
+        {user.isAdmin ? (
+          <>
+            <Link
+              to={`/admin/edit-form/${product.id}`}
+              className={styles.deleteProduct}
+            >
+              Edit
+            </Link>
+            <button
+              type="button"
+              className={styles.deleteProduct}
+              onClick={handleDeleteProduct}
+            >
+              Delete
+            </button>
+          </>
+        ) : (
           <button
             type="button"
-            className={styles.deleteProduct}
-            onClick={handleDeleteProduct}
+            className={styles.addToCart}
+            onClick={handleAddingProductToCart}
           >
-            Delete
+            Add to Cart
           </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          className={styles.addToCart}
-          onClick={handleAddingProductToCart}
-        >
-          Add to Cart
-        </button>
-      )}
-    </div>;
+        )}
+      </div>
+    );
   }
   return (
     <div
@@ -110,7 +112,7 @@ function Home({ products }) {
       </div>
       <h1 className="title"> Featured Products</h1>
       <div className={styles.postcard}>
-        {displayedProducts?.map((product) => renderProduct(product))}
+        {displayedProducts.map((product) => renderProduct(product))}
       </div>
     </div>
   );
