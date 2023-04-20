@@ -84,45 +84,6 @@ async function createTables() {
   }
 }
 
-/* const seedDb = async () => {
-  console.log('creating users...');
-  for (const user of users) {
-    const createdUser = await prisma.users.create({ data: user });
-    console.log(createdUser);
-  }
-
-  console.log('creating products...');
-  // eslint-disable-next-line no-restricted-syntax
-  for (const product of products) {
-    const prod = await prisma.products.create({ data: product });
-    console.log(prod);
-  }
-  console.log('creating orders...');
-  for (const order of orders) {
-    const createdOrder = await prisma.orders.create({ data: order });
-    console.log(createdOrder);
-  }
-  console.log('creating categories...');
-  for (const category of categories) {
-    const createdCategory = await prisma.categories.create({ data: category });
-    console.log(createdCategory);
-  }
-  console.log('creating productOrders...');
-
-  for (const product of productOrders) {
-    const createdProduct = await prisma.product_orders.create({
-      data: product,
-    });
-    console.log(createdProduct);
-  }
-  console.log('creating productCategories..');
-  for (const category of productCategories) {
-    const productCat = await prisma.product_categories.create({
-      data: category,
-    });
-    console.log(productCat);
-  }
-}; */
 const seedDb = async () => {
   try {
     console.log("creating users...");

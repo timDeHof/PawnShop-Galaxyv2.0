@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-console */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from "react";
 import { createProduct } from "../axios-services/products";
 import useAuth from "../hooks/useAuth";
@@ -16,7 +13,7 @@ function AdminProductForm() {
   });
   const { user } = useAuth();
   return (
-    <>
+    <div>
       {user.isAdmin ? (
         <div className={styles.register_box}>
           <form
@@ -37,6 +34,7 @@ function AdminProductForm() {
           >
             <div className={styles.user_box}>
               <input
+                id="name"
                 value={formState.name}
                 type="text"
                 onChange={(e) => {
@@ -44,10 +42,11 @@ function AdminProductForm() {
                 }}
                 required
               />
-              <label>Name</label>
+              <label htmlFor="name">Name</label>
             </div>
             <div className={styles.user_box}>
               <input
+                id="price"
                 value={formState.price}
                 type="text"
                 onChange={(e) => {
@@ -55,10 +54,11 @@ function AdminProductForm() {
                 }}
                 required
               />
-              <label>Price</label>
+              <label htmlFor="price">Price</label>
             </div>
             <div className={styles.user_box}>
               <input
+                id="description"
                 value={formState.description}
                 type="text"
                 onChange={(e) => {
@@ -66,7 +66,7 @@ function AdminProductForm() {
                 }}
                 required
               />
-              <label>Description</label>
+              <label htmlFor="description">Description</label>
             </div>
             <div>Condition</div>
             <input
@@ -95,6 +95,7 @@ function AdminProductForm() {
             <hr />
             <div className={styles.user_box}>
               <input
+                id="imageURL"
                 value={formState.imageURL}
                 type="url"
                 onChange={(e) => {
@@ -102,7 +103,7 @@ function AdminProductForm() {
                 }}
                 required
               />
-              <label>Image URL</label>
+              <label htmlFor="imageURL">Image URL</label>
             </div>
             <div className={styles.buttonContainer}>
               <button className={styles.submit} type="submit">
@@ -118,7 +119,7 @@ function AdminProductForm() {
       ) : (
         <h2>You&apos;re not authorized to view this page :/</h2>
       )}
-    </>
+    </div>
   );
 }
 
