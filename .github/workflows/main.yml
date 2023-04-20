@@ -37,6 +37,6 @@ jobs:
       - run: npm run lint
       - run: npm run prettier
       # verify that there are no type and build errors
-      - run: npm run build
+      - run: npm run client:build
       - name: Seed Database
         run: npm run db:build
