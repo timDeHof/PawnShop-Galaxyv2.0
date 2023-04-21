@@ -83,7 +83,7 @@ function Cart() {
         Checkout
       </button>
       {cart.productOrders.map((productOrder) => (
-        <div key={`cartProduct${productOrder.products.id}`}>
+        <div key={`cartProduct-${productOrder.id}`}>
           <h2>{productOrder.products.name}</h2>
           <img
             src={productOrder.products.imageURL}
