@@ -3,27 +3,28 @@ import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 
 function Cart() {
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const { cart, updateQty, deleteItem, checkout } = useCart();
   const [loading, setLoading] = useState(false);
 
   console.log("The Cart:", cart);
   const decrementButton = useRef();
   const incrementButton = useRef();
+  const { id, userId } = cart;
 
   useEffect(() => {
     if (loading) {
-      decrementButton.current.disabled = true;
-      incrementButton.current.disabled = true;
+      if (decrementButton.current) decrementButton.current.disabled = true;
+      if (incrementButton.current) incrementButton.current.disabled = true;
     } else {
-      decrementButton.current.removeAttribute("disabled");
-      incrementButton.current.removeAttribute("disabled");
+      if (decrementButton.current) decrementButton.current.disabled = false;
+      if (incrementButton.current) incrementButton.current.disabled = false;
     }
   }, [loading]);
 
   async function handleCheckout() {
-    const orderId = cart.id;
-    await checkout(orderId, user.id);
+    const orderId = id;
+    await checkout(orderId, userId);
   }
 
   async function handleDeleteItemFromCart(productOrder) {
@@ -37,27 +38,38 @@ function Cart() {
     }
   }
 
-  const handleQuantityDecrement = useCallback(async (productOrder) => {
-    setLoading(true);
-    try {
-      await updateQty(productOrder.id, productOrder.quantity - 1);
-    } catch (error) {
-      console.error(error);
-    } finally {
+  const handleQuantityDecrement = useCallback(
+    async (productOrder) => {
+      console.log("click");
+      console.log("product order", productOrder);
+      setLoading(true);
+      const newQuantity = productOrder.quantity - 1;
+      if (newQuantity >= 1) {
+        try {
+          await updateQty(productOrder.id, newQuantity);
+        } catch (error) {
+          console.error(error);
+        }
+      }
       setLoading(false);
-    }
-  }, []);
+    },
+    [updateQty]
+  );
 
-  const handleQuantityIncrement = useCallback(async (productOrder) => {
-    setLoading(true);
-    try {
-      await updateQty(productOrder.id, productOrder.quantity + 1);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const handleQuantityIncrement = useCallback(
+    async (productOrder) => {
+      setLoading(true);
+      const newQuantity = productOrder.quantity + 1;
+      try {
+        await updateQty(productOrder.id, newQuantity);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [updateQty]
+  );
 
   return (
     <div>
@@ -67,12 +79,11 @@ function Cart() {
       <br />
       <br />
 
-      <button type="button" onClick={handleCheckout}>
+      <button type="button" onClick={() => handleCheckout(cart)}>
         Checkout
       </button>
-
       {cart.productOrders.map((productOrder) => (
-        <div key={`cartProduct${productOrder.products.id}-${productOrder.id}`}>
+        <div key={`cartProduct${productOrder.products.id}`}>
           <h2>{productOrder.products.name}</h2>
           <img
             src={productOrder.products.imageURL}
@@ -89,7 +100,7 @@ function Cart() {
             type="button"
             ref={decrementButton}
             disabled={productOrder.quantity === 1}
-            onClick={handleQuantityDecrement}
+            onClick={() => handleQuantityDecrement(productOrder)}
           >
             {loading ? "loading..." : "-"}
           </button>
@@ -97,7 +108,7 @@ function Cart() {
           <button
             type="button"
             ref={incrementButton}
-            onClick={handleQuantityIncrement}
+            onClick={() => handleQuantityIncrement(productOrder)}
           >
             {loading ? "loading..." : "+"}
           </button>

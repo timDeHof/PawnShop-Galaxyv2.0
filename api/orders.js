@@ -40,7 +40,7 @@ ordersRouter.post("/", async (req, res, next) => {
         isActive,
       },
       include: {
-        product_orders: {
+        productOrders: {
           include: {
             products: true,
           },

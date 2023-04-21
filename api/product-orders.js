@@ -11,7 +11,7 @@ productOrdersRouter.use((req, res, next) => {
 
 productOrdersRouter.get("/", async (req, res, next) => {
   try {
-    const productOrders = await prisma.product_orders.findMany();
+    const productOrders = await prisma.productOrders.findMany();
     res.send(productOrders);
   } catch (error) {
     next(error);
@@ -21,7 +21,7 @@ productOrdersRouter.get("/", async (req, res, next) => {
 productOrdersRouter.post("/", async (req, res, next) => {
   const { orderId, productId, quantity } = req.body;
   try {
-    const createdProductOrder = await prisma.product_orders.create({
+    const createdProductOrder = await prisma.productOrders.create({
       data: {
         orderId,
         productId,
@@ -52,7 +52,7 @@ productOrdersRouter.delete(
   requireUser,
   async (req, res, next) => {
     try {
-      const deleteProductOrder = await prisma.product_orders.delete({
+      const deleteProductOrder = await prisma.productOrders.delete({
         where: {
           id: +req.params.productOrderId,
         },
@@ -67,7 +67,7 @@ productOrdersRouter.delete(
 productOrdersRouter.patch("/:productOrderId", async (req, res, next) => {
   const { quantity } = req.body;
   try {
-    const updateProductOrder = await prisma.product_orders.update({
+    const updateProductOrder = await prisma.productOrders.update({
       where: {
         id: +req.params.productOrderId,
       },

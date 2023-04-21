@@ -52,7 +52,7 @@ productsRouter.post("/", async (req, res, next) => {
 
 productsRouter.get("/category/:categoryId", async (req, res, next) => {
   try {
-    const getProductsByCat = await prisma.product_categories.findMany({
+    const getProductsByCat = await prisma.productCategories.findMany({
       where: {
         categoryId: +req.params.categoryId,
       },

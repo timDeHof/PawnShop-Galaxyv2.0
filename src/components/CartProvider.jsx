@@ -10,7 +10,7 @@ import { getProducts } from "../axios-services/products";
 
 function CartProvider({ children }) {
   const { token, user } = useAuth();
-  const [cart, setCart] = useState({ product_orders: [] });
+  const [cart, setCart] = useState({ productOrders: [] });
 
   //   const localCart = JSON.parse(localStorage.getItem("cart"));
   //   console.log(localCart, "my local cart");

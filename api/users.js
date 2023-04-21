@@ -121,7 +121,7 @@ usersRouter.get("/cart/:userId", async (req, res, next) => {
         isActive: true,
       },
       include: {
-        product_orders: {
+        productOrders: {
           include: {
             products: true,
           },

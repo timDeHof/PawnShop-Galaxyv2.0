@@ -33,8 +33,8 @@ export async function createCart(userId, isActive) {
 }
 
 export async function setInactiveOrder(orderId, userId, isActive) {
-  if (!orderId || !userId || !isActive) {
-    throw new Error("UserId, orderId, and isActive is required");
+  if (!orderId || !userId) {
+    throw new Error("UserId and orderId is required");
   }
   try {
     const data = await axios.patch(`/api/orders/${orderId}`, {
