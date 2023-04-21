@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
-/* eslint-disable camelcase */
 /* eslint-disable no-console */
 import { useContext } from "react";
 import {
@@ -28,33 +27,33 @@ const useCart = () => {
     console.log("this should be the product", productOrder);
     setCart({
       ...cart,
-      product_orders: [...cart.product_orders, productOrder],
+      productOrders: [...cart.productOrders, productOrder],
     });
   };
 
   const updateQty = async (productOrderId, qty) => {
     await updateQuantity(productOrderId, qty);
-    console.log(cart.product_orders);
-    const mappedItems = cart.product_orders.map((product_order) => {
-      console.log("productOrder in map", product_order);
-      if (product_order.id === productOrderId) {
-        product_order.quantity = +qty;
+    console.log(cart.productOrders);
+    const mappedItems = cart.productOrders.map((productOrder) => {
+      console.log("productOrder in map", productOrder);
+      if (productOrder.id === productOrderId) {
+        productOrder.quantity = +qty;
       }
-      return product_order;
+      return productOrder;
     });
     console.log(mappedItems);
-    setCart({ ...cart, product_orders: mappedItems });
+    setCart({ ...cart, productOrders: mappedItems });
   };
 
   const deleteItem = async (token, productOrderId) => {
     await removeFromCart(token, productOrderId);
     // eslint-disable-next-line consistent-return
-    const filteredItems = cart.product_orders.filter((product_order) => {
-      if (product_order.id !== productOrderId) {
-        return product_order;
+    const filteredItems = cart.productOrders.filter((productOrder) => {
+      if (productOrder.id !== productOrderId) {
+        return productOrder;
       }
     });
-    setCart({ ...cart, product_orders: filteredItems });
+    setCart({ ...cart, productOrders: filteredItems });
   };
 
   const checkout = async (orderId, userId) => {

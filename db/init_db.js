@@ -13,15 +13,15 @@ async function dropTables() {
   // drop all tables, in the correct order
   try {
     await prisma.$executeRaw`
-    DROP TABLE IF EXISTS product_categories;`;
+    DROP TABLE IF EXISTS productCategories;`;
     await prisma.$executeRaw`
-    DROP TABLE IF EXISTS product_orders;`;
+    DROP TABLE IF EXISTS productOrders;`;
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS orders;`;
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS categories;`;
     await prisma.$executeRaw`
-    DROP TABLE IF EXISTS products;`;
+    DROP TABLE IF EXISTS products CASCADE;`;
     await prisma.$executeRaw`
     DROP TABLE IF EXISTS users;`;
   } catch (error) {
@@ -65,7 +65,7 @@ async function createTables() {
       "isActive" BOOLEAN DEFAULT true
     );`;
     await prisma.$executeRaw`
-    CREATE TABLE product_orders (
+    CREATE TABLE productOrders (
       id SERIAL PRIMARY KEY,
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id) ON DELETE CASCADE,
@@ -74,7 +74,7 @@ async function createTables() {
 
     );`;
     await prisma.$executeRaw`
-    CREATE TABLE product_categories (
+    CREATE TABLE productCategories (
       id SERIAL PRIMARY KEY,
       "productId" INTEGER REFERENCES products(id) ON DELETE CASCADE,
       "categoryId" INTEGER REFERENCES categories(id)
@@ -85,54 +85,43 @@ async function createTables() {
 }
 
 const seedDb = async () => {
+  console.log("creating users...");
   try {
-    console.log("creating users...");
-    const userPromises = users.map((user) =>
-      prisma.users.create({ data: user })
-    );
-    const createdUsers = await Promise.all(userPromises);
+    const createdUsers = await prisma.users.createMany({ data: users });
     console.log(createdUsers);
 
     console.log("creating products...");
-    const productPromises = products.map((product) =>
-      prisma.products.create({ data: product })
-    );
-    const createdProducts = await Promise.all(productPromises);
+    const createdProducts = await prisma.products.createMany({
+      data: products,
+    });
     console.log(createdProducts);
 
     console.log("creating orders...");
-    const orderPromises = orders.map((order) =>
-      prisma.orders.create({ data: order })
-    );
-    const createdOrders = await Promise.all(orderPromises);
+    const createdOrders = await prisma.orders.createMany({ data: orders });
     console.log(createdOrders);
 
     console.log("creating categories...");
-    const categoryPromises = categories.map((category) =>
-      prisma.categories.create({ data: category })
-    );
-    const createdCategories = await Promise.all(categoryPromises);
+    const createdCategories = await prisma.categories.createMany({
+      data: categories,
+    });
     console.log(createdCategories);
 
     console.log("creating productOrders...");
-    const productOrderPromises = productOrders.map((productOrder) =>
-      prisma.productOrders.create({ data: productOrder })
-    );
-    const createdProductOrders = await Promise.all(productOrderPromises);
+    const createdProductOrders = await prisma.productOrders.createMany({
+      data: productOrders,
+    });
     console.log(createdProductOrders);
 
     console.log("creating productCategories..");
-    const productCategoriesPromises = productCategories.map((productCategory) =>
-      prisma.productCategories.create({ data: productCategory })
-    );
-    const createdProductCategories = await Promise.all(
-      productCategoriesPromises
-    );
+    const createdProductCategories = await prisma.productCategories.createMany({
+      data: productCategories,
+    });
     console.log(createdProductCategories);
   } catch (error) {
     console.error(error);
   }
 };
+
 async function rebuildDB() {
   await dropTables();
   await createTables();
