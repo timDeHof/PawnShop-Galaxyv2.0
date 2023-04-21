@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../axios-services/users";
@@ -32,113 +29,111 @@ function Login() {
     setErrMsg("");
   }, [username, password]);
 
-  return (
-    <>
-      {success ? (
-        <section className={styles.login_box}>
-          <h1>You are logged in!</h1>
-          <br />
-          <p className={styles.buttonContainer}>
-            <button
-              className={styles.submit}
-              onClick={() => navigate("/products")}
-            >
-              <span />
-              <span />
-              <span />
-              <span />
-              Check out our Products!
-            </button>
-          </p>
-        </section>
-      ) : (
-        <section className={styles.login_box}>
-          <p
-            ref={errRef}
-            className={errMsg ? styles.errmsg : styles.offscreen}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
+  return success ? (
+    <section className={styles.login_box}>
+      <h1>You are logged in!</h1>
+      <br />
+      <p className={styles.buttonContainer}>
+        <button
+          type="button"
+          className={styles.submit}
+          onClick={() => navigate("/products")}
+        >
+          <span />
+          <span />
+          <span />
+          <span />
+          Check out our Products!
+        </button>
+      </p>
+    </section>
+  ) : (
+    <section className={styles.login_box}>
+      <p
+        ref={errRef}
+        className={errMsg ? styles.errmsg : styles.offscreen}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
 
-          <h1>Log in</h1>
+      <h1>Log in</h1>
 
-          <form
-            onSubmit={async (ev) => {
-              ev.preventDefault();
-              try {
-                const result = await loginUser(username, password);
+      <form
+        onSubmit={async (ev) => {
+          ev.preventDefault();
+          try {
+            const result = await loginUser(username, password);
 
-                localStorage.setItem("token", result.token);
-                setToken(result.token);
-                setSuccess(true);
+            localStorage.setItem("token", result.token);
+            setToken(result.token);
+            setSuccess(true);
 
-                setUsername("");
-                setPassword("");
-              } catch (error) {
-                if (!errMsg.response) {
-                  setErrMsg("No Server Response");
-                } else if (error.response?.status === 400) {
-                  setErrMsg("Missing Username or Password");
-                } else if (error.response?.status === 401) {
-                  setErrMsg("Unauthorized");
-                } else {
-                  setErrMsg("Login Failed");
-                }
-                errRef.current.focus();
-              }
+            setUsername("");
+            setPassword("");
+          } catch (error) {
+            if (!errMsg.response) {
+              setErrMsg("No Server Response");
+            } else if (error.response?.status === 400) {
+              setErrMsg("Missing Username or Password");
+            } else if (error.response?.status === 401) {
+              setErrMsg("Unauthorized");
+            } else {
+              setErrMsg("Login Failed");
+            }
+            errRef.current.focus();
+          }
+        }}
+      >
+        <div className={styles.user_box}>
+          <input
+            type="text"
+            id="username"
+            required
+            ref={userRef}
+            autoComplete="off"
+            onChange={(ev) => {
+              setUsername(ev.target.value);
             }}
+            value={username}
+          />
+          <label htmlFor="username">Username:</label>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            type="password"
+            value={password}
+            required
+            onChange={(ev) => {
+              setPassword(ev.target.value);
+            }}
+          />
+          <label htmlFor="password">Password:</label>
+        </div>
+        <div className={styles.buttonContainer}>
+          <button type="submit" className={styles.submit}>
+            <span />
+            <span />
+            <span />
+            <span />
+            Log in
+          </button>
+        </div>
+      </form>
+      <p className={styles.registerContainer}>
+        Need an Account?
+        <br />
+        <span className={styles.buttonContainer}>
+          <button
+            type="button"
+            className={styles.registerSubmit}
+            onClick={() => navigate("/register")}
           >
-            <div className={styles.user_box}>
-              <input
-                type="text"
-                id="username"
-                required
-                ref={userRef}
-                autoComplete="off"
-                onChange={(ev) => {
-                  setUsername(ev.target.value);
-                }}
-                value={username}
-              />
-              <label htmlFor="username">Username:</label>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                type="password"
-                value={password}
-                required
-                onChange={(ev) => {
-                  setPassword(ev.target.value);
-                }}
-              />
-              <label htmlFor="password">Password:</label>
-            </div>
-            <div className={styles.buttonContainer}>
-              <button className={styles.submit}>
-                <span />
-                <span />
-                <span />
-                <span />
-                Log in
-              </button>
-            </div>
-          </form>
-          <p className={styles.registerContainer}>
-            Need an Account?
-            <br />
-            <span className={styles.buttonContainer}>
-              <button
-                className={styles.registerSubmit}
-                onClick={() => navigate("/register")}
-              >
-                Create Account
-              </button>
-            </span>
-          </p>
-        </section>
-      )}
-    </>
+            Create Account
+          </button>
+        </span>
+      </p>
+    </section>
   );
 }
 
