@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 
 function Cart() {
+
   const { token } = useAuth();
   const { cart, updateQty, deleteItem, checkout } = useCart();
   const [loading, setLoading] = useState(false);
