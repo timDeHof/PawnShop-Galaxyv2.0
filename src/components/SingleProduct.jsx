@@ -1,10 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-shadow */
-/* eslint-disable no-console */
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types */
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { deleteProduct } from "../axios-services/products";
@@ -53,15 +46,15 @@ function SingleProduct({ product, products, setProducts }) {
         </Link>
 
         <div className={styles.productPrice}>
-          <label className={styles.contentLabel}>PRICE:</label> ${" "}
+          <span className={styles.contentLabel}>PRICE:</span> ${" "}
           {productToRender.price}
         </div>
         <div className={styles.productCondition}>
-          <label className={styles.contentLabel}>Condition:</label>{" "}
+          <span className={styles.contentLabel}>Condition:</span>{" "}
           {productToRender.condition ? " New" : " Used"}
         </div>
         <div className={styles.productDescription}>
-          <label className={styles.contentLabel}>Description:</label>{" "}
+          <span className={styles.contentLabel}>Description:</span>{" "}
           {productToRender.description}
         </div>
         {user.isAdmin ? (
@@ -73,6 +66,7 @@ function SingleProduct({ product, products, setProducts }) {
               Edit
             </Link>
             <button
+              type="button"
               className={styles.deleteProduct}
               onClick={async () => {
                 console.log(
@@ -83,8 +77,9 @@ function SingleProduct({ product, products, setProducts }) {
                 border-radius: .5em`
                 );
                 await deleteProduct(productToRender.id);
-                const filteredProducts = products.filter((product) => {
-                  if (product.id !== productToRender.id) return true;
+                const filteredProducts = products.filter((prod) => {
+                  if (prod.id !== productToRender.id) return true;
+                  return false;
                 });
                 setProducts(filteredProducts);
               }}
@@ -94,6 +89,7 @@ function SingleProduct({ product, products, setProducts }) {
           </>
         ) : (
           <button
+            type="button"
             className={styles.addToCart}
             onClick={() => {
               addToCart(cart.id, productToRender.id, 1);
