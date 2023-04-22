@@ -22,11 +22,11 @@ function CartProvider({ children }) {
 
   const cartContextValue = useMemo(() => ({ cart, setCart }), [cart, setCart]);
 
-  return cart ? (
+  return (
     <CartContext.Provider value={cartContextValue}>
       {children}
     </CartContext.Provider>
-  ) : null;
+  );
 }
 
 export default CartProvider;
