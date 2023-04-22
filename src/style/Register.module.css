@@ -4,13 +4,13 @@ body {
   background: linear-gradient(var(--primary), var(--primary_alt));
 }
 .instructions {
-  font-size: 0.75em;
+  font-size: 1rem;
   border-radius: 0.5em;
   background: var(--secondary_alt);
   color: #fff;
-  padding: 0.25em;
+  padding: 0.25rem;
   position: relative;
-  bottom: -10px;
+  bottom: 32px;
 }
 .instructions > svg {
   margin-right: 00.25em;

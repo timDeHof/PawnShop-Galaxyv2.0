@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useRef, useEffect } from "react";
 import {
   faCheck,
@@ -73,269 +70,256 @@ function Register() {
   useEffect(() => {
     setErrMsg("");
   }, [username, password, matchPwd]);
-
-  return (
-    <>
-      {success ? (
-        <section className={styles.register_box}>
-          <h1>Success!</h1>
-          <p className={styles.buttonContainer}>
-            <button
-              className={styles.submit}
-              onClick={() => navigate("/products")}
-            >
-              <span />
-              <span />
-              <span />
-              <span />
-              Products
-            </button>
-          </p>
-        </section>
-      ) : (
-        <section className={styles.register_box}>
-          <p
-            ref={errRef}
-            className={errMsg ? styles.errmsg : styles.offscreen}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
-          <h1>Registration Form</h1>
-          <form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              // if button enabled with JS hack
-              const v1 = USER_REGEX.test(username);
-              const v2 = PWD_REGEX.test(password);
-              if (!v1 || !v2) {
-                setErrMsg("Invalid Entry");
-                return;
-              }
-              try {
-                const result = await registerUser(
-                  username,
-                  password,
-                  name,
-                  shippingAddress,
-                  billingAddress
-                );
-                setSuccess(true);
-                localStorage.setItem("token", result.token);
-                setToken(result.token);
-                // clear input fields
-                setUsername("");
-                setPassword("");
-                setName("");
-                setShippingAddress("");
-                setBillingAddress("");
-              } catch (error) {
-                if (!error.response) {
-                  setErrMsg("No server Response");
-                } else if (error.response?.status === 401) {
-                  setErrMsg("Username taken");
-                } else {
-                  setErrMsg("Registration Failed");
-                }
-                errRef.current.focus();
-                // throw error;
-              }
+  const isFormDisabled = !(validUserName && !validPwd && validMatch);
+  return success ? (
+    <section className={styles.register_box}>
+      <h1>Success!</h1>
+      <p className={styles.buttonContainer}>
+        <button
+          type="button"
+          className={styles.submit}
+          onClick={() => navigate("/products")}
+        >
+          <span />
+          <span />
+          <span />
+          <span />
+          Products
+        </button>
+      </p>
+    </section>
+  ) : (
+    <section className={styles.register_box}>
+      <p
+        ref={errRef}
+        className={errMsg ? styles.errmsg : styles.offscreen}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
+      <h1>Registration Form</h1>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          // if button enabled with JS hack
+          const v1 = USER_REGEX.test(username);
+          const v2 = PWD_REGEX.test(password);
+          if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+          }
+          try {
+            const result = await registerUser(
+              username,
+              password,
+              name,
+              shippingAddress,
+              billingAddress
+            );
+            setSuccess(true);
+            localStorage.setItem("token", result.token);
+            setToken(result.token);
+            // clear input fields
+            setUsername("");
+            setPassword("");
+            setName("");
+            setShippingAddress("");
+            setBillingAddress("");
+          } catch (error) {
+            if (!error.response) {
+              setErrMsg("No server Response");
+            } else if (error.response?.status === 401) {
+              setErrMsg("Username taken");
+            } else {
+              setErrMsg("Registration Failed");
+            }
+            errRef.current.focus();
+            // throw error;
+          }
+        }}
+      >
+        <div className={styles.user_box}>
+          <input
+            type="text"
+            value={username}
+            ref={userRef}
+            autoComplete="off"
+            onChange={(e) => {
+              setUsername(e.target.value);
             }}
-          >
-            <div className={styles.user_box}>
-              <input
-                type="text"
-                value={username}
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                required
-                aria-invalid={validUserName ? "false" : "true"}
-                aria-describedby="uidnote"
-                onFocus={() => setUserNameFocus(true)}
-                onBlur={() => setUserNameFocus(false)}
-              />
-              <label htmlFor="username">
-                Username:
-                <span className={validUserName ? styles.valid : styles.hide}>
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span
-                  className={
-                    validUserName || !username ? styles.hide : styles.invalid
-                  }
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="uidnote"
-                className={
-                  userNameFocus && username && !validUserName
-                    ? styles.instructions
-                    : styles.offscreen
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                6 to 24 characters.
-                <br />
-                Must begin with a letter.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
-              </p>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                value={password}
-                type="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-                aria-invalid={validPwd ? "false" : "true"}
-                aria-describedby="pwdnote"
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)}
-              />
-              <label htmlFor="password">
-                Password:
-                <span className={validPwd ? styles.valid : styles.hide}>
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span
-                  className={
-                    validPwd || !password ? styles.hide : styles.invalid
-                  }
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-              <p
-                id="pwdnote"
-                className={
-                  pwdFocus && !validPwd ? styles.instructions : styles.offscreen
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                8 to 24 characters.
-                <br />
-                Must include uppercase and lowercase letters, a number and a
-                special character.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
-                <br />
-                Allowed special characters: !,@,#,$,%
-                {/* <span aria-label="exclamation mark">!</span>{" "}
-                <span aria-label="at symbol">@</span>{" "}
-                <span aria-label="hashtag">#</span>{" "}
-                <span aria-label="dollar sign">$</span>{" "}
-                <span aria-label="percent">%</span> */}
-              </p>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                type="password"
-                id="confirm_pwd"
-                onChange={(e) => setMatchPwd(e.target.value)}
-                required
-                aria-invalid={validMatch ? "false" : "true"}
-                aria-describedby="confirmnote"
-                onFocus={() => setMatchFocus(true)}
-                onBlur={() => setMatchFocus(false)}
-              />
-              <p
-                id="confirmnote"
-                className={
-                  matchFocus && !validMatch
-                    ? styles.instructions
-                    : styles.offscreen
-                }
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-                Must match the first password input field.
-              </p>
-
-              <label htmlFor="confirm_pwd">
-                Confirm Password:
-                <span
-                  className={
-                    validMatch && matchPwd ? styles.valid : styles.hide
-                  }
-                >
-                  <FontAwesomeIcon icon={faCheck} />
-                </span>
-                <span
-                  className={
-                    validMatch || !matchPwd ? styles.hide : styles.invalid
-                  }
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </span>
-              </label>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                value={name}
-                type="text"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                required
-              />
-              <label>Name:</label>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                value={shippingAddress}
-                type="text"
-                onChange={(e) => {
-                  setShippingAddress(e.target.value);
-                }}
-                required
-              />
-              <label>Shipping address:</label>
-            </div>
-            <div className={styles.user_box}>
-              <input
-                value={billingAddress}
-                type="text"
-                onChange={(e) => {
-                  setBillingAddress(e.target.value);
-                }}
-                required
-              />
-              <label>Billing address:</label>
-            </div>
-            <div className={styles.buttonContainer}>
-              <button
-                className={styles.submit}
-                disabled={!!(!validUserName || !validPwd || !validMatch)}
-              >
-                <span />
-                <span />
-                <span />
-                <span />
-                Register
-              </button>
-            </div>
-          </form>
-          <p className={styles.loginContainer}>
-            Already registered?
-            <br />
-            <span className={styles.buttonContainer}>
-              <button
-                className={styles.loginSubmit}
-                onClick={() => navigate("/login")}
-              >
-                Log in
-              </button>
+            required
+            aria-invalid={validUserName ? "false" : "true"}
+            aria-describedby="uidnote"
+            onFocus={() => setUserNameFocus(true)}
+            onBlur={() => setUserNameFocus(false)}
+          />
+          <label htmlFor="username">
+            Username:
+            <span className={validUserName ? styles.valid : styles.hide}>
+              <FontAwesomeIcon icon={faCheck} />
             </span>
+            <span
+              className={
+                validUserName || !username ? styles.hide : styles.invalid
+              }
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <p
+            id="uidnote"
+            className={
+              userNameFocus && username && !validUserName
+                ? styles.instructions
+                : styles.offscreen
+            }
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            6 to 24 characters. Must begin with a letter.
+            <br />
+            Letters, numbers, underscores, hyphens allowed.
           </p>
-        </section>
-      )}
-    </>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            value={password}
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+            aria-invalid={validPwd ? "false" : "true"}
+            aria-describedby="pwdnote"
+            onFocus={() => setPwdFocus(true)}
+            onBlur={() => setPwdFocus(false)}
+          />
+          <label htmlFor="password">
+            Password:
+            <span className={validPwd ? styles.valid : styles.hide}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span
+              className={validPwd || !password ? styles.hide : styles.invalid}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <p
+            id="pwdnote"
+            className={
+              pwdFocus && !validPwd ? styles.instructions : styles.offscreen
+            }
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            8 to 24 characters.
+            <br />
+            Must include uppercase and lowercase letters, a number and a special
+            character.
+            <br />
+            Letters, numbers, underscores, hyphens allowed.
+            <br />
+            Allowed special characters: !,@,#,$,%
+          </p>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            type="password"
+            id="confirm_pwd"
+            onChange={(e) => setMatchPwd(e.target.value)}
+            required
+            aria-invalid={validMatch ? "false" : "true"}
+            aria-describedby="confirmnote"
+            onFocus={() => setMatchFocus(true)}
+            onBlur={() => setMatchFocus(false)}
+          />
+          <p
+            id="confirmnote"
+            className={
+              matchFocus && !validMatch ? styles.instructions : styles.offscreen
+            }
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            Must match the first password input field.
+          </p>
+
+          <label htmlFor="confirm_pwd">
+            Confirm Password:
+            <span
+              className={validMatch && matchPwd ? styles.valid : styles.hide}
+            >
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span
+              className={validMatch || !matchPwd ? styles.hide : styles.invalid}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            id="name"
+            value={name}
+            type="text"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+          <label htmlFor="name">Name:</label>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            id="shippingAddress"
+            value={shippingAddress}
+            type="text"
+            onChange={(e) => {
+              setShippingAddress(e.target.value);
+            }}
+            required
+          />
+          <label htmlFor="shippingAddress">Shipping address:</label>
+        </div>
+        <div className={styles.user_box}>
+          <input
+            id="billingAddress"
+            value={billingAddress}
+            type="text"
+            onChange={(e) => {
+              setBillingAddress(e.target.value);
+            }}
+            required
+          />
+          <label htmlFor="billingAddress">Billing address:</label>
+        </div>
+        <div className={styles.buttonContainer}>
+          <button
+            type="button"
+            className={styles.submit}
+            disabled={isFormDisabled}
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            Register
+          </button>
+        </div>
+      </form>
+      <p className={styles.loginContainer}>
+        Already registered?
+        <br />
+        <span className={styles.buttonContainer}>
+          <button
+            type="button"
+            className={styles.loginSubmit}
+            onClick={() => navigate("/login")}
+          >
+            Log in
+          </button>
+        </span>
+      </p>
+    </section>
   );
 }
 
