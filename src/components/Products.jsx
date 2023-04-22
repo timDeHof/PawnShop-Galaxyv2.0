@@ -1,5 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../axios-services/products";
@@ -26,6 +24,7 @@ function Products() {
         <Link to="/admin/product-form">
           <div style={{ textAlign: "center" }}>
             <button
+              type="button"
               className={styles.deleteProduct}
               style={{ textAlign: "center", marginBottom: "2rem" }}
             >
@@ -36,9 +35,9 @@ function Products() {
       ) : null}
       <div className={styles.postcard}>
         {products
-          ? products.map((product, i) => (
+          ? products.map((product) => (
               <SingleProduct
-                key={`product${i}`}
+                key={`product${product.id}`}
                 product={product}
                 products={products}
                 setProducts={setProducts}
