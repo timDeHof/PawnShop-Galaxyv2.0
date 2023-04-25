@@ -75,7 +75,7 @@ const products = [
       "https://res.cloudinary.com/dvb5py1ef/image/upload/v1650502483/Spaceballs-Spaceballs-Replica-Perri-Air-Can-1_bwcahn.jpg",
   },
   {
-    name: "Thanos' Gauntlet",
+    name: "Infinity Gauntlet",
     price: 59.99,
     description:
       "You'll be ready to rule the Galaxy with golden gauntlet with multi colored stones",
